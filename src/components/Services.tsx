@@ -55,25 +55,27 @@ export const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-card rounded-lg p-8 shadow-md hover:shadow-xl transition-smooth border border-border gradient-card"
+              className="group bg-card rounded-2xl p-8 border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth"
             >
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                <service.icon className="w-7 h-7 text-primary" />
+              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-smooth">
+                <service.icon className="w-8 h-8 text-primary" />
               </div>
 
               <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-              <p className="text-muted-foreground mb-6">{service.description}</p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
 
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-3 mb-6">
                 {service.deliverables.map((item, i) => (
                   <li key={i} className="flex items-start text-sm text-muted-foreground">
-                    <span className="text-primary mr-2 mt-1">→</span>
-                    <span>{item}</span>
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary/10 text-primary text-xs mr-2.5 flex-shrink-0 mt-0.5">
+                      →
+                    </span>
+                    <span className="leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
 
-              <Button variant="ghost" className="w-full">
+              <Button variant="ghost" className="w-full group-hover:bg-primary/5">
                 Mais detalhes
               </Button>
             </div>

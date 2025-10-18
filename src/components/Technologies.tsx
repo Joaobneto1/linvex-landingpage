@@ -36,7 +36,7 @@ export const Technologies = () => {
           {technologies.map((tech, index) => (
             <span
               key={index}
-              className="px-5 py-2.5 bg-card border-2 border-border rounded-full text-sm font-medium text-foreground hover:border-primary hover:text-primary transition-smooth cursor-default"
+              className="px-6 py-3 bg-card border border-border rounded-xl text-sm font-medium text-foreground hover:border-primary hover:text-primary hover:shadow-md transition-smooth cursor-default"
             >
               {tech}
             </span>

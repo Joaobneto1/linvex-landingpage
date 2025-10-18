@@ -52,23 +52,23 @@ export const Testimonials = () => {
         </div>
 
         <div className="relative">
-          <div className="bg-card rounded-lg p-8 lg:p-12 shadow-lg">
+          <div className="bg-card rounded-2xl p-8 lg:p-12 border border-border shadow-sm">
             <div className="flex flex-col items-center text-center space-y-6">
               {/* Avatar */}
-              <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+                <span className="text-primary-foreground font-bold text-2xl">
                   {testimonials[currentIndex].avatar}
                 </span>
               </div>
 
               {/* Quote */}
-              <blockquote className="text-xl lg:text-2xl font-medium text-foreground">
+              <blockquote className="text-xl lg:text-2xl font-medium text-foreground leading-relaxed">
                 "{testimonials[currentIndex].quote}"
               </blockquote>
 
               {/* Author */}
-              <div>
-                <div className="font-semibold text-foreground">
+              <div className="pt-2">
+                <div className="font-semibold text-lg text-foreground">
                   {testimonials[currentIndex].author}
                 </div>
                 <div className="text-sm text-muted-foreground">

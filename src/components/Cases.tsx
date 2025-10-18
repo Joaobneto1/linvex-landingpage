@@ -48,23 +48,25 @@ export const Cases = () => {
           {cases.map((caseItem, index) => (
             <div
               key={index}
-              className="group bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-smooth"
+              className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth"
             >
-              <div className="aspect-video overflow-hidden">
+              <div className="aspect-video overflow-hidden bg-muted">
                 <img
                   src={caseItem.image}
                   alt={caseItem.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-500"
                   loading="lazy"
                 />
               </div>
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-semibold">{caseItem.title}</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {caseItem.metrics.map((metric, i) => (
                     <li key={i} className="flex items-start text-sm text-muted-foreground">
-                      <span className="text-primary mr-2">✓</span>
-                      <span>{metric}</span>
+                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary mr-2.5 flex-shrink-0 mt-0.5">
+                        ✓
+                      </span>
+                      <span className="leading-relaxed">{metric}</span>
                     </li>
                   ))}
                 </ul>
