@@ -2,6 +2,8 @@ export const About = () => {
   return (
     <section className="section-spacing">
       <div className="container-custom max-w-4xl mx-auto text-center space-y-6">
+        <h2 className="mb-8">Sobre nós</h2>
+        
         <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
           Somos uma software house com times sênior especializados em desenvolvimento
           web, mobile e blockchain. Atuamos com empresas de diversos setores que buscam
