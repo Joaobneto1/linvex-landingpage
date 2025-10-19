@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import linvexSG from "@/assets/linvexSG-bg.png";
 
 const navigation = [
   { name: "Desenvolvimento", href: "#desenvolvimento" },
@@ -39,13 +40,12 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center space-x-2">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">L</span>
-            </div>
-            <span className="font-bold text-lg lg:text-xl">
-              Linvex Software Group
-            </span>
+           <a href="#" className="flex items-center">
+            <img 
+              src={linvexSG} 
+              alt="Linvex Software Group" 
+              className="h-38 lg:h-40 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}

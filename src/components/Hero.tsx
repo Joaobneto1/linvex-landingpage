@@ -8,7 +8,7 @@ interface HeroProps {
 
 export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
   const [displayText, setDisplayText] = useState("");
-  const fullText = "Times sênior, prazos cumpridos, software que gera resultado.";
+  const fullText = "Nosso foco é desempenho, escalabilidade e longevidade — software que evolui junto com o seu negócio.";
 
   useEffect(() => {
     let index = 0;
@@ -31,8 +31,6 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
         <div className="absolute top-1/4 -left-48 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
         
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
       </div>
 
       {/* Content */}
@@ -47,10 +45,10 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
           </div>
 
           {/* Headline */}
-          <h1 className="font-bold leading-tight text-center mb-6 animate-fade-in">
-            <span className="block text-foreground mb-2">Fazemos Tech.</span>
-            <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              Desenvolvimento Web & Mobile.
+           <h1 className="font-bold leading-tight text-center mb-6 animate-fade-in">
+            <span className="block text-foreground mb-2 text-4xl lg:text-5xl">A Linvex Software Group transforma tecnologia em resultado.</span>
+            <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent text-2xl lg:text-4xl">
+              Construímos sistemas, integrações e soluções digitais.
             </span>
           </h1>
 
@@ -65,7 +63,7 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
             <Button 
               onClick={onOpenQuoteModal} 
               size="lg" 
-              className="w-full sm:w-auto group shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto group shadow-lg hover:shadow-xl rounded-full px-8"
             >
               Solicitar orçamento
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-smooth" />
@@ -73,7 +71,7 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto rounded-full px-8"
               onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
             >
               Ver portfólio
@@ -107,4 +105,3 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
     </section>
   );
 };
-

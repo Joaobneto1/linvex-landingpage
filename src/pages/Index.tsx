@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { SocialProof } from "@/components/SocialProof";
 import { About } from "@/components/About";
 import { Cases } from "@/components/Cases";
 import { Services } from "@/components/Services";
@@ -22,7 +21,6 @@ const Index = () => {
       
       <main>
         <Hero onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
-        <SocialProof />
         <About />
         <Cases />
         <Services />

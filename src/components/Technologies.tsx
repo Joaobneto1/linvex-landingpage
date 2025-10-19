@@ -6,19 +6,19 @@ const technologies = [
   "React Native",
   "Next.js",
   "Vue.js",
-  "Ruby on Rails",
   "Python",
-  "Django",
   "PostgreSQL",
   "MongoDB",
   "Redis",
   "AWS",
   "Docker",
-  "Kubernetes",
-  "Solidity",
   "Web3.js",
   "GraphQL",
   "REST APIs",
+  "Java",
+  "Java",
+  "Spring Boot",
+  "Kotlin",
 ];
 
 export const Technologies = () => {

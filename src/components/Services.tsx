@@ -8,9 +8,9 @@ const services = [
     description:
       "Criamos produtos digitais escaláveis com arquitetura moderna, do MVP à enterprise.",
     deliverables: [
-      "Web apps com React, Next.js e TypeScript",
+      "Web apps com React, JavaScript e TypeScript",
       "Apps mobile nativos e híbridos (React Native)",
-      "Backend Node.js, Ruby on Rails, Python",
+      "Backend Node.js, Java, Kotlin",
       "Arquitetura, frontend, backend, QA e observabilidade desde o dia 1",
     ],
   },

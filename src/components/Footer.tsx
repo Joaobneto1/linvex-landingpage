@@ -94,15 +94,15 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-background/70 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>São Paulo, SP - Brasil</span>
+                <span>Maceió, AL - Brasil</span>
               </li>
               <li>
                 <a
-                  href="mailto:contato@linvex.com.br"
+                  href="mailto:linvex.software@gmail.com"
                   className="flex items-center gap-2 text-background/70 hover:text-background transition-smooth text-sm"
                 >
                   <Mail className="w-4 h-4 flex-shrink-0" />
-                  <span>contato@linvex.com.br</span>
+                  <span>linvex.software@gmail.com</span>
                 </a>
               </li>
               <li>
