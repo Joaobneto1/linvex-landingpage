@@ -1,34 +1,34 @@
-import caseEcommerce from "@/assets/case-ecommerce.jpg";
-import caseHealthcare from "@/assets/case-healthcare.jpg";
-import caseFintech from "@/assets/case-fintech.jpg";
+import caseLiveNature from "@/assets/case-livenature.png";
+import caseAtendLeads from "@/assets/case-atendleads.png";
+import caseErpLicitacoes from "@/assets/case-erp-licitacoes.png";
 import { ArrowRight } from "lucide-react";
 
 const cases = [
   {
-    title: "Plataforma E-commerce",
-    image: caseEcommerce,
+    title: "LiveNature",
+    image: caseLiveNature,
     metrics: [
-      "Crescimento de 200 para 10.000 usuários/mês",
-      "Checkout simplificado em menos de 2 minutos",
-      "Taxa de conversão aumentou 45%",
+      "Monitoramento em tempo real de clima e desastres naturais",
+      "Integração com mapas e alertas geográficos",
+      "Interface intuitiva para análise de dados climáticos",
     ],
   },
   {
-    title: "Sistema de Gestão de Saúde",
-    image: caseHealthcare,
+    title: "AtendLeads",
+    image: caseAtendLeads,
     metrics: [
-      "Redução de 60% no tempo de agendamento",
-      "Integração com 8 sistemas legados",
-      "NPS de 78 entre profissionais de saúde",
+      "Dashboard completo para gestão de atendimento",
+      "Controle de tempo médio e filas em tempo real",
+      "Sistema de avaliação e análise de conversas",
     ],
   },
   {
-    title: "App Fintech Mobile",
-    image: caseFintech,
+    title: "ERP Licitações",
+    image: caseErpLicitacoes,
     metrics: [
-      "Mais de 50.000 downloads em 6 meses",
-      "Transações processadas com 99.9% de uptime",
-      "Onboarding completo em menos de 3 minutos",
+      "Gestão completa de licitações e contratos",
+      "Alertas automáticos de prazos e eventos",
+      "Dashboard executivo com indicadores financeiros",
     ],
   },
 ];
