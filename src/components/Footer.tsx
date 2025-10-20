@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, Github, Mail, Phone, MapPin } from "lucide-react";
+import limvexSG from "@/assets/limvexLogoBg.png";
 
 const footerLinks = {
   services: [
@@ -16,10 +17,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/limvexsoftware", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/limvex.com.br/", label: "Instagram" },
+  { icon: Github, href: "https://github.com/linvex-software", label: "GitHub" },
 ];
 
 export const Footer = () => {
@@ -33,7 +33,7 @@ export const Footer = () => {
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-xl">L</span>
               </div>
-              <span className="font-bold text-lg">Linvex Software Group</span>
+              <span className="font-bold text-lg">Limvex Software Group</span>
             </div>
             <p className="text-background/70 text-sm">
               Desenvolvimento de software de excelência para empresas que buscam resultados.
@@ -128,7 +128,7 @@ export const Footer = () => {
         <div className="pt-8 border-t border-background/20">
           <div className="text-center text-sm text-background/60">
             <p>
-              © {new Date().getFullYear()} Linvex Software Group. Todos os direitos
+              © {new Date().getFullYear()} Limvex Software Group. Todos os direitos
               reservados.
             </p>
           </div>

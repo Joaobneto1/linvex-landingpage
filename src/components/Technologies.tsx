@@ -16,7 +16,6 @@ const technologies = [
   "GraphQL",
   "REST APIs",
   "Java",
-  "Java",
   "Spring Boot",
   "Kotlin",
 ];

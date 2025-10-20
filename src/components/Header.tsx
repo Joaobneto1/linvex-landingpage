@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import linvexSG from "@/assets/linvexSG-bg.png";
+import limvexSG from "@/assets/limvexLogoBg.png";
 
 const navigation = [
   { name: "Desenvolvimento", href: "#desenvolvimento" },
@@ -40,11 +40,11 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-           <a href="#" className="flex items-center">
-            <img 
-              src={linvexSG} 
-              alt="Linvex Software Group" 
-              className="h-38 lg:h-40 w-auto"
+          <a href="#" className="flex items-center">
+            <img
+              src={limvexSG}
+              alt="Linvex Software Group"
+              className="h-28 lg:h-40 w-auto"
             />
           </a>
 
@@ -63,7 +63,11 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button onClick={onOpenQuoteModal} size="default">
+            <Button
+              onClick={onOpenQuoteModal}
+              size="default"
+              className="rounded-full px-6"
+            >
               Solicitar orçamento
             </Button>
           </div>
@@ -103,7 +107,7 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
                 onOpenQuoteModal();
               }}
               size="default"
-              className="w-full"
+              className="w-full rounded-full"
             >
               Solicitar orçamento
             </Button>

@@ -46,7 +46,7 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
 
           {/* Headline */}
            <h1 className="font-bold leading-tight text-center mb-6 animate-fade-in">
-            <span className="block text-foreground mb-2 text-4xl lg:text-5xl">A Linvex Software Group transforma tecnologia em resultado.</span>
+            <span className="block text-foreground mb-2 text-4xl lg:text-5xl">A Limvex Software Group transforma tecnologia em resultado.</span>
             <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent text-2xl lg:text-4xl">
               Construímos sistemas, integrações e soluções digitais.
             </span>

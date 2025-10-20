@@ -17,7 +17,11 @@ export const FinalCTA = ({ onOpenQuoteModal }: FinalCTAProps) => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
             Receba uma proposta personalizada em até 48 horas. Sem compromisso.
           </p>
-          <Button onClick={onOpenQuoteModal} size="lg" className="shadow-xl">
+          <Button 
+            onClick={onOpenQuoteModal} 
+            size="lg" 
+            className="shadow-xl rounded-full px-8"
+          >
             Solicitar orçamento gratuito
           </Button>
         </div>
