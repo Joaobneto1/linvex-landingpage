@@ -81,12 +81,12 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
           </div>
 
           {/* Stats alinhados à esquerda */}
-          <div className="grid grid-cols-3 gap-8 max-w-3xl mr-auto pt-12 border-t border-border/50">
+          <div className="grid grid-cols-3 gap-8 max-w-3xl mr-auto pt-12 border-t border-black/10">
             <div className="text-left px-6">
               <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">100+</div>
               <div className="text-sm text-muted-foreground">Projetos entregues</div>
             </div>
-            <div className="text-left border-x border-border/50 px-6">
+            <div className="text-left border-x border-black/10 px-6">
               <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">98%</div>
               <div className="text-sm text-muted-foreground">Satisfação dos clientes</div>
             </div>

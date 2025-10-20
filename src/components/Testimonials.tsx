@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import avatarCM from "@/assets/avatarCM.jpg";
-import avatarAP from "@/assets/avatarAP.jpg";
-import avatarRA from "@/assets/avatarRA.jpg";
-import avatarMC from "@/assets/avatarMC.jpg";
+import avatarWpp from "@/assets/avatarWpp.png";
+import avatarReddit from "@/assets/avatarReddit.svg";
 
 const testimonials = [
 	{
@@ -13,7 +11,7 @@ const testimonials = [
 		author: "Carlos Mendes",
 		company: "CEO, HealthTech Brasil",
 		avatar: "CM",
-		avatarUrl: avatarCM,
+		avatarUrl: avatarWpp,
 	},
 	{
 		quote:
@@ -21,7 +19,7 @@ const testimonials = [
 		author: "Ana Paula Silva",
 		company: "CTO, Fintech Solutions",
 		avatar: "AS",
-		avatarUrl: avatarAP,
+		avatarUrl: avatarReddit,
 	},
 	{
 		quote:
@@ -29,7 +27,7 @@ const testimonials = [
 		author: "Roberto Alves",
 		company: "Diretor de Produto, E-commerce Plus",
 		avatar: "RA",
-		avatarUrl: avatarRA,
+		avatarUrl: avatarWpp,
 	},
 	{
 		quote:
@@ -37,7 +35,7 @@ const testimonials = [
 		author: "Mariana Costa",
 		company: "Head de TI, Grupo Hospitalar",
 		avatar: "MC",
-		avatarUrl: avatarMC,
+		avatarUrl: avatarReddit,
 	},
 ];
 

@@ -4,7 +4,6 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Cases } from "@/components/Cases";
 import { Services } from "@/components/Services";
-import { Technologies } from "@/components/Technologies";
 import { Testimonials } from "@/components/Testimonials";
 import { Process } from "@/components/Process";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -24,7 +23,6 @@ const Index = () => {
         <About />
         <Cases />
         <Services />
-        <Technologies />
         <Testimonials />
         <Process />
         <FinalCTA onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />

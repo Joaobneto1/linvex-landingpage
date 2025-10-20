@@ -5,12 +5,10 @@ const footerLinks = {
   services: [
     { name: "Desenvolvimento Web", href: "#desenvolvimento" },
     { name: "Desenvolvimento Mobile", href: "#desenvolvimento" },
-    { name: "Web3 & Blockchain", href: "#desenvolvimento" },
-    { name: "Recrutamento Tech", href: "#recrutamento" },
+    { name: "Automação com IA", href: "#automacao-ia" },
   ],
   company: [
     { name: "Portfólio", href: "#portfolio" },
-    { name: "Blog", href: "#blog" },
     { name: "Sobre nós", href: "#sobre" },
     { name: "Contato", href: "#contato" },
   ],

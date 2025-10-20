@@ -1,6 +1,6 @@
-import caseLiveNature from "@/assets/caseLiveNature.png";
-import caseAtendLeads from "@/assets/case-atendleads.png";
-import caseErpLicitacoes from "@/assets/case-erp-licitacoes.png";
+import caseLiveNature from "@/assets/liveNatureCase.png";
+import caseAtendLeads from "@/assets/atendLeadsCase.png";
+import caseErpLicitacoes from "@/assets/erplicitacoesCase.png";
 import { ArrowRight } from "lucide-react";
 
 const cases = [
@@ -73,16 +73,6 @@ export const Cases = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <a
-            href="#portfolio"
-            className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-smooth"
-          >
-            Ver portfólio completo
-            <ArrowRight className="w-5 h-5" />
-          </a>
         </div>
       </div>
     </section>
