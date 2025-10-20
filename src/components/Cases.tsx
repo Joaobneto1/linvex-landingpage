@@ -1,4 +1,4 @@
-import caseLiveNature from "@/assets/case-livenature.png";
+import caseLiveNature from "@/assets/caseLiveNature.png";
 import caseAtendLeads from "@/assets/case-atendleads.png";
 import caseErpLicitacoes from "@/assets/case-erp-licitacoes.png";
 import { ArrowRight } from "lucide-react";

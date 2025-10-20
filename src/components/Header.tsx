@@ -43,7 +43,7 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
           <a href="#" className="flex items-center">
             <img
               src={limvexSG}
-              alt="Linvex Software Group"
+              alt="Limvex Software Group"
               className="h-28 lg:h-40 w-auto"
             />
           </a>

@@ -1,5 +1,5 @@
 import { Facebook, Twitter, Linkedin, Instagram, Github, Mail, Phone, MapPin } from "lucide-react";
-import limvexSG from "@/assets/limvexLogoBg.png";
+import limvexIcon from "@/assets/limvex-icon.jpg";
 
 const footerLinks = {
   services: [
@@ -30,9 +30,11 @@ export const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">L</span>
-              </div>
+              <img
+                src={limvexIcon}
+                alt="Limvex Software Group"
+                className="w-10 h-10 object-cover rounded-lg"
+              />
               <span className="font-bold text-lg">Limvex Software Group</span>
             </div>
             <p className="text-background/70 text-sm">
@@ -117,10 +119,6 @@ export const Footer = () => {
                 </a>
               </li>
             </ul>
-
-            <div className="mt-4 text-xs text-background/60">
-              CNPJ: 00.000.000/0001-00
-            </div>
           </div>
         </div>
 
