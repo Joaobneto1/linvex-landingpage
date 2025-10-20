@@ -204,7 +204,7 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
               type="button" 
               variant="outline" 
               onClick={onClose} 
-              className="flex-1 h-12 rounded-xl transition-smooth border-border hover:border-primary/50"
+              className="flex-1 h-12 rounded-xl transition-smooth bg-background text-primary border-border hover:bg-background hover:border-primary"
             >
               Cancelar
             </Button>
