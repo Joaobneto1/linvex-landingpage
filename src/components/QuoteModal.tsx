@@ -204,13 +204,13 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
               type="button" 
               variant="outline" 
               onClick={onClose} 
-              className="flex-1 h-12 rounded-xl hover:bg-muted transition-smooth"
+              className="flex-1 h-12 rounded-xl transition-smooth border-border hover:border-primary/50"
             >
               Cancelar
             </Button>
             <Button 
               type="submit" 
-              className="flex-1 h-12 rounded-xl bg-gradient-to-r from-primary to-secondary hover:shadow-xl hover:shadow-primary/30 transition-smooth"
+              className="flex-1 h-12 rounded-xl hover:shadow-xl hover:shadow-primary/30 transition-smooth"
             >
               Enviar solicitação
             </Button>
