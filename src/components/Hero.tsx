@@ -34,7 +34,7 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
           alt="" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/20 to-background/40" />
       </div>
 
       {/* Content */}
