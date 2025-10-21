@@ -33,7 +33,11 @@ export const Footer = () => {
                 alt="Limvex Software Group"
                 className="w-10 h-10 object-cover rounded-lg"
               />
-              <span className="font-bold text-lg">Limvex Software Group</span>
+              <span className="font-bold text-lg"
+              style={{ fontFamily: '"Myriad Pro", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
+              >
+              Limvex Software Group
+              </span>
             </div>
             <p className="text-background/70 text-sm">
               Desenvolvimento de software de excelência para empresas que buscam resultados.
