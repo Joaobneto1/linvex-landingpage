@@ -175,10 +175,10 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                 <SelectValue placeholder="Selecione uma faixa" />
               </SelectTrigger>
               <SelectContent className="rounded-xl">
-                <SelectItem value="10k-30k">R$ 10.000 - R$ 30.000</SelectItem>
-                <SelectItem value="30k-50k">R$ 30.000 - R$ 50.000</SelectItem>
-                <SelectItem value="50k-100k">R$ 50.000 - R$ 100.000</SelectItem>
-                <SelectItem value="100k+">Acima de R$ 100.000</SelectItem>
+                <SelectItem value="10k-30k">Acima de R$ 1.500</SelectItem>
+                <SelectItem value="30k-50k">Acima de R$ 3.000</SelectItem>
+                <SelectItem value="50k-100k">Acima de R$ 5.000</SelectItem>
+                <SelectItem value="50k-100k">Acima de R$ 9.000</SelectItem>
                 <SelectItem value="unsure">Não tenho certeza</SelectItem>
               </SelectContent>
             </Select>

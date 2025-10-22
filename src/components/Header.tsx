@@ -6,7 +6,6 @@ import limvexSG from "@/assets/limvexLogoBg.png";
 
 const navigation = [
   { name: "Desenvolvimento", href: "#desenvolvimento" },
-  { name: "Recrutamento", href: "#recrutamento" },
   { name: "Portfólio", href: "#portfolio" },
   { name: "Contato", href: "#contato" },
 ];
