@@ -6,13 +6,18 @@ export const About = () => {
           <h2 className="mb-8">Sobre nós</h2>
           
           <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-            Somos uma software house com times sênior especializados em desenvolvimento
-            web, mobile e automação com IA. Atuamos com empresas de diversos setores que buscam
-            escalar seus produtos digitais com qualidade, agilidade e previsibilidade.
+            Somos uma software house com equipes sênior especializadas em desenvolvimento web, mobile e automação com IA.
+            Atuamos com empresas de diferentes segmentos que buscam escalar seus produtos digitais com qualidade,
+            segurança e previsibilidade.
           </p>
           <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-            Processos ágeis, arquitetura sólida e entrega garantida. Transformamos
-            requisitos de negócio em soluções técnicas que geram resultado.
+            Com processos ágeis e arquitetura robusta, garantimos entregas de alto desempenho.
+            Transformamos desafios de negócio em soluções tecnológicas eficientes,
+            sólidas e orientadas a resultados.
+          </p>
+          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
+            🚀 Software sob medida & soluções corporativas.
+            💡 Performance, segurança e confiabilidade.
           </p>
         </div>
       </div>
