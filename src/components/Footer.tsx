@@ -98,7 +98,7 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-background/70 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Maceió, AL - Brasil</span>
+                <span>Brasil</span>
               </li>
               <li>
                 <a
@@ -111,13 +111,13 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://wa.me/5511999999999"
+                  href="https://wa.me/5582991709740"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-background/70 hover:text-background transition-smooth text-sm"
                 >
                   <Phone className="w-4 h-4 flex-shrink-0" />
-                  <span>(11) 99999-9999</span>
+                  <span>(82) 99170-9740</span>
                 </a>
               </li>
             </ul>
