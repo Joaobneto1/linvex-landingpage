@@ -92,7 +92,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
+            {/* Contact */}
           <div>
             <h3 className="font-semibold mb-4 text-background">Contato</h3>
             <ul className="space-y-3">
@@ -119,6 +119,9 @@ export const Footer = () => {
                   <Phone className="w-4 h-4 flex-shrink-0" />
                   <span>(82) 99170-9740</span>
                 </a>
+              </li>
+              <li className="text-background/70 text-sm">
+                <span>CNPJ: 63.385.399/0001-96</span>
               </li>
             </ul>
           </div>
