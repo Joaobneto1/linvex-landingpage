@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import limvexSG from "@/assets/limvexLogoBg.png";
 
@@ -10,11 +9,7 @@ const navigation = [
   { name: "Contato", href: "#contato" },
 ];
 
-interface HeaderProps {
-  onOpenQuoteModal: () => void;
-}
-
-export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
+export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -59,15 +54,23 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA Button - Desktop */}
           <div className="hidden lg:block">
-            <Button
-              onClick={onOpenQuoteModal}
-              size="default"
-              className="rounded-full px-6"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfpmlt5xmZTrRc5bKVbCJz_acpXr_9YK1sTr2ooUWS09tMx8A/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5"
             >
-              Solicitar orçamento
-            </Button>
+              <span className="relative z-10">Solicitar orçamento</span>
+              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform duration-300" />
+
+              {/* Efeito de brilho */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* Glow effect */}
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 opacity-30 blur group-hover:opacity-50 transition-opacity duration-300" />
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -99,16 +102,21 @@ export const Header = ({ onOpenQuoteModal }: HeaderProps) => {
                 {item.name}
               </a>
             ))}
-            <Button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenQuoteModal();
-              }}
-              size="default"
-              className="w-full rounded-full"
+
+            {/* CTA Button - Mobile */}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfpmlt5xmZTrRc5bKVbCJz_acpXr_9YK1sTr2ooUWS09tMx8A/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="group relative w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg"
             >
-              Solicitar orçamento
-            </Button>
+              <span className="relative z-10">Solicitar orçamento</span>
+              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform duration-300" />
+
+              {/* Efeito de brilho */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </a>
           </div>
         </div>
       )}

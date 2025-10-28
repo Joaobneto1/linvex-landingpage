@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
@@ -9,31 +8,24 @@ import { Process } from "@/components/Process";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { QuoteModal } from "@/components/QuoteModal";
 
 const Index = () => {
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-
   return (
     <div className="min-h-screen">
-      <Header onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
+      <Header />
       
       <main>
-        <Hero onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
+        <Hero />
         <About />
         <Cases />
         <Services />
         <Testimonials />
         <Process />
-        <FinalCTA onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
+        <FinalCTA />
       </main>
 
       <Footer />
       <WhatsAppButton />
-      <QuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
-      />
     </div>
   );
 };

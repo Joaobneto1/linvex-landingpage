@@ -3,11 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import heroBg from "@/assets/hero-bg-wb.jpg";
 
-interface HeroProps {
-  onOpenQuoteModal: () => void;
-}
-
-export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
+export const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const fullText =
     "Nosso foco é desempenho, escalabilidade e longevidade — software que evolui junto com o seu negócio.";
@@ -60,14 +56,15 @@ export const Hero = ({ onOpenQuoteModal }: HeroProps) => {
 
           {/* CTAs (esquerda) */}
           <div className="flex flex-col sm:flex-row items-center justify-start gap-4 mb-16">
-            <Button
-              onClick={onOpenQuoteModal}
-              size="lg"
-              className="w-full sm:w-auto group shadow-lg hover:shadow-xl rounded-full px-8"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfpmlt5xmZTrRc5bKVbCJz_acpXr_9YK1sTr2ooUWS09tMx8A/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto group shadow-lg hover:shadow-xl rounded-full px-8 py-3 bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors inline-flex items-center justify-center"
             >
               Solicitar orçamento
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-smooth" />
-            </Button>
+            </a>
             <Button
               variant="outline"
               size="lg"

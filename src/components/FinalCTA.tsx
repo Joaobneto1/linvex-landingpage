@@ -1,10 +1,4 @@
-import { Button } from "@/components/ui/button";
-
-interface FinalCTAProps {
-  onOpenQuoteModal: () => void;
-}
-
-export const FinalCTA = ({ onOpenQuoteModal }: FinalCTAProps) => {
+export const FinalCTA = () => {
   return (
     <section className="section-spacing">
       <div className="container-custom">
@@ -17,13 +11,14 @@ export const FinalCTA = ({ onOpenQuoteModal }: FinalCTAProps) => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
             Receba uma proposta personalizada em até 48 horas. Sem compromisso.
           </p>
-          <Button 
-            onClick={onOpenQuoteModal} 
-            size="lg" 
-            className="shadow-xl rounded-full px-8"
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfpmlt5xmZTrRc5bKVbCJz_acpXr_9YK1sTr2ooUWS09tMx8A/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center shadow-xl rounded-full px-8 py-3 bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
           >
             Solicitar orçamento gratuito
-          </Button>
+          </a>
         </div>
       </div>
     </section>
