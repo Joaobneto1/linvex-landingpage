@@ -65,13 +65,12 @@ export const Cases = () => {
           opts={{
             align: "start",
             loop: true,
-            dragFree: false,
           }}
           className="w-full max-w-5xl mx-auto"
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent>
             {cases.map((caseItem, index) => (
-              <CarouselItem key={index} className="basis-full pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-smooth h-full flex flex-col min-h-[580px]">
                   <div className="h-[260px] overflow-hidden bg-muted flex-shrink-0">
                     <img
@@ -98,8 +97,8 @@ export const Cases = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="-left-2 md:-left-12" />
-          <CarouselNext className="-right-2 md:-right-12" />
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
         </Carousel>
       </div>
     </section>
