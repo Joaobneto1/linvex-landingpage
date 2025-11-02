@@ -73,12 +73,13 @@ export const Services = () => {
 				opts={{
 					align: "start",
 					loop: true,
+					dragFree: false,
 				}}
 				className="w-full max-w-6xl mx-auto"
 			>
-				<CarouselContent className="-ml-4">
+				<CarouselContent className="-ml-2 md:-ml-4">
 					{services.map((service, index) => (
-						<CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+						<CarouselItem key={index} className="basis-full pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
 							<div className="group bg-card rounded-2xl p-8 border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth h-full">
 								<div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-smooth">
 									<service.icon className="w-8 h-8 text-primary" />
@@ -106,8 +107,8 @@ export const Services = () => {
 						</CarouselItem>
 					))}
 				</CarouselContent>
-				<CarouselPrevious className="hidden md:flex" />
-				<CarouselNext className="hidden md:flex" />
+				<CarouselPrevious className="-left-2 md:-left-12" />
+				<CarouselNext className="-right-2 md:-right-12" />
 			</Carousel>
 			</div>
 		</section>
