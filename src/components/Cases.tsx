@@ -66,29 +66,31 @@ export const Cases = () => {
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-5xl mx-auto"
+          className="w-full max-w-7xl mx-auto"
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-8">
             {cases.map((caseItem, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth h-full">
-                  <div className="aspect-video overflow-hidden bg-muted">
-                    <img
-                      src={caseItem.image}
-                      alt={caseItem.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-500"
-                      loading="lazy"
-                    />
+              <CarouselItem key={index} className="pl-8 md:basis-1/2 lg:basis-1/2">
+                <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-smooth h-[560px] flex flex-col">
+                  <div className="flex items-center justify-center py-8 bg-muted flex-shrink-0">
+                    <div className="w-[80%]">
+                      <img
+                        src={caseItem.image}
+                        alt={caseItem.title}
+                        className="w-full h-auto object-contain group-hover:scale-105 transition-smooth duration-500"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
-                  <div className="p-6 space-y-4">
-                    <h3 className="text-xl font-semibold">{caseItem.title}</h3>
-                    <ul className="space-y-2.5">
+                  <div className="p-8 space-y-5 flex-1 flex flex-col">
+                    <h3 className="text-[26px] font-semibold leading-tight">{caseItem.title}</h3>
+                    <ul className="space-y-3.5 flex-1">
                       {caseItem.metrics.map((metric, i) => (
-                        <li key={i} className="flex items-start text-sm text-muted-foreground">
-                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary mr-2.5 flex-shrink-0 mt-0.5">
+                        <li key={i} className="flex items-start text-[18px] text-muted-foreground leading-relaxed">
+                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary mr-3 flex-shrink-0 mt-0.5 text-sm">
                             ✓
                           </span>
-                          <span className="leading-relaxed">{metric}</span>
+                          <span>{metric}</span>
                         </li>
                       ))}
                     </ul>
