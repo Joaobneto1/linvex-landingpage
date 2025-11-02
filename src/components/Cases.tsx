@@ -71,8 +71,8 @@ export const Cases = () => {
           <CarouselContent>
             {cases.map((caseItem, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth h-full">
-                  <div className="aspect-video overflow-hidden bg-muted">
+                <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth h-full flex flex-col">
+                  <div className="h-[280px] overflow-hidden bg-muted flex-shrink-0">
                     <img
                       src={caseItem.image}
                       alt={caseItem.title}
@@ -80,7 +80,7 @@ export const Cases = () => {
                       loading="lazy"
                     />
                   </div>
-                  <div className="p-6 space-y-4">
+                  <div className="p-6 space-y-4 flex-1">
                     <h3 className="text-xl font-semibold">{caseItem.title}</h3>
                     <ul className="space-y-2.5">
                       {caseItem.metrics.map((metric, i) => (
