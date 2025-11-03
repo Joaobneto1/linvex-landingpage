@@ -1,7 +1,7 @@
 import caseLiveNature from "@/assets/liveNatureCase.png";
 import caseAtendLeads from "@/assets/atendLeadsCase.png";
 import caseErpLicitacoes from "@/assets/erplicitacoesCase.png";
-import caseCheckoutSentinel from "@/assets/checkoutSentinelCase.jpg";
+import caseCheckoutSentinel from "@/assets/checkoutSentinelCase.png";
 import { ArrowRight } from "lucide-react";
 import {
   Carousel,
@@ -71,8 +71,8 @@ export const Cases = () => {
           <CarouselContent>
             {cases.map((caseItem, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-smooth h-full flex flex-col min-h-[580px]">
-                  <div className="h-[260px] overflow-hidden bg-muted flex-shrink-0">
+                <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-smooth h-full flex flex-col">
+                  <div className="h-[240px] overflow-hidden bg-muted flex-shrink-0">
                     <img
                       src={caseItem.image}
                       alt={caseItem.title}
