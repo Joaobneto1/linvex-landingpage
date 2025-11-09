@@ -84,14 +84,16 @@ export const Cases = () => {
           <Carousel
             setApi={setApi}
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
+              skipSnaps: false,
+              dragFree: false,
             }}
             className="w-full max-w-5xl mx-auto"
           >
-            <CarouselContent>
+            <CarouselContent className="-ml-2 md:-ml-4">
               {cases.map((caseItem, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                   <div className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-smooth h-full flex flex-col">
                     <div className="h-[240px] overflow-hidden bg-muted flex-shrink-0">
                       <img
