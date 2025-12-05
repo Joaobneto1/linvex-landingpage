@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -20,13 +20,15 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary - Tech Blue */
-    --primary: 212 92% 55%;
+    /* Primary - Limvex Blue (mais forte e premium) */
+    --primary: 212 92% 50%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 212 92% 65%;
+    --primary-dark: 212 92% 35%;
+    --primary-light: 212 92% 95%;
 
-    /* Secondary - Violet Accent */
-    --secondary: 267 84% 62%;
+    /* Secondary - Violet Accent (mais sutil) */
+    --secondary: 267 84% 58%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted */
@@ -44,15 +46,18 @@
     /* Border & Input */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 212 92% 55%;
+    --ring: 212 92% 50%;
 
     /* Radius */
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(212 92% 55%) 0%, hsl(267 84% 62%) 100%);
+    /* Custom gradients - Azul Limvex Premium */
+    --gradient-hero: linear-gradient(135deg, hsl(212 92% 50%) 0%, hsl(212 92% 60%) 50%, hsl(267 84% 58%) 100%);
+    --gradient-blue-vertical: linear-gradient(180deg, hsl(212 92% 25%) 0%, hsl(212 92% 15%) 100%);
+    --gradient-blue-subtle: linear-gradient(180deg, hsl(212 92% 98%) 0%, hsl(212 92% 95%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(220 18% 97%) 0%, hsl(0 0% 100%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(212 92% 55% / 0.05) 0%, hsl(267 84% 62% / 0.05) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(212 92% 55% / 0.08) 0%, hsl(212 92% 55% / 0.03) 100%);
+    --gradient-card-blue: linear-gradient(135deg, hsl(212 92% 50% / 0.1) 0%, hsl(212 92% 50% / 0.05) 100%);
 
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
@@ -109,7 +114,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter Tight', 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -117,21 +122,29 @@
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-xl md:text-2xl lg:text-3xl font-bold tracking-tight;
   }
 }
 
 @layer utilities {
   .gradient-hero {
     background: var(--gradient-hero);
+  }
+
+  .gradient-blue-vertical {
+    background: var(--gradient-blue-vertical);
+  }
+
+  .gradient-blue-subtle {
+    background: var(--gradient-blue-subtle);
   }
 
   .gradient-subtle {
@@ -142,12 +155,28 @@
     background: var(--gradient-card);
   }
 
+  .gradient-card-blue {
+    background: var(--gradient-card-blue);
+  }
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
 
+  .shadow-blue {
+    box-shadow: 0 8px 30px hsl(212 92% 50% / 0.15);
+  }
+
   .transition-smooth {
     transition: var(--transition-smooth);
+  }
+
+  .bg-blue-premium {
+    background: linear-gradient(180deg, hsl(212 92% 98%) 0%, hsl(212 92% 95%) 50%, hsl(212 92% 92%) 100%);
+  }
+
+  .bg-blue-dark {
+    background: linear-gradient(180deg, hsl(212 92% 20%) 0%, hsl(212 92% 15%) 100%);
   }
 }
 
@@ -158,5 +187,44 @@
 
   .section-spacing {
     @apply py-16 md:py-24 lg:py-32;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .backdrop-blur-glass {
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out both;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
