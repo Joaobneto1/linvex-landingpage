@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link, useLocation } from "react-router-dom";
 import limvexSG from "@/assets/limvexLogoBg.png";
 
 const navigation = [
-  { name: "Desenvolvimento", href: "#desenvolvimento" },
-  { name: "Portfólio", href: "#portfolio" },
-  { name: "Contato", href: "#contato" },
+  { name: "Para Empresas", href: "/para-empresas", highlight: true },
+  { name: "Para Novos Negócios", href: "/para-novos-negocios", highlight: true },
+  { name: "Produtos", href: "/produtos", highlight: true },
+  { name: "Sobre", href: "/sobre" },
 ];
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,62 +24,68 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isActive = (href: string) => {
+    if (href === "/") return location.pathname === "/";
+    return location.pathname.startsWith(href);
+  };
+
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-smooth",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-md"
+          ? "backdrop-blur-glass bg-background/80 border-b border-white/10 shadow-sm"
           : "bg-transparent"
       )}
     >
-      <div className="container-custom">
+      <div className="container-custom max-w-[1200px]">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img
               src={limvexSG}
               alt="Limvex Software Group"
-              className="h-28 lg:h-40 w-auto"
+              className="h-24 lg:h-32 w-auto"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-smooth"
+                to={item.href}
+                className={cn(
+                  "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                  isActive(item.href)
+                    ? "text-primary bg-primary/10"
+                    : item.highlight
+                    ? "text-foreground/90 hover:text-foreground hover:bg-white/5 font-semibold"
+                    : "text-foreground/70 hover:text-foreground hover:bg-white/5"
+                )}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* CTA Button - Desktop */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfpmlt5xmZTrRc5bKVbCJz_acpXr_9YK1sTr2ooUWS09tMx8A/viewform"
+              href="https://wa.me/5582991709740"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-white font-medium hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <span className="relative z-10">Solicitar orçamento</span>
-              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform duration-300" />
-
-              {/* Efeito de brilho */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              {/* Glow effect */}
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 opacity-30 blur group-hover:opacity-50 transition-opacity duration-300" />
+              <MessageCircle className="w-4 h-4" />
+              <span>Agendar reunião</span>
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-muted transition-smooth"
+            className="lg:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
             aria-label="Menu"
           >
             {isMobileMenuOpen ? (
@@ -90,32 +99,36 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border">
-          <div className="container-custom py-4 space-y-4">
+        <div className="lg:hidden backdrop-blur-glass bg-background/95 border-t border-white/10">
+          <div className="container-custom max-w-[1200px] py-4 space-y-2">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-base font-medium text-foreground/80 hover:text-primary transition-smooth py-2"
+                className={cn(
+                  "block px-4 py-3 rounded-lg text-base font-medium transition-colors",
+                  isActive(item.href)
+                    ? "text-primary bg-primary/10"
+                    : item.highlight
+                    ? "text-foreground font-semibold hover:bg-white/5"
+                    : "text-foreground/70 hover:text-foreground hover:bg-white/5"
+                )}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
 
             {/* CTA Button - Mobile */}
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfpmlt5xmZTrRc5bKVbCJz_acpXr_9YK1sTr2ooUWS09tMx8A/viewform"
+              href="https://wa.me/5582991709740"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="group relative w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg"
+              className="block w-full mt-4 group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-gradient-to-r from-primary to-primary/90 text-white font-medium hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg"
             >
-              <span className="relative z-10">Solicitar orçamento</span>
-              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform duration-300" />
-
-              {/* Efeito de brilho */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <MessageCircle className="w-4 h-4" />
+              <span>Agendar reunião</span>
             </a>
           </div>
         </div>
