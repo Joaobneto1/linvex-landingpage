@@ -301,8 +301,9 @@ const ContactForm = () => {
     cargo: "",
     descricao: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validação básica
@@ -315,25 +316,54 @@ const ContactForm = () => {
       return;
     }
 
-    // Log dos dados (não enviar para backend ainda)
-    console.log("Dados do formulário:", formData);
+    setIsSubmitting(true);
 
-    // Toast de sucesso
-    toast({
-      title: "Enviado com sucesso!",
-      description: "Em breve entraremos em contato.",
-    });
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: `${formData.nome} ${formData.sobrenome}`.trim(),
+          email: formData.email,
+          empresa: formData.empresa,
+          telefone: formData.telefone,
+          cargo: formData.cargo,
+          descricao: formData.descricao,
+          origem: 'para-empresas',
+        }),
+      });
 
-    // Limpar formulário
-    setFormData({
-      nome: "",
-      sobrenome: "",
-      email: "",
-      empresa: "",
-      telefone: "",
-      cargo: "",
-      descricao: "",
-    });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Erro ao enviar formulário');
+      }
+
+      // Toast de sucesso
+      toast({
+        title: "Enviado com sucesso!",
+        description: "Recebemos seus dados, entraremos em contato em breve.",
+      });
+
+      // Limpar formulário
+      setFormData({
+        nome: "",
+        sobrenome: "",
+        email: "",
+        empresa: "",
+        telefone: "",
+        cargo: "",
+        descricao: "",
+      });
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      toast({
+        title: "Erro ao enviar formulário",
+        description: error instanceof Error ? error.message : "Ocorreu um erro ao enviar seus dados. Por favor, tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -433,9 +463,10 @@ const ContactForm = () => {
       <Button
         type="submit"
         size="lg"
-        className="w-full rounded-full px-10 py-7 text-base md:text-lg font-bold bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all"
+        disabled={isSubmitting}
+        className="w-full rounded-full px-10 py-7 text-base md:text-lg font-bold bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Enviar pedido de contato
+        {isSubmitting ? 'Enviando...' : 'Enviar pedido de contato'}
       </Button>
     </form>
   );
