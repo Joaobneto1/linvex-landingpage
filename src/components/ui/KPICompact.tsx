@@ -18,22 +18,23 @@ export const KPICompact = ({
     <div
       className={cn(
         "rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm",
-        "p-6 transition-all duration-300",
+        "p-4 md:p-6 transition-all duration-300",
         "hover:border-white/20 hover:bg-white/10",
+        "flex flex-col",
         className
       )}
     >
       {Icon && (
-        <div className="mb-4">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
-            <Icon className="w-5 h-5 text-blue-500" strokeWidth={1.5} />
+        <div className="mb-3">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+            <Icon className="w-4 h-4 md:w-5 md:h-5 text-blue-400" strokeWidth={1.5} />
           </div>
         </div>
       )}
-      <div className="text-3xl md:text-4xl font-black text-white mb-2">
+      <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-1">
         {value}
       </div>
-      <div className="text-sm text-gray-400 font-medium">
+      <div className="text-xs md:text-sm text-gray-400 font-medium">
         {label}
       </div>
     </div>

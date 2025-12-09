@@ -24,7 +24,7 @@ export const DarkSection = ({
   };
 
   const variantClasses = {
-    default: "bg-[#0D1117]",
+    default: "bg-[#0D111B]",
     darker: "bg-[#0A0E14]",
     lighter: "bg-[#0F141C]",
   };

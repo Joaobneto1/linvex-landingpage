@@ -24,8 +24,8 @@ export const ProductCard = ({
     <div
       className={cn(
         "group relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm",
-        "p-8 transition-all duration-300 h-full flex flex-col",
-        "hover:border-white/20 hover:bg-white/10 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]",
+        "p-8 md:p-10 transition-all duration-300 h-full flex flex-col hover-lift",
+        "hover:border-white/20 hover:bg-white/10 hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)]",
         "dark:bg-black/20 dark:border-white/5 dark:hover:border-white/10",
         className
       )}

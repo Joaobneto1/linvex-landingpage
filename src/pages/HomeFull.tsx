@@ -51,36 +51,36 @@ export default function HomeFull() {
 
       <main>
         {/* Hero - Quem somos */}
-        <Section spacing="lg" className="pt-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6">
+        <Section spacing="xl" className="pt-24 md:pt-32">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="mb-8 md:mb-12">
               <img
                 src={limvexSG}
                 alt="Limvex Software Group"
-                className="h-20 md:h-24 w-auto mx-auto"
+                className="h-24 md:h-32 lg:h-40 w-auto mx-auto drop-shadow-2xl"
               />
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 text-foreground">
               Quem é a Limvex
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
               Software house especializada em desenvolvimento sob medida, aceleração de negócios e produtos white-label.
             </p>
           </div>
         </Section>
 
         {/* 3 Modelos de Negócio */}
-        <Section spacing="lg">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+        <Section spacing="xl">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 text-foreground">
               Como trabalhamos
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-medium">
               Três formas de trabalhar com a Limvex
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             <BusinessModelCard
               icon={Building2}
               title="Para Empresas"
@@ -106,12 +106,12 @@ export default function HomeFull() {
         </Section>
 
         {/* Cases - Preview */}
-        <SectionBlue spacing="lg" variant="light">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+        <SectionBlue spacing="xl" variant="light">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 text-foreground">
               Cases de sucesso
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 font-medium">
               Projetos que entregaram resultado real
             </p>
             <Cases />
@@ -127,14 +127,14 @@ export default function HomeFull() {
         </SectionBlue>
 
         {/* Por que escolher a Limvex */}
-        <Section spacing="lg">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+        <Section spacing="xl">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 text-foreground">
               Por que escolher a Limvex
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
             {whyChoose.map((item, index) => (
               <FeatureCard
                 key={index}
@@ -147,12 +147,12 @@ export default function HomeFull() {
         </Section>
 
         {/* CTA Final */}
-        <Section spacing="lg">
-          <div className="max-w-3xl mx-auto text-center rounded-2xl border-2 border-primary/30 bg-gradient-card-blue p-8 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
+        <Section spacing="xl">
+          <div className="max-w-4xl mx-auto text-center rounded-3xl border-2 border-primary/30 bg-gradient-card-blue p-10 md:p-14">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-foreground">
               Pronto para começar?
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground mb-6 font-medium">
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 font-medium">
               Fale com nossos especialistas
             </p>
             <Button
