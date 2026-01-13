@@ -34,7 +34,7 @@ export const Header = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "backdrop-blur-glass bg-background/80 border-b border-border/50 shadow-lg"
+          ? "backdrop-blur-glass bg-background/80 border-b border-white/10 shadow-sm"
           : "bg-transparent"
       )}
     >
@@ -45,7 +45,7 @@ export const Header = () => {
             <img
               src={limvexSG}
               alt="Limvex Software Group"
-              className="h-20 lg:h-24 w-auto"
+              className="h-24 lg:h-32 w-auto"
             />
           </Link>
 
@@ -60,8 +60,8 @@ export const Header = () => {
                   isActive(item.href)
                     ? "text-primary bg-primary/10"
                     : item.highlight
-                    ? "text-foreground/90 hover:text-foreground hover:bg-primary/5 font-semibold"
-                    : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+                    ? "text-foreground/90 hover:text-foreground hover:bg-white/5 font-semibold"
+                    : "text-foreground/70 hover:text-foreground hover:bg-white/5"
                 )}
               >
                 {item.name}
@@ -75,7 +75,7 @@ export const Header = () => {
               href="https://wa.me/5582991709740"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all duration-300 shadow-glow-sm hover:shadow-glow"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-white font-medium hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Agendar reunião</span>
@@ -85,7 +85,7 @@ export const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-primary/5 transition-colors text-foreground"
+            className="lg:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
             aria-label="Menu"
           >
             {isMobileMenuOpen ? (
@@ -99,7 +99,7 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden backdrop-blur-glass bg-background/95 border-t border-border/50">
+        <div className="lg:hidden backdrop-blur-glass bg-background/95 border-t border-white/10">
           <div className="container-custom max-w-[1200px] py-4 space-y-2">
             {navigation.map((item) => (
               <Link
@@ -111,8 +111,8 @@ export const Header = () => {
                   isActive(item.href)
                     ? "text-primary bg-primary/10"
                     : item.highlight
-                    ? "text-foreground font-semibold hover:bg-primary/5"
-                    : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+                    ? "text-foreground font-semibold hover:bg-white/5"
+                    : "text-foreground/70 hover:text-foreground hover:bg-white/5"
                 )}
               >
                 {item.name}
@@ -125,7 +125,7 @@ export const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full mt-4 group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all duration-300 shadow-glow-sm"
+              className="block w-full mt-4 group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-gradient-to-r from-primary to-primary/90 text-white font-medium hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Agendar reunião</span>

@@ -89,7 +89,7 @@ const product = {
   ],
   hasManual: true,
   hasInstaller: true,
-  websiteUrl: "https://lvx-commerce-lp.vercel.app/",
+  websiteUrl: "https://commerce.limvex.com",
 };
 
 // Formulário de contato no modal
