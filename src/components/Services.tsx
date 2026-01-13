@@ -80,95 +80,86 @@ export const Services = () => {
   const scrollNext = () => api?.scrollNext();
 
   return (
-    <section id="desenvolvimento" className="section-spacing">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="mb-4">Nossos serviços</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Soluções completas para escalar seu negócio digital
-          </p>
+    <div className="relative">
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: "center",
+          loop: true,
+          skipSnaps: false,
+          dragFree: false,
+        }}
+        className="w-full max-w-6xl mx-auto"
+      >
+        <CarouselContent className="-ml-2 md:-ml-4">
+          {services.map((service, index) => (
+            <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+              <div className="group glass-card glass-card-hover rounded-2xl p-8 h-full transition-all duration-300 hover:scale-[1.02] border-glow">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <service.icon className="w-7 h-7 text-primary" />
+                </div>
+
+                <h3 className="text-xl font-display font-semibold text-foreground mb-3">{service.title}</h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
+                  {service.description}
+                </p>
+
+                <ul className="space-y-3">
+                  {service.deliverables.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start text-sm text-muted-foreground"
+                    >
+                      <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary/10 text-primary text-xs mr-2.5 flex-shrink-0 mt-0.5">
+                        →
+                      </span>
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="hidden md:flex bg-card border-border hover:bg-primary/10 hover:border-primary/30 text-foreground" />
+        <CarouselNext className="hidden md:flex bg-card border-border hover:bg-primary/10 hover:border-primary/30 text-foreground" />
+      </Carousel>
+
+      {/* Navigation Mobile */}
+      <div className="flex items-center justify-center gap-4 mt-8">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={scrollPrev}
+          aria-label="Serviço anterior"
+          className="bg-card border-border hover:bg-primary/10 hover:border-primary/30"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </Button>
+
+        <div className="flex gap-2">
+          {services.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === current ? "bg-primary w-8" : "bg-border w-2"
+              }`}
+              aria-label={`Ir para serviço ${index + 1}`}
+            />
+          ))}
         </div>
 
-        <div className="relative">
-          <Carousel
-            setApi={setApi}
-            opts={{
-              align: "center",
-              loop: true,
-              skipSnaps: false,
-              dragFree: false,
-            }}
-            className="w-full max-w-6xl mx-auto"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {services.map((service, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <div className="group bg-card rounded-2xl p-8 border border-border hover:border-primary/50 shadow-sm hover:shadow-xl transition-smooth h-full">
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-smooth">
-                      <service.icon className="w-8 h-8 text-primary" />
-                    </div>
-
-                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    <ul className="space-y-3 mb-6">
-                      {service.deliverables.map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start text-sm text-muted-foreground"
-                        >
-                          <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary/10 text-primary text-xs mr-2.5 flex-shrink-0 mt-0.5">
-                            →
-                          </span>
-                          <span className="leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
-          </Carousel>
-
-          {/* Navigation Mobile */}
-          <div className="flex md:hidden items-center justify-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollPrev}
-              aria-label="Serviço anterior"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-
-            <div className="flex gap-2">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => api?.scrollTo(index)}
-                  className={`w-2 h-2 rounded-full transition-smooth ${
-                    index === current ? "bg-primary w-8" : "bg-border"
-                  }`}
-                  aria-label={`Ir para serviço ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollNext}
-              aria-label="Próximo serviço"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={scrollNext}
+          aria-label="Próximo serviço"
+          className="bg-card border-border hover:bg-primary/10 hover:border-primary/30"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </Button>
       </div>
-    </section>
+    </div>
   );
 };
