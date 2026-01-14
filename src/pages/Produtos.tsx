@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/Footer";
-import { DarkSection } from "@/components/ui/DarkSection";
+import { HeaderDark } from "@/components/redesign/HeaderDark";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,61 +17,11 @@ import { useToast } from "@/hooks/use-toast";
 import {
   ShoppingCart,
   CheckCircle2,
-  ArrowLeft,
-  Menu,
-  X,
   Download,
   FileText,
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
-import limvexSG from "@/assets/limvexLogoBg.png";
-
-// Header customizado estilo Arauc (igual ao /para-empresas)
-const ProdutosHeader = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0D111B] border-b border-white/10">
-      <div className="container-custom max-w-[1200px]">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          <div className="flex items-center gap-4">
-            {/* Botão Voltar - estilo Arauc */}
-            <Link
-              to="/"
-              className="flex items-center gap-2 px-3 py-2 rounded-xl border border-white/10 bg-[#0D111B] hover:bg-white/5 transition-all duration-200 text-white/70 hover:text-white"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Voltar</span>
-            </Link>
-
-            {/* Logo com borda suave estilo Arauc */}
-            <Link to="/" className="flex items-center">
-              <img
-                src={limvexSG}
-                alt="Limvex Software Group"
-                className="h-8 lg:h-10 w-auto border border-white/10 rounded-xl px-3 py-2 bg-[#0D111B]"
-              />
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-white/5 transition-colors text-white"
-            aria-label="Menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-};
 
 // Dados do produto LVX Commerce
 const product = {
@@ -184,12 +134,15 @@ const ContactFormModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0F141C] border-white/10 text-white">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0A0A0F] border-white/10 text-white">
         <DialogHeader>
           <DialogTitle className="text-2xl font-black text-white">
-            Fale com um especialista
+            Fale com um{" "}
+            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              especialista
+            </span>
           </DialogTitle>
-          <DialogDescription className="text-gray-400">
+          <DialogDescription className="text-white/60">
             Preencha o formulário abaixo e entraremos em contato em breve
           </DialogDescription>
         </DialogHeader>
@@ -204,7 +157,7 @@ const ContactFormModal = ({
                 id="nome"
                 value={formData.nome}
                 onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
                 required
               />
             </div>
@@ -216,7 +169,7 @@ const ContactFormModal = ({
                 id="sobrenome"
                 value={formData.sobrenome}
                 onChange={(e) => setFormData({ ...formData, sobrenome: e.target.value })}
-                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
               />
             </div>
           </div>
@@ -231,7 +184,7 @@ const ContactFormModal = ({
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
                 required
               />
             </div>
@@ -243,7 +196,7 @@ const ContactFormModal = ({
                 id="empresa"
                 value={formData.empresa}
                 onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
-                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
                 required
               />
             </div>
@@ -258,7 +211,7 @@ const ContactFormModal = ({
                 id="telefone"
                 value={formData.telefone}
                 onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
               />
             </div>
             <div className="space-y-2">
@@ -269,7 +222,7 @@ const ContactFormModal = ({
                 id="cargo"
                 value={formData.cargo}
                 onChange={(e) => setFormData({ ...formData, cargo: e.target.value })}
-                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+                className="h-12 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
               />
             </div>
           </div>
@@ -282,7 +235,7 @@ const ContactFormModal = ({
               id="mensagem"
               value={formData.mensagem}
               onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
-              className="min-h-[120px] bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-500"
+              className="min-h-[120px] bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-purple-500"
               placeholder="Descreva sua necessidade ou dúvida..."
             />
           </div>
@@ -292,14 +245,14 @@ const ContactFormModal = ({
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="flex-1 rounded-full border-white/20 text-white hover:bg-white/10"
+              className="flex-1 rounded-full border-white/20 text-white hover:bg-white/10 hover:border-purple-500/30"
             >
               Voltar
             </Button>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-600/25"
             >
               {isSubmitting ? 'Enviando...' : 'Enviar'}
             </Button>
@@ -322,142 +275,159 @@ export default function Produtos() {
   const Icon = product.icon;
 
   return (
-    <div className="min-h-screen relative" style={{ backgroundColor: "#0D111B" }}>
-      <ProdutosHeader />
+    <div className="min-h-screen bg-[#0A0A0F]">
+      <HeaderDark />
 
       <main className="text-white pt-20 relative z-10">
-        {/* Hero minimalista - estilo Arauc */}
-        <DarkSection spacing="md" variant="default">
-          <div className="max-w-5xl mx-auto text-center py-16 md:py-20">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 text-white">
-              Nossos Produtos
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto font-medium">
-              Soluções prontas e customizáveis para você lançar rápido com a sua marca.
-            </p>
+        {/* Hero Section - Fintech Style */}
+        <section className="relative min-h-[60vh] flex flex-col justify-center overflow-hidden py-20 lg:py-32">
+          {/* Background with animated gradient */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[#0A0A0F]" />
+            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[100px]" />
           </div>
-        </DarkSection>
 
-        {/* Card de Produto - LVX Commerce estilo Arauc */}
-        <DarkSection spacing="md" variant="default">
-          <div className="max-w-4xl mx-auto">
-            <div className="group relative rounded-2xl border border-white/10 bg-[#10141F] hover:bg-[#0F141C] transition-all duration-300 p-8 hover:border-white/10 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]">
-              {/* Ícone grande azul */}
-              <div className="mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors duration-300">
-                  <Icon className="w-8 h-8 text-blue-500" strokeWidth={1.5} />
+          <div className="container-custom max-w-[1200px] relative z-10">
+            <div className="max-w-5xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 text-white">
+                Nossos{" "}
+                <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
+                  Produtos
+                </span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto font-medium">
+                Soluções prontas e customizáveis para você lançar rápido com a sua marca.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Card de Produto - LVX Commerce */}
+        <section className="py-24 md:py-32 bg-[#0A0A0F]">
+          <div className="container-custom max-w-[1200px]">
+            <div className="max-w-4xl mx-auto">
+              <div className="group relative rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] backdrop-blur-sm transition-all duration-300 p-8 hover:border-purple-500/30">
+                {/* Ícone grande */}
+                <div className="mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-500/30 transition-all">
+                    <Icon className="w-8 h-8 text-purple-400" strokeWidth={1.5} />
+                  </div>
+                </div>
+
+                {/* Nome do produto */}
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-3">
+                  {product.title}
+                </h3>
+
+                {/* Descrição */}
+                <p className="text-base text-white/70 mb-6 leading-relaxed">
+                  {product.description}
+                </p>
+
+                {/* Preço */}
+                <div className="mb-6 pb-6 border-b border-white/10">
+                  <p className="text-sm text-white/60">
+                    A partir de <span className="text-white font-semibold">{product.price}</span>
+                  </p>
+                </div>
+
+                {/* Features */}
+                <ul className="space-y-3 mb-8">
+                  {product.features.map((feature, i) => (
+                    <li key={i} className="flex items-start text-sm text-white/70">
+                      <CheckCircle2 className="w-5 h-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Botões */}
+                <div className="space-y-3">
+                  {product.hasManual && (
+                    <Button
+                      variant="outline"
+                      className="w-full rounded-full border-white/10 text-white hover:bg-white/10 hover:border-purple-500/30"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Manual de uso
+                    </Button>
+                  )}
+                  {product.hasInstaller && (
+                    <Button
+                      variant="outline"
+                      className="w-full rounded-full border-white/10 text-white hover:bg-white/10 hover:border-purple-500/30"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Baixar instalador
+                    </Button>
+                  )}
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full rounded-full border-white/10 text-white hover:bg-white/10 hover:border-purple-500/30"
+                  >
+                    <a href={product.websiteUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Ir para o site
+                    </a>
+                  </Button>
+                  <Button
+                    onClick={() => handleContactClick(product.title)}
+                    className="w-full rounded-full bg-purple-600 hover:bg-purple-700 text-white font-semibold shadow-lg shadow-purple-600/25"
+                  >
+                    Saiba mais / Contratar
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Nome do produto */}
-              <h3 className="text-2xl md:text-3xl font-black text-white mb-3">
-                {product.title}
-              </h3>
-
-              {/* Descrição */}
-              <p className="text-base text-gray-400 mb-6 leading-relaxed">
-                {product.description}
-              </p>
-
-              {/* Preço */}
-              <div className="mb-6 pb-6 border-b border-white/5">
-                <p className="text-sm text-gray-500">
-                  A partir de <span className="text-white font-semibold">{product.price}</span>
+        {/* Seção CTA Gradient */}
+        <section className="py-24 md:py-32 bg-[#0A0A0F]">
+          <div className="container-custom max-w-[1200px]">
+            <div className="max-w-5xl mx-auto">
+              <div className="rounded-3xl bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 p-10 md:p-14 text-center">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-white">
+                  Quer conhecer mais sobre nossos{" "}
+                  <span className="text-white/90">produtos?</span>
+                </h2>
+                <p className="text-lg md:text-xl text-white/90 mb-8 font-medium max-w-2xl mx-auto">
+                  Entre em contato e descubra qual produto white-label é ideal para seu negócio.
                 </p>
-              </div>
-
-              {/* Features */}
-              <ul className="space-y-3 mb-8">
-                {product.features.map((feature, i) => (
-                  <li key={i} className="flex items-start text-sm text-gray-300">
-                    <CheckCircle2 className="w-5 h-5 text-blue-500 mr-3 flex-shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Botões */}
-              <div className="space-y-3">
-                {product.hasManual && (
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
-                    variant="outline"
-                    className="w-full rounded-full border-white/10 text-white hover:bg-white/10"
+                    asChild
+                    size="lg"
+                    className="rounded-full px-8 py-6 font-bold bg-white text-purple-600 hover:bg-white/90"
                   >
-                    <FileText className="w-4 h-4 mr-2" />
-                    Manual de uso
+                    <Link to="/para-empresas">
+                      Para Empresas
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
                   </Button>
-                )}
-                {product.hasInstaller && (
                   <Button
+                    asChild
+                    size="lg"
                     variant="outline"
-                    className="w-full rounded-full border-white/10 text-white hover:bg-white/10"
+                    className="rounded-full px-8 py-6 font-bold border-2 border-white text-white hover:bg-white/10"
                   >
-                    <Download className="w-4 h-4 mr-2" />
-                    Baixar instalador
+                    <Link to="/para-novos-negocios">
+                      Novos Negócios
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
                   </Button>
-                )}
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full rounded-full border-white/10 text-white hover:bg-white/10"
-                >
-                  <a href={product.websiteUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Ir para o site
-                  </a>
-                </Button>
-                <Button
-                  onClick={() => handleContactClick(product.title)}
-                  className="w-full rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold"
-                >
-                  Saiba mais / Contratar
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                </div>
               </div>
             </div>
           </div>
-        </DarkSection>
-
-        {/* Seção CTA Gradient - estilo Arauc */}
-        <DarkSection spacing="md" variant="default">
-          <div className="max-w-5xl mx-auto">
-            <div className="rounded-3xl bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 p-10 md:p-14 text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-white">
-                Quer conhecer mais sobre nossos produtos?
-              </h2>
-              <p className="text-lg md:text-xl text-white/90 mb-8 font-medium max-w-2xl mx-auto">
-                Entre em contato e descubra qual produto white-label é ideal para seu negócio.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="lg"
-                  className="rounded-full px-8 py-6 font-bold bg-white text-blue-600 hover:bg-white/90"
-                >
-                  <Link to="/para-empresas">
-                    Para Empresas
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full px-8 py-6 font-bold border-2 border-white text-white hover:bg-white/10"
-                >
-                  <Link to="/para-novos-negocios">
-                    Novos Negócios
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </DarkSection>
+        </section>
       </main>
 
-      {/* Footer com fundo escuro */}
-      <div style={{ backgroundColor: "#0D111B" }} className="relative z-10">
+      {/* Footer */}
+      <div className="bg-[#0A0A0F] relative z-10">
         <Footer />
       </div>
 

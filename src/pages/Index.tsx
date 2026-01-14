@@ -1,9 +1,9 @@
 import { HeroSection } from "@/components/redesign/HeroSection";
 import { SolutionsSection } from "@/components/redesign/SolutionsSection";
-import { CTAGridSection } from "@/components/redesign/CTAGridSection";
+import { BenefitsSection } from "@/components/redesign/BenefitsSection";
+import { PromoBanner } from "@/components/redesign/PromoBanner";
 import { PricingSection } from "@/components/redesign/PricingSection";
 import { AboutSection } from "@/components/redesign/AboutSection";
-import { TestimonialsSection } from "@/components/redesign/TestimonialsSection";
 import { FAQSection } from "@/components/redesign/FAQSection";
 import { FooterSection } from "@/components/redesign/FooterSection";
 import { HeaderDark } from "@/components/redesign/HeaderDark";
@@ -17,10 +17,10 @@ export default function Index() {
       <main>
         <HeroSection />
         <SolutionsSection />
-        <CTAGridSection />
+        <BenefitsSection />
+        <PromoBanner />
         <PricingSection />
         <AboutSection />
-        <TestimonialsSection />
         <FAQSection />
       </main>
 

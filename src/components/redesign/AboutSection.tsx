@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -20,9 +19,18 @@ export const AboutSection = () => {
           </p>
         </div>
 
-        {/* Main visual block */}
+        {/* Main visual block com imagem real */}
         <div className="relative rounded-3xl overflow-hidden mb-8">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-purple-900/40" />
+          {/* Background image */}
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=600&fit=crop&q=80"
+              alt="Equipe trabalhando em tecnologia"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-purple-900/50 to-black/80" />
+          </div>
+          
           <div className="relative z-10 p-8 md:p-12 lg:p-16">
             <div className="max-w-2xl">
               <span className="text-purple-400 text-sm font-semibold uppercase tracking-wider">
@@ -31,16 +39,12 @@ export const AboutSection = () => {
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mt-4 mb-6">
                 Transformando Negócios com Tecnologia e Inovação
               </h3>
-              <p className="text-white/70 text-lg leading-relaxed">
+              <p className="text-white/90 text-lg leading-relaxed">
                 Somos uma software house com equipes sênior especializadas em desenvolvimento 
                 web, mobile e automação com IA. Transformamos desafios de negócio em soluções 
                 tecnológicas eficientes, sólidas e orientadas a resultados.
               </p>
             </div>
-          </div>
-          {/* Background image placeholder */}
-          <div className="absolute inset-0 -z-10">
-            <div className="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#0d0d15]" />
           </div>
         </div>
 
@@ -91,23 +95,6 @@ export const AboutSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <Button
-            size="lg"
-            className="rounded-full px-8 py-6 text-base font-bold bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
-            asChild
-          >
-            <a
-              href="https://wa.me/5582991709740"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Falar com especialista
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </a>
-          </Button>
-        </div>
       </div>
     </section>
   );

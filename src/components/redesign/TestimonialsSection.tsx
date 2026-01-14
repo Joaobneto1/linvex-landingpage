@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import avatarWpp from "@/assets/avatarWpp.png";
-import avatarReddit from "@/assets/avatarReddit.svg";
 
 const testimonials = [
   {
@@ -10,28 +8,28 @@ const testimonials = [
       "Saímos de 10 para 200+ consultas por dia em 6 meses. O time foi decisivo no crescimento.",
     author: "Carlos Mendes",
     company: "CEO, HealthTech Brasil",
-    avatar: avatarWpp,
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
   },
   {
     quote:
       "Reduzimos o tempo de desenvolvimento em 40% com a arquitetura proposta pela Limvex.",
     author: "Ana Paula Silva",
     company: "CTO, Fintech Solutions",
-    avatar: avatarReddit,
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
   },
   {
     quote:
       "Entregaram um produto complexo em 4 meses, com qualidade acima da expectativa.",
     author: "Roberto Alves",
     company: "Diretor de Produto, E-commerce Plus",
-    avatar: avatarWpp,
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&q=80",
   },
   {
     quote:
       "A integração com nossos sistemas legados foi feita sem nenhum downtime. Profissionalismo total.",
     author: "Mariana Costa",
     company: "Head de TI, Grupo Hospitalar",
-    avatar: avatarReddit,
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&q=80",
   },
 ];
 
