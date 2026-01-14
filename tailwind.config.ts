@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter Tight', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Satoshi', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

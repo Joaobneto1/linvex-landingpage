@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { HeaderDark } from "@/components/redesign/HeaderDark";
-import { Footer } from "@/components/Footer";
+import { FooterSection } from "@/components/redesign/FooterSection";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import {
@@ -569,9 +569,7 @@ export default function ParaNovosNegocios() {
         </section>
       </main>
 
-      <div className="bg-[#0A0A0F]">
-        <Footer />
-      </div>
+      <FooterSection />
       <WhatsAppButton />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Footer } from "@/components/Footer";
+import { FooterSection } from "@/components/redesign/FooterSection";
 import { HeaderDark } from "@/components/redesign/HeaderDark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -580,33 +580,6 @@ export default function ParaEmpresas() {
           </div>
         </section>
 
-        {/* Seção: Ecossistema */}
-        <section id="ecossistema" className="py-24 md:py-32 bg-[#0A0A0F]">
-          <div className="container-custom max-w-[1200px]">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 text-white">
-                Nosso{" "}
-                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-                  Ecossistema
-                </span>
-              </h2>
-              <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto font-medium">
-                Parceiros e tecnologias que fazem parte do nosso dia a dia
-              </p>
-            </div>
-            <div className="grid grid-cols-3 gap-6 md:gap-8">
-              {[...Array(9)].map((_, index) => (
-                <div
-                  key={index}
-                  className="aspect-square rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm flex items-center justify-center hover:border-purple-500/30 hover:bg-white/[0.05] transition-all duration-300"
-                >
-                  <div className="text-white/20 text-sm font-medium">Logo {index + 1}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Formulário Final */}
         <section id="formulario-final" className="py-24 md:py-32 bg-[#0A0A0F]">
           <div className="container-custom max-w-[1200px]">
@@ -631,9 +604,7 @@ export default function ParaEmpresas() {
       </main>
 
       {/* Footer */}
-      <div className="bg-[#0A0A0F] relative z-10">
-        <Footer />
-      </div>
+      <FooterSection />
     </div>
   );
 }

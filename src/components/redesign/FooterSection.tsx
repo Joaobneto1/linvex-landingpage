@@ -120,10 +120,15 @@ export const FooterSection = () => {
       {/* Bottom bar */}
       <div className="container-custom max-w-[1200px] py-6 border-t border-white/10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/40 text-center md:text-left">
-            © {new Date().getFullYear()} Todos os direitos reservados por{" "}
-            <span className="text-white font-medium">Limvex Software Group</span>
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p className="text-sm text-white/40 text-center md:text-left">
+              © {new Date().getFullYear()} Todos os direitos reservados por{" "}
+              <span className="text-white font-medium">Limvex Software Group</span>
+            </p>
+            <p className="text-sm text-white/40 text-center md:text-left">
+              CNPJ: 63.996.570/0001-01
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <Link to="/termos" className="text-sm text-white/40 hover:text-white transition-colors">
               Termos de Serviço

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Footer } from "@/components/Footer";
+import { FooterSection } from "@/components/redesign/FooterSection";
 import { HeaderDark } from "@/components/redesign/HeaderDark";
 import { Button } from "@/components/ui/button";
 import {
@@ -284,8 +284,54 @@ export default function Produtos() {
           {/* Background with animated gradient */}
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[#0A0A0F]" />
+            
+            {/* Purple gradient glow */}
             <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[80px]" />
+            
+            {/* Wave lines effect - SVG decorativo */}
+            <svg
+              className="absolute bottom-0 left-0 w-full h-[400px] opacity-30"
+              viewBox="0 0 1440 400"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 300 Q 360 200, 720 300 T 1440 300"
+                stroke="url(#wave-gradient-produtos)"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path
+                d="M0 320 Q 360 220, 720 320 T 1440 320"
+                stroke="url(#wave-gradient-produtos)"
+                strokeWidth="1.5"
+                fill="none"
+                opacity="0.7"
+              />
+              <path
+                d="M0 340 Q 360 240, 720 340 T 1440 340"
+                stroke="url(#wave-gradient-produtos)"
+                strokeWidth="1"
+                fill="none"
+                opacity="0.5"
+              />
+              <defs>
+                <linearGradient id="wave-gradient-produtos" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#a855f7" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.3" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{
+              backgroundImage: `linear-gradient(to right, rgba(168, 85, 247, 0.1) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(168, 85, 247, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }} />
           </div>
 
           <div className="container-custom max-w-[1200px] relative z-10">
@@ -386,39 +432,48 @@ export default function Produtos() {
         </section>
 
         {/* Seção CTA Gradient */}
-        <section className="py-24 md:py-32 bg-[#0A0A0F]">
-          <div className="container-custom max-w-[1200px]">
+        <section className="py-24 md:py-32 bg-[#0A0A0F] relative overflow-hidden">
+          {/* Background effects for CTA */}
+          <div className="absolute inset-0">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[150px]" />
+          </div>
+          
+          <div className="container-custom max-w-[1200px] relative z-10">
             <div className="max-w-5xl mx-auto">
-              <div className="rounded-3xl bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 p-10 md:p-14 text-center">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-white">
-                  Quer conhecer mais sobre nossos{" "}
-                  <span className="text-white/90">produtos?</span>
-                </h2>
-                <p className="text-lg md:text-xl text-white/90 mb-8 font-medium max-w-2xl mx-auto">
-                  Entre em contato e descubra qual produto white-label é ideal para seu negócio.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="rounded-full px-8 py-6 font-bold bg-white text-purple-600 hover:bg-white/90"
-                  >
-                    <Link to="/para-empresas">
-                      Para Empresas
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="rounded-full px-8 py-6 font-bold border-2 border-white text-white hover:bg-white/10"
-                  >
-                    <Link to="/para-novos-negocios">
-                      Novos Negócios
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
-                  </Button>
+              <div className="rounded-3xl bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 p-10 md:p-14 text-center relative overflow-hidden">
+                {/* Inner glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+                <div className="relative z-10">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-white">
+                    Quer conhecer mais sobre nossos{" "}
+                    <span className="text-white/90">produtos?</span>
+                  </h2>
+                  <p className="text-lg md:text-xl text-white/90 mb-8 font-medium max-w-2xl mx-auto">
+                    Entre em contato e descubra qual produto white-label é ideal para seu negócio.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="rounded-full px-8 py-6 font-bold bg-white text-purple-600 hover:bg-white/90 shadow-lg shadow-white/20"
+                    >
+                      <Link to="/para-empresas">
+                        Para Empresas
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="rounded-full px-8 py-6 font-bold border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm"
+                    >
+                      <Link to="/para-novos-negocios">
+                        Novos Negócios
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -427,9 +482,7 @@ export default function Produtos() {
       </main>
 
       {/* Footer */}
-      <div className="bg-[#0A0A0F] relative z-10">
-        <Footer />
-      </div>
+      <FooterSection />
 
       {/* Modal de Contato */}
       <ContactFormModal

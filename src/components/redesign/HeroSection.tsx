@@ -146,15 +146,6 @@ export const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Logos marquee - pode ser adicionado depois com logos de clientes */}
-      <div className="relative z-10 border-t border-white/10 py-8 mt-auto">
-        <div className="container-custom max-w-[1200px]">
-          <div className="flex items-center justify-center gap-12 opacity-40">
-            <span className="text-white/60 text-sm font-medium">Empresas que confiam na Limvex</span>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };

@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Footer } from "@/components/Footer";
+import { FooterSection } from "@/components/redesign/FooterSection";
 import { HeaderDark } from "@/components/redesign/HeaderDark";
 import { Button } from "@/components/ui/button";
 import {
@@ -120,7 +119,6 @@ const comoTrabalhamos = [
 ];
 
 export default function Sobre() {
-  const [activeTab, setActiveTab] = useState("software-house");
 
   return (
     <div className="min-h-screen bg-[#0A0A0F]">
@@ -132,54 +130,67 @@ export default function Sobre() {
           {/* Background with animated gradient */}
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[#0A0A0F]" />
+            
+            {/* Purple gradient glow */}
             <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[100px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[80px]" />
+            
+            {/* Wave lines effect - SVG decorativo */}
+            <svg
+              className="absolute bottom-0 left-0 w-full h-[400px] opacity-30"
+              viewBox="0 0 1440 400"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0 300 Q 360 200, 720 300 T 1440 300"
+                stroke="url(#wave-gradient-sobre)"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path
+                d="M0 320 Q 360 220, 720 320 T 1440 320"
+                stroke="url(#wave-gradient-sobre)"
+                strokeWidth="1.5"
+                fill="none"
+                opacity="0.7"
+              />
+              <path
+                d="M0 340 Q 360 240, 720 340 T 1440 340"
+                stroke="url(#wave-gradient-sobre)"
+                strokeWidth="1"
+                fill="none"
+                opacity="0.5"
+              />
+              <defs>
+                <linearGradient id="wave-gradient-sobre" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#a855f7" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.3" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{
+              backgroundImage: `linear-gradient(to right, rgba(168, 85, 247, 0.1) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(168, 85, 247, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }} />
           </div>
 
           <div className="container-custom max-w-[1200px] relative z-10 py-20 lg:py-32">
             <div className="max-w-5xl mx-auto text-center space-y-8">
-              {/* Tabs interativas */}
-              <div className="flex justify-center mb-8">
-                <div className="inline-flex items-center gap-2 p-1 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                  <button
-                    onClick={() => setActiveTab("software-house")}
-                    className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                      activeTab === "software-house"
-                        ? "bg-purple-600 text-white shadow-lg shadow-purple-600/25"
-                        : "text-white/60 hover:text-white"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Shield className="w-4 h-4" />
-                      <span>Software House</span>
-                    </div>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("desenvolvimento")}
-                    className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                      activeTab === "desenvolvimento"
-                        ? "bg-purple-600 text-white shadow-lg shadow-purple-600/25"
-                        : "text-white/60 hover:text-white"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Code className="w-4 h-4" />
-                      <span>Desenvolvimento Sob Medida</span>
-                    </div>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("equipes")}
-                    className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                      activeTab === "equipes"
-                        ? "bg-purple-600 text-white shadow-lg shadow-purple-600/25"
-                        : "text-white/60 hover:text-white"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      <span>Equipes Sênior</span>
-                    </div>
-                  </button>
+              {/* Badges visuais (não clicáveis) */}
+              <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium backdrop-blur-sm">
+                  <Code className="w-4 h-4" />
+                  <span>Desenvolvimento Sob Medida</span>
+                </div>
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium backdrop-blur-sm">
+                  <Users className="w-4 h-4" />
+                  <span>Equipes Sênior</span>
                 </div>
               </div>
 
@@ -390,58 +401,53 @@ export default function Sobre() {
           </div>
         </section>
 
-        {/* Seção: Nosso Compromisso */}
-        <section id="compromisso" className="py-24 md:py-32 bg-[#0A0A0F]">
+        {/* Seção: Nosso Compromisso e Quem confia na Limvex - Lado a lado */}
+        <section className="py-24 md:py-32 bg-[#0A0A0F]">
           <div className="container-custom max-w-[1200px]">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+              {/* Nosso Compromisso */}
+              <div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-8 text-white">
                   Nosso{" "}
                   <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
                     Compromisso
                   </span>
                 </h2>
+                <div className="space-y-6 text-lg text-white/70 leading-relaxed">
+                  <p>
+                    Cada projeto é tratado como único.
+                  </p>
+                  <p>
+                    Cada cliente recebe atenção direta dos founders.
+                  </p>
+                  <p>
+                    Cada entrega é pensada para gerar impacto real.
+                  </p>
+                  <p className="text-xl font-semibold text-white mt-8">
+                    Somos obsessivos por clareza, velocidade e resultado.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-6 text-lg text-white/70 leading-relaxed text-center">
-                <p>
-                  Cada projeto é tratado como único.
-                </p>
-                <p>
-                  Cada cliente recebe atenção direta dos founders.
-                </p>
-                <p>
-                  Cada entrega é pensada para gerar impacto real.
-                </p>
-                <p className="text-xl font-semibold text-white mt-8">
-                  Somos obsessivos por clareza, velocidade e resultado.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Seção: Quem confia na Limvex */}
-        <section id="quem-confia" className="py-24 md:py-32 bg-[#0A0A0F]">
-          <div className="container-custom max-w-[1200px]">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 text-white">
+              {/* Quem confia na Limvex */}
+              <div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-8 text-white">
                   Quem confia na{" "}
                   <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
                     Limvex
                   </span>
                 </h2>
-              </div>
-              <div className="space-y-4 text-lg text-white/70 leading-relaxed">
-                <p>
-                  <strong className="text-white">Empresas</strong> que buscam excelência, segurança e soluções de alto impacto.
-                </p>
-                <p>
-                  <strong className="text-white">Startups</strong> que querem nascer com estrutura tecnológica sólida.
-                </p>
-                <p>
-                  <strong className="text-white">Empreendedores</strong> que querem tirar ideias do papel com velocidade.
-                </p>
+                <div className="space-y-4 text-lg text-white/70 leading-relaxed">
+                  <p>
+                    <strong className="text-white">Empresas</strong> que buscam excelência, segurança e soluções de alto impacto.
+                  </p>
+                  <p>
+                    <strong className="text-white">Startups</strong> que querem nascer com estrutura tecnológica sólida.
+                  </p>
+                  <p>
+                    <strong className="text-white">Empreendedores</strong> que querem tirar ideias do papel com velocidade.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -491,9 +497,7 @@ export default function Sobre() {
       </main>
 
       {/* Footer */}
-      <div className="bg-[#0A0A0F] relative z-10">
-        <Footer />
-      </div>
+      <FooterSection />
     </div>
   );
 }
