@@ -77,6 +77,25 @@ export function ComoFuncionaSection() {
             </a>
           </Button>
         </div>
+
+        {/* Team collaboration image */}
+        <div className="mt-16 relative rounded-2xl overflow-hidden border border-white/[0.08]">
+          <img
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=400&fit=crop&q=80"
+            alt="Time colaborando"
+            className="w-full h-64 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000920] via-[#000920]/70 to-transparent flex items-center">
+            <div className="p-8 md:p-12 max-w-2xl">
+              <h4 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                Comunicação constante em cada etapa
+              </h4>
+              <p className="text-white/80 text-lg">
+                Você acompanha o progresso e participa das decisões, garantindo que o resultado final esteja alinhado com suas expectativas.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

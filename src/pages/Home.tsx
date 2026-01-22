@@ -5,6 +5,7 @@ import { ProblemaSection } from "@/components/home/ProblemaSection";
 import { SolucaoSection } from "@/components/home/SolucaoSection";
 import { ComoFuncionaSection } from "@/components/home/ComoFuncionaSection";
 import { DiferenciaisSection } from "@/components/home/DiferenciaisSection";
+import { TimeSection } from "@/components/home/TimeSection";
 import { ProvaSocialSection } from "@/components/home/ProvaSocialSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { ChamadaFinalSection } from "@/components/home/ChamadaFinalSection";
@@ -26,6 +27,7 @@ export default function Home() {
         <SolucaoSection />
         <ComoFuncionaSection />
         <DiferenciaisSection />
+        <TimeSection />
         <ProvaSocialSection />
         <FAQSection />
         <ChamadaFinalSection />

@@ -20,7 +20,12 @@ export function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center relative h-16 md:h-20">
           {/* Logo centralizada */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/src/assets/limvex-icon-bg.png" 
+              alt="LIMVEX" 
+              className="w-8 h-8 md:w-10 md:h-10 rounded-lg"
+            />
             <span className="text-xl md:text-2xl font-bold text-white">LIMVEX</span>
           </div>
 

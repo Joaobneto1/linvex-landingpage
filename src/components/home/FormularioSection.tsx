@@ -144,14 +144,22 @@ export function FormularioSection() {
   };
 
   return (
-    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920]">
-      <div className="container mx-auto max-w-2xl">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-center text-white tracking-tight">
-          Solicitar análise do projeto
-        </h2>
-        <p className="text-center text-white/70 mb-16 text-lg leading-relaxed">
-          Preencha os dados abaixo e nossa equipe entrará em contato em breve
-        </p>
+    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920] relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0076CE]/5 via-transparent to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto max-w-2xl relative z-10">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-[#0076CE] text-sm font-semibold mb-6">
+            <span>📋 Formulário de contato</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
+            Solicitar análise do projeto
+          </h2>
+          <p className="text-white/70 text-lg leading-relaxed">
+            Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
