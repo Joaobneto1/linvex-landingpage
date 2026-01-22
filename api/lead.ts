@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 import { canSendEmail, registerEmailSend } from './utils/emailRateLimit';
 
-const resend = new Resend('re_59KmR2ki_HAGvs6MuvH56ynY1bPviGsMN');
+const resend = new Resend(process.env.RESEND_API_KEY || 're_59KmR2ki_HAGvs6MuvH56ynY1bPviGsMN');
 
 interface LeadPayload {
   nome: string;
@@ -23,6 +23,7 @@ function formatEmailBody(payload: LeadPayload): string {
     'produtos': 'Contato - Produtos',
     'para-empresas': 'Contato - Para Empresas',
     'contato': 'Contato - Solicitar Orçamento',
+    'home': 'Lead - Home (Análise de Projeto)',
   };
 
   let body = `Nova solicitação recebida: ${origemLabels[payload.origem] || payload.origem}\n\n`;
@@ -40,12 +41,28 @@ function formatEmailBody(payload: LeadPayload): string {
     body += `Telefone: ${payload.telefone}\n`;
   }
 
+  if (payload.whatsapp) {
+    body += `WhatsApp: ${payload.whatsapp}\n`;
+  }
+
   if (payload.cargo) {
     body += `Cargo: ${payload.cargo}\n`;
   }
 
   if (payload.produto) {
     body += `Produto de interesse: ${payload.produto}\n`;
+  }
+
+  if (payload.tipoProjeto) {
+    body += `Tipo de projeto: ${payload.tipoProjeto}\n`;
+  }
+
+  if (payload.objetivoProjeto) {
+    body += `Objetivo do projeto: ${payload.objetivoProjeto}\n`;
+  }
+
+  if (payload.faturamento) {
+    body += `Faturamento: ${payload.faturamento}\n`;
   }
 
   body += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
@@ -143,10 +160,10 @@ export default async function handler(
     }
 
     // Validar origem
-    const origensValidas = ['startup', 'produtos', 'para-empresas', 'contato'];
+    const origensValidas = ['startup', 'produtos', 'para-empresas', 'contato', 'home'];
     if (!payload.origem || !origensValidas.includes(payload.origem)) {
       return res.status(400).json({
-        error: 'Origem inválida. Deve ser: startup, produtos, para-empresas ou contato.',
+        error: 'Origem inválida. Deve ser: startup, produtos, para-empresas, contato ou home.',
       });
     }
 
@@ -174,7 +191,7 @@ export default async function handler(
     // Enviar e-mail via Resend
     const { data, error } = await resend.emails.send({
       from: 'Linvex Landing Page <onboarding@resend.dev>',
-      to: 'muriloalbuquerquemartins@gmail.com',
+      to: process.env.LEAD_EMAIL || 'muriloalbuquerquemartins@gmail.com',
       subject: assunto,
       text: corpoEmail,
     });

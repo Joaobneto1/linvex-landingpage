@@ -1,73 +1,149 @@
-# Welcome to your Lovable project
+# LIMVEX Landing Page
 
-## Project info
+Landing page institucional da LIMVEX focada em conversão e captação de leads qualificados.
 
-**URL**: https://lovable.dev/projects/b9e8fa49-9125-4ea1-8e4b-c4b3e61e5e13
+## 🚀 Stack Tecnológica
 
-## How can I edit this code?
+- **Vite** - Build tool e dev server
+- **React 18** - Framework UI
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Estilização
+- **shadcn/ui** - Componentes UI
+- **React Router** - Roteamento
+- **React Hook Form + Zod** - Formulários e validação
+- **Resend** - Envio de e-mails
+- **Vercel** - Deploy e hosting
 
-There are several ways of editing your application.
+## 📋 Pré-requisitos
 
-**Use Lovable**
+- Node.js 18+ e npm
+- Conta Vercel (para deploy)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b9e8fa49-9125-4ea1-8e4b-c4b3e61e5e13) and start prompting.
+## 🛠️ Como rodar localmente
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+# 1. Instalar dependências
+npm install
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview
+# 2. Iniciar servidor de desenvolvimento
 npm run dev
+
+# O site estará disponível em http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+## 🏗️ Build para produção
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run build
+```
 
-**Use GitHub Codespaces**
+Os arquivos serão gerados na pasta `dist/`.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📦 Scripts disponíveis
 
-## What technologies are used for this project?
+- `npm run dev` - Inicia servidor de desenvolvimento
+- `npm run dev:vercel` - Inicia servidor com Vercel CLI
+- `npm run build` - Build para produção
+- `npm run preview` - Preview do build de produção
+- `npm run lint` - Executa o linter
 
-This project is built with:
+## 🌐 Variáveis de Ambiente
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Para produção (Vercel)
 
-## How can I deploy this project?
+Configure as seguintes variáveis no painel da Vercel:
 
-Simply open [Lovable](https://lovable.dev/projects/b9e8fa49-9125-4ea1-8e4b-c4b3e61e5e13) and click on Share -> Publish.
+- `RESEND_API_KEY` - API key do Resend para envio de e-mails (opcional, tem fallback)
+- `LEAD_EMAIL` - E-mail de destino para receber os leads (opcional, tem fallback)
+- `KV_REST_API_URL` - URL do Vercel KV para rate limiting (opcional)
+- `KV_REST_API_TOKEN` - Token do Vercel KV para rate limiting (opcional)
 
-## Can I connect a custom domain to my Lovable project?
+### Rate Limiting
 
-Yes, you can!
+O sistema de rate limiting de e-mails funciona com:
+- **Vercel KV** (recomendado em produção) - se as variáveis `KV_REST_API_URL` e `KV_REST_API_TOKEN` estiverem configuradas
+- **Fallback local** - arquivo JSON em `/tmp` (funciona em desenvolvimento)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Limite: 3.000 e-mails por mês
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain).
+## 📁 Estrutura do Projeto
+
+```
+├── api/                    # API routes (Vercel serverless)
+│   ├── lead.ts            # Endpoint para receber leads
+│   └── utils/
+│       └── emailRateLimit.ts
+├── src/
+│   ├── components/
+│   │   ├── home/          # Componentes da home
+│   │   └── ui/            # Componentes shadcn/ui
+│   ├── pages/
+│   │   ├── Home.tsx       # Página principal
+│   │   ├── Obrigado.tsx   # Página de confirmação
+│   │   └── NotFound.tsx   # Página 404
+│   ├── types/             # Tipos TypeScript
+│   └── App.tsx            # Rotas e configuração principal
+└── public/                # Assets estáticos
+```
+
+## 🎨 Design System
+
+### Paleta de Cores
+
+- **Background principal**: `#000920` (azul escuro)
+- **Texto principal**: `#FFFFFF` (branco)
+- **Texto secundário**: Cinzas claros (`white/70`, `white/80`)
+- **Destaque/Azul**: `#0076CE` (azul estilo Dell/WordPress)
+- **Hover**: `#0099FF` (azul mais claro)
+
+### Tipografia
+
+- **Fonte**: Satoshi (via Fontshare)
+- **Estilo**: Moderno, forte, direto
+
+## 📄 Páginas
+
+- `/` - Home (landing page completa)
+- `/obrigado` - Confirmação após envio do formulário
+- `/404` - Página não encontrada
+
+## 📝 Formulário de Lead
+
+O formulário na home coleta:
+- Nome completo
+- WhatsApp
+- E-mail
+- Empresa
+- Cargo
+- Tipo de projeto
+- Objetivo do projeto
+- Faturamento
+
+Os dados são enviados para `/api/lead` que:
+1. Valida os campos
+2. Verifica rate limit
+3. Envia e-mail via Resend
+4. Retorna sucesso/erro
+
+## 🚀 Deploy
+
+O projeto está configurado para deploy na Vercel:
+
+1. Conecte o repositório à Vercel
+2. Configure as variáveis de ambiente
+3. O deploy é automático a cada push
+
+### Comandos de deploy manual
+
+```bash
+# Com Vercel CLI instalado
+vercel
+```
+
+## 📞 Suporte
+
+Para dúvidas ou problemas, entre em contato com a equipe LIMVEX.
+
+---
+
+**LIMVEX** - Transformando tecnologia em crescimento real
