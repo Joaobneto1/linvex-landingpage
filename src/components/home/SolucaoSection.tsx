@@ -24,24 +24,7 @@ export function SolucaoSection() {
   const whatsappLink = getWhatsAppLink("solucao");
 
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920] relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0076CE]/[0.02] to-transparent pointer-events-none" />
-      
-      {/* Organic shape background */}
-      <svg
-        className="absolute -left-40 top-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.03]"
-        viewBox="0 0 500 500"
-        fill="none"
-      >
-        <circle cx="250" cy="250" r="250" fill="url(#solutionGradient)" />
-        <defs>
-          <radialGradient id="solutionGradient">
-            <stop offset="0%" stopColor="#0076CE" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#0076CE" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-      </svg>
+    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a1628] relative overflow-hidden">
       
       <div className="container mx-auto max-w-6xl relative z-10">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-center text-white tracking-tight">

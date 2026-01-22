@@ -6,9 +6,9 @@ export function HeroSection() {
   const whatsappLink = getWhatsAppLink("hero");
 
   return (
-    <section className="pt-32 pb-24 md:pt-48 md:pb-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
-      {/* Deep ocean background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#091325] to-[#0a1a35]" />
+    <section className="pt-12 pb-24 md:pt-20 md:pb-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col">
+      {/* Deep ocean background */}
+      <div className="absolute inset-0 bg-[#0a1628]" />
       
       {/* Subtle glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#0076CE]/10 rounded-full blur-[150px] animate-pulse" style={{ animationDuration: '4s' }} />
@@ -91,20 +91,22 @@ export function HeroSection() {
         ))}
       </div>
 
-      <div className="container mx-auto max-w-5xl text-center relative z-10">
+      <div className="container mx-auto max-w-3xl text-center relative z-10 flex-1 flex flex-col justify-center">
+        {/* Nome LIMVEX no topo */}
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide">LIMVEX</h2>
+        </div>
+
         {/* Badge superior */}
-        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-sm font-semibold mb-10 animate-fade-in backdrop-blur-sm">
-          <div className="flex -space-x-1">
-            <span className="text-lg">🇧🇷</span>
-            <span className="text-lg">🚀</span>
-            <span className="text-lg">💻</span>
+        <div className="flex justify-center mb-10 animate-fade-in">
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-sm font-semibold backdrop-blur-sm">
+            <span className="text-white/90">🚀 Software escalável e previsível</span>
           </div>
-          <span className="text-white/90">+20 projetos entregues com excelência</span>
         </div>
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-8 leading-[1.05] tracking-[-0.04em] text-white animate-slide-up">
           Transformamos tecnologia em{" "}
-          <span className="bg-gradient-to-r from-[#0076CE] to-[#0099FF] bg-clip-text text-transparent">
+          <span className="text-[#0076CE]">
             crescimento real
           </span>{" "}
           para empresas que querem escalar
@@ -125,24 +127,6 @@ export function HeroSection() {
               <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
             </a>
           </Button>
-        </div>
-
-        {/* Trust badges / Metrics */}
-        <div className="mt-20 flex flex-wrap items-center justify-center gap-8 md:gap-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-black text-white">4.9+</div>
-            <div className="text-sm text-white/50 font-medium mt-1">Avaliação média</div>
-          </div>
-          <div className="w-px h-10 bg-white/10 hidden md:block" />
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-black text-white">20+</div>
-            <div className="text-sm text-white/50 font-medium mt-1">Projetos entregues</div>
-          </div>
-          <div className="w-px h-10 bg-white/10 hidden md:block" />
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-black text-white">100%</div>
-            <div className="text-sm text-white/50 font-medium mt-1">Satisfação</div>
-          </div>
         </div>
       </div>
 

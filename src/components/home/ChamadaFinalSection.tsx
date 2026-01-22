@@ -13,9 +13,7 @@ export function ChamadaFinalSection() {
   const whatsappLink = getWhatsAppLink("chamada-final");
 
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920]/50 backdrop-blur-sm relative overflow-hidden">
-      {/* Background gradient accent */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0076CE]/5 via-transparent to-transparent pointer-events-none" />
+    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a1628] relative overflow-hidden">
       
       <div className="container mx-auto max-w-4xl text-center relative z-10">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-[#0076CE] text-sm font-semibold mb-8">
@@ -24,7 +22,7 @@ export function ChamadaFinalSection() {
 
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 text-white tracking-tight">
           Vamos entender se a LIMVEX{" "}
-          <span className="bg-gradient-to-r from-[#0076CE] to-[#0099FF] bg-clip-text text-transparent">
+          <span className="text-[#0076CE]">
             faz sentido
           </span>{" "}
           para o seu projeto

@@ -144,19 +144,16 @@ export function FormularioSection() {
   };
 
   return (
-    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920] relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0076CE]/5 via-transparent to-transparent pointer-events-none" />
-      
-      <div className="container mx-auto max-w-2xl relative z-10">
+    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="container mx-auto max-w-2xl">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-[#0076CE] text-sm font-semibold mb-6">
             <span>📋 Formulário de contato</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-[#0a1628] tracking-tight">
             Solicitar análise do projeto
           </h2>
-          <p className="text-white/70 text-lg leading-relaxed">
+          <p className="text-gray-600 text-lg leading-relaxed">
             Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
           </p>
         </div>
@@ -164,28 +161,28 @@ export function FormularioSection() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="nome" className="text-white">
+              <Label htmlFor="nome" className="text-[#0a1628]">
                 Nome completo *
               </Label>
               <Input
                 id="nome"
                 {...register("nome")}
-                className="bg-white/[0.05] border-white/[0.15] text-white placeholder:text-white/40 hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200"
+                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
                 placeholder="Seu nome completo"
               />
               {errors.nome && (
-                <p className="text-sm text-red-400">{errors.nome.message}</p>
+                <p className="text-sm text-red-500">{errors.nome.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-white">
+              <Label htmlFor="whatsapp" className="text-[#0a1628]">
                 WhatsApp *
               </Label>
               <Input
                 id="whatsapp"
                 {...register("whatsapp")}
-                className="bg-white/[0.05] border-white/[0.15] text-white placeholder:text-white/40 hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200"
+                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
                 placeholder="(11) 99999-9999"
               />
               {errors.whatsapp && (
@@ -196,14 +193,14 @@ export function FormularioSection() {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-white">
+              <Label htmlFor="email" className="text-[#0a1628]">
                 E-mail *
               </Label>
               <Input
                 id="email"
                 type="email"
                 {...register("email")}
-                className="bg-white/[0.05] border-white/[0.15] text-white placeholder:text-white/40 hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200"
+                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
                 placeholder="seu@email.com"
               />
               {errors.email && (
@@ -212,13 +209,13 @@ export function FormularioSection() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="empresa" className="text-white">
+              <Label htmlFor="empresa" className="text-[#0a1628]">
                 Empresa *
               </Label>
               <Input
                 id="empresa"
                 {...register("empresa")}
-                className="bg-white/[0.05] border-white/[0.15] text-white placeholder:text-white/40 hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200"
+                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
                 placeholder="Nome da empresa"
               />
               {errors.empresa && (
@@ -229,13 +226,13 @@ export function FormularioSection() {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="cargo" className="text-white">
+              <Label htmlFor="cargo" className="text-[#0a1628]">
                 Cargo *
               </Label>
               <Input
                 id="cargo"
                 {...register("cargo")}
-                className="bg-white/[0.05] border-white/[0.15] text-white placeholder:text-white/40 hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200"
+                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
                 placeholder="Seu cargo"
               />
               {errors.cargo && (
@@ -244,17 +241,17 @@ export function FormularioSection() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="tipoProjeto" className="text-white">
+              <Label htmlFor="tipoProjeto" className="text-[#0a1628]">
                 Tipo de projeto *
               </Label>
               <Select
                 value={tipoProjeto}
                 onValueChange={(value) => setValue("tipoProjeto", value)}
               >
-                <SelectTrigger className="bg-white/[0.05] border-white/[0.15] text-white hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200">
+                <SelectTrigger className="bg-white border-gray-300 text-[#0a1628] hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200">
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#000920] border-white/[0.15] rounded-lg">
+                <SelectContent className="bg-white border-gray-300 rounded-lg">
                   <SelectItem value="saas">Plataforma SaaS</SelectItem>
                   <SelectItem value="custom">Software sob medida</SelectItem>
                   <SelectItem value="ecommerce">E-commerce</SelectItem>
@@ -270,13 +267,13 @@ export function FormularioSection() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="objetivoProjeto" className="text-white">
+            <Label htmlFor="objetivoProjeto" className="text-[#0a1628]">
               Objetivo do projeto *
             </Label>
               <Textarea
                 id="objetivoProjeto"
                 {...register("objetivoProjeto")}
-                className="bg-white/[0.05] border-white/[0.15] text-white placeholder:text-white/40 hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200 min-h-[120px]"
+                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200 min-h-[120px]"
                 placeholder="Descreva o objetivo principal do projeto..."
               />
             {errors.objetivoProjeto && (
@@ -285,17 +282,17 @@ export function FormularioSection() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="faturamento" className="text-white">
+            <Label htmlFor="faturamento" className="text-[#0a1628]">
               Faturamento *
             </Label>
             <Select
               value={faturamento}
               onValueChange={(value) => setValue("faturamento", value)}
             >
-              <SelectTrigger className="bg-white/[0.05] border-white/[0.15] text-white hover:border-white/25 focus:border-[#0076CE] rounded-lg transition-all duration-200">
+              <SelectTrigger className="bg-white border-gray-300 text-[#0a1628] hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200">
                 <SelectValue placeholder="Selecione" />
               </SelectTrigger>
-              <SelectContent className="bg-[#000920] border-white/[0.15] rounded-lg">
+              <SelectContent className="bg-white border-gray-300 rounded-lg">
                 <SelectItem value="ate-100k">Até R$ 100k/ano</SelectItem>
                 <SelectItem value="100k-500k">R$ 100k - R$ 500k/ano</SelectItem>
                 <SelectItem value="500k-1m">R$ 500k - R$ 1M/ano</SelectItem>

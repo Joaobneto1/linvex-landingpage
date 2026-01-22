@@ -10,15 +10,12 @@ import { ProvaSocialSection } from "@/components/home/ProvaSocialSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { ChamadaFinalSection } from "@/components/home/ChamadaFinalSection";
 import { FormularioSection } from "@/components/home/FormularioSection";
-import { Header } from "@/components/home/Header";
 import { Footer } from "@/components/home/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a1628] text-white">
-      <Header />
-
       <main>
         <HeroSection />
         <ParaQuemSection />

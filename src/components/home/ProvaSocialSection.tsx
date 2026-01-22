@@ -1,6 +1,6 @@
 export function ProvaSocialSection() {
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920]/50 backdrop-blur-sm relative overflow-hidden">
+    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#000920] relative overflow-hidden">
       {/* Background shape */}
       <svg
         className="absolute -right-40 top-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.02]"
@@ -32,14 +32,14 @@ export function ProvaSocialSection() {
           {/* Image */}
           <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
             <img
-              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=600&fit=crop&q=80"
-              alt="Equipe celebrando resultado"
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop&q=80"
+              alt="Workspace tech"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#000920]/80 via-[#000920]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#000920]/85 via-[#000920]/50 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-8">
               <p className="text-white text-lg font-semibold">
-                "Parceria que transforma desafios em oportunidades de crescimento"
+                "Tecnologia de ponta para resultados consistentes"
               </p>
             </div>
           </div>
