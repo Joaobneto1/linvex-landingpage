@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const whatsappLink = getWhatsAppLink("hero");
 
   const scrollToForm = () => {
     const form = document.getElementById("formulario");
@@ -26,15 +28,17 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-8 absolute right-0">
             <button
               onClick={scrollToForm}
-              className="text-sm text-white/80 hover:text-white transition-colors"
+              className="text-sm text-white/60 hover:text-white/80 transition-colors"
             >
-              Contato
+              Preferir formulário
             </button>
             <Button
-              onClick={scrollToForm}
+              asChild
               className="bg-[#0076CE] hover:bg-[#0099FF] text-white"
             >
-              Falar com especialista
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="Falar com especialista no WhatsApp">
+                Falar com especialista
+              </a>
             </Button>
           </nav>
 
@@ -54,15 +58,17 @@ export function Header() {
             <div className="flex flex-col gap-4">
               <button
                 onClick={scrollToForm}
-                className="text-sm text-white/80 hover:text-white transition-colors text-left"
+                className="text-sm text-white/60 hover:text-white/80 transition-colors text-left"
               >
-                Contato
+                Preferir formulário
               </button>
               <Button
-                onClick={scrollToForm}
+                asChild
                 className="bg-[#0076CE] hover:bg-[#0099FF] text-white w-full"
               >
-                Falar com especialista
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="Falar com especialista no WhatsApp">
+                  Falar com especialista
+                </a>
               </Button>
             </div>
           </div>
