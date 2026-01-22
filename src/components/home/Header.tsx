@@ -22,7 +22,7 @@ export function Header() {
           {/* Logo centralizada */}
           <div className="flex items-center gap-3">
             <img 
-              src="/src/assets/limvex-icon-bg.png" 
+              src="/limvex-icon-bg.png" 
               alt="LIMVEX" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-lg"
             />

@@ -32,7 +32,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
           <div className="flex items-center gap-3">
             <img 
-              src="/src/assets/limvex-icon-bg.png" 
+              src="/limvex-icon-bg.png" 
               alt="LIMVEX" 
               className="w-10 h-10 rounded-lg"
             />
