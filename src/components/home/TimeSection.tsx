@@ -1,39 +1,40 @@
 import { Users, Handshake, MessageSquare } from "lucide-react";
+import parceirosImage from "@/assets/Parceiros-secao.jpg";
 
 export function TimeSection() {
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#030014] to-[#050520] relative overflow-hidden">
-      {/* Background Elements */}
+    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+      {/* Mesh Background */}
+      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
+      
+      {/* Background Elements - Apenas azul */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#0076CE]/10 rounded-full blur-[200px] -translate-y-1/2" />
       
       <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-5 gap-12 items-center">
           {/* Image Side */}
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-gradient-to-r from-[#0076CE]/20 to-[#8B5CF6]/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+          <div className="relative group order-2 lg:order-1 lg:col-span-3">
+            <div className="absolute -inset-4 bg-gradient-to-r from-[#0076CE]/20 to-[#0099FF]/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
             <div className="relative rounded-2xl overflow-hidden border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&q=80"
-                alt="Equipe de desenvolvimento trabalhando em conjunto"
-                className="w-full h-80 lg:h-[450px] object-cover"
+                src={parceirosImage}
+                alt="Equipe de desenvolvimento trabalhando em conjunto como parceiros"
+                className="w-full h-80 sm:h-96 md:h-[400px] lg:h-[450px] object-contain sm:object-cover"
+                style={{ objectPosition: 'center center' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-[#030014]/50 to-transparent" />
             </div>
           </div>
 
           {/* Content Side */}
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/20 mb-6">
-              <Users className="w-4 h-4 text-[#0076CE]" />
-              <span className="text-sm font-medium text-[#0076CE]">Nossa equipe</span>
+          <div className="order-1 lg:order-2 lg:col-span-2 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
+              <Users className="w-4 h-4 text-white/90" />
+              <span className="text-sm font-medium text-white/90">Nossa equipe</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight leading-tight">
-              Trabalhamos como{" "}
-              <span className="bg-gradient-to-r from-[#0076CE] to-[#06B6D4] bg-clip-text text-transparent">
-                parceiros
-              </span>
-              , não fornecedores
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight leading-tight">
+              Trabalhamos como parceiros, não fornecedores
             </h2>
             
             <p className="text-lg text-white/70 mb-8 leading-relaxed">

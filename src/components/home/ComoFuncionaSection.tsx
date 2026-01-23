@@ -1,6 +1,4 @@
-import { Search, CheckCircle2, Code2, Rocket, ArrowRight, Workflow } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { Search, CheckCircle2, Code2, Rocket, Workflow } from "lucide-react";
 
 const passos = [
   {
@@ -8,64 +6,107 @@ const passos = [
     icon: Search,
     title: "Diagnóstico",
     description: "Entendemos sua necessidade, objetivos e contexto do negócio para propor a melhor solução",
-    color: "from-[#0076CE] to-[#0099FF]",
+    gradient: "from-[#0076CE] to-[#0099FF]",
+    bgGradient: "from-[#0076CE]/15 to-[#0076CE]/5",
+    glowColor: "rgba(0, 118, 206, 0.3)",
   },
   {
     numero: "02",
     icon: CheckCircle2,
     title: "Validação & Escopo",
     description: "Validamos a viabilidade técnica e definimos escopo claro com prazo e investimento",
-    color: "from-[#06B6D4] to-[#0EA5E9]",
+    gradient: "from-[#0099FF] to-[#00B8FF]",
+    bgGradient: "from-[#0099FF]/15 to-[#0099FF]/5",
+    glowColor: "rgba(0, 153, 255, 0.3)",
   },
   {
     numero: "03",
     icon: Code2,
     title: "Desenvolvimento",
     description: "Desenvolvemos com comunicação constante, entregas incrementais e transparência total",
-    color: "from-[#8B5CF6] to-[#A855F7]",
+    gradient: "from-[#00B8FF] to-[#0076CE]",
+    bgGradient: "from-[#00B8FF]/15 to-[#00B8FF]/5",
+    glowColor: "rgba(0, 184, 255, 0.3)",
   },
   {
     numero: "04",
     icon: Rocket,
     title: "Entrega & Evolução",
     description: "Entregamos o projeto funcionando e damos suporte contínuo para evolução",
-    color: "from-[#10B981] to-[#34D399]",
+    gradient: "from-[#0076CE] via-[#0099FF] to-[#00B8FF]",
+    bgGradient: "from-[#0076CE]/15 to-[#0099FF]/5",
+    glowColor: "rgba(0, 118, 206, 0.35)",
   },
 ];
 
 export function ComoFuncionaSection() {
-  const whatsappLink = getWhatsAppLink("como-funciona");
-
   return (
-    <section id="como-funciona" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#030014] via-[#050520] to-[#030014] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#0076CE]/10 rounded-full blur-[200px] -translate-y-1/2" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-[#8B5CF6]/10 rounded-full blur-[200px] -translate-y-1/2" />
+    <section id="como-funciona" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+      {/* Mesh Background */}
+      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
       
-      <div className="container mx-auto max-w-5xl relative z-10">
+      {/* Background Elements - Apenas azul */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#0076CE]/8 rounded-full blur-[200px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#0099FF]/8 rounded-full blur-[200px]" />
+      
+      {/* Asymmetric Grid Pattern */}
+      <div className="absolute inset-0 asymmetric-grid opacity-[0.06]" />
+      
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 mb-6">
-            <Workflow className="w-4 h-4 text-[#06B6D4]" />
-            <span className="text-sm font-medium text-[#06B6D4]">Processo simplificado</span>
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
+            <Workflow className="w-4 h-4 text-white/90" />
+            <span className="text-sm font-medium text-white/90">Processo simplificado</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
-            Como{" "}
-            <span className="bg-gradient-to-r from-[#06B6D4] to-[#0076CE] bg-clip-text text-transparent">
-              funciona
-            </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
+            Como funciona
           </h2>
-          <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/65 max-w-3xl mx-auto leading-relaxed">
             Um processo claro e transparente do início ao fim do seu projeto
           </p>
         </div>
 
-        {/* Timeline Steps */}
+        {/* Steps - Layout único com conexões diagonais */}
         <div className="relative mb-16">
-          {/* Connection Line - Desktop */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#0076CE]/50 via-[#8B5CF6]/50 to-[#10B981]/50" />
+          {/* Connection Lines - Diagonais únicas */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none">
+            {passos.slice(0, -1).map((_, index) => {
+              const startY = index * 25 + 12.5;
+              const endY = (index + 1) * 25 + 12.5;
+              const isEven = index % 2 === 0;
+              const startX = isEven ? 25 : 75;
+              const endX = isEven ? 75 : 25;
+              
+              return (
+                <svg
+                  key={index}
+                  className="absolute inset-0 w-full h-full"
+                  style={{ zIndex: 0 }}
+                >
+                  <line
+                    x1={`${startX}%`}
+                    y1={`${startY}%`}
+                    x2={`${endX}%`}
+                    y2={`${endY}%`}
+                    stroke="url(#gradient-line)"
+                    strokeWidth="2"
+                    strokeDasharray="4 4"
+                    opacity="0.3"
+                  />
+                  <defs>
+                    <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#0076CE" stopOpacity="0.5" />
+                      <stop offset="50%" stopColor="#0099FF" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="#00B8FF" stopOpacity="0.5" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              );
+            })}
+          </div>
           
-          <div className="space-y-8 lg:space-y-0">
+          <div className="space-y-8 lg:space-y-16 relative">
             {passos.map((passo, index) => {
               const Icon = passo.icon;
               const isEven = index % 2 === 0;
@@ -73,66 +114,51 @@ export function ComoFuncionaSection() {
               return (
                 <div 
                   key={index}
-                  className={`relative lg:flex lg:items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+                  className={`relative lg:flex lg:items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}
                 >
-                  {/* Content Card */}
-                  <div className={`lg:w-[calc(50%-40px)] ${isEven ? 'lg:pr-8 lg:text-right' : 'lg:pl-8 lg:text-left'}`}>
-                    <div className="group p-8 rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-4px]">
-                      {/* Mobile Icon */}
-                      <div className={`lg:hidden w-14 h-14 rounded-xl bg-gradient-to-br ${passo.color} flex items-center justify-center mb-4 shadow-lg`}>
-                        <Icon className="w-7 h-7 text-white" />
+                  {/* Content Card - Layout único */}
+                  <div className={`w-full lg:w-1/2 ${isEven ? 'lg:pr-12' : 'lg:pl-12'}`}>
+                    <div 
+                      className={`group relative p-6 sm:p-8 lg:p-10 rounded-2xl bg-gradient-to-br ${passo.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-6px]`}
+                      style={{ boxShadow: `0 8px 32px ${passo.glowColor}` }}
+                    >
+                      {/* Number Badge - Posição única */}
+                      <div className={`absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg border-2 border-[#030014]`}>
+                        <span className="text-xl sm:text-2xl font-extrabold text-white">{passo.numero}</span>
                       </div>
                       
-                      {/* Step Number */}
-                      <div className={`text-sm font-bold mb-2 bg-gradient-to-r ${passo.color} bg-clip-text text-transparent`}>
-                        PASSO {passo.numero}
+                      {/* Icon - Dentro do card */}
+                      <div className="flex items-start gap-4 sm:gap-5 mb-4 sm:mb-5">
+                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`} style={{ boxShadow: `0 0 20px ${passo.glowColor}` }}>
+                          <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                        </div>
+                        <div className="flex-1 pt-1">
+                          <div className="text-xs font-bold mb-2 text-white/60 uppercase tracking-wider">
+                            Passo {passo.numero}
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-3 leading-tight">
+                            {passo.title}
+                          </h3>
+                        </div>
                       </div>
                       
-                      <h3 className="text-2xl font-bold text-white mb-3">
-                        {passo.title}
-                      </h3>
-                      <p className="text-white/60 leading-relaxed">
+                      <p className="text-white/70 leading-relaxed text-base sm:text-lg">
                         {passo.description}
                       </p>
+                      
+                      {/* Hover accent */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${passo.gradient} rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                     </div>
                   </div>
                   
-                  {/* Center Icon - Desktop */}
-                  <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-20 h-20 rounded-2xl bg-gradient-to-br from-[#0a0a1f] to-[#030014] border border-white/10 items-center justify-center z-10">
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${passo.color} flex items-center justify-center shadow-lg`}>
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
-                  </div>
-                  
-                  {/* Spacer for opposite side - Desktop */}
-                  <div className="hidden lg:block lg:w-[calc(50%-40px)]" />
+                  {/* Spacer for opposite side */}
+                  <div className="hidden lg:block lg:w-1/2" />
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-[#0076CE]/10 to-[#8B5CF6]/5 border border-white/[0.08]">
-            <h4 className="text-2xl font-bold text-white mb-4">
-              Pronto para começar seu projeto?
-            </h4>
-            <p className="text-white/60 mb-6 max-w-lg">
-              Vamos conversar sobre suas necessidades e entender como podemos ajudar
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="group bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#06B6D4] text-white px-8 py-6 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300"
-            >
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                Falar sobre meu projeto
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-            </Button>
-          </div>
-        </div>
       </div>
     </section>
   );

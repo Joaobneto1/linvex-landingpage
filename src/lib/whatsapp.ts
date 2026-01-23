@@ -8,7 +8,9 @@ export type WhatsAppContext =
   | "solucao"
   | "como-funciona"
   | "diferenciais"
-  | "chamada-final";
+  | "chamada-final"
+  | "faq"
+  | "problema";
 
 const WHATSAPP_NUMBER = "5582991709740";
 const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=`;
@@ -20,6 +22,8 @@ const MESSAGES: Record<WhatsAppContext, string> = {
   "como-funciona": "Olá! Gostaria de conversar sobre meu projeto e entender os próximos passos.",
   diferenciais: "Olá! Me interessei pelos diferenciais da LIMVEX e gostaria de conversar.",
   "chamada-final": "Olá! Quero iniciar uma conversa agora sobre um projeto com a LIMVEX.",
+  faq: "Olá! Tenho algumas dúvidas sobre a LIMVEX e gostaria de conversar com um especialista.",
+  problema: "Olá! Estou enfrentando alguns desafios no desenvolvimento de software e gostaria de entender como a LIMVEX pode ajudar.",
 };
 
 /**

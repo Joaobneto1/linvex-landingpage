@@ -144,24 +144,23 @@ export function FormularioSection() {
   const labelStyles = "text-white/80 font-medium";
 
   return (
-    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#030014] to-[#050520] relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+      {/* Mesh Background */}
+      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
+      
+      {/* Background Elements - Apenas azul */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/10 rounded-full blur-[200px]" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#8B5CF6]/10 rounded-full blur-[200px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#0099FF]/10 rounded-full blur-[200px]" />
       
       <div className="container mx-auto max-w-2xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/20 mb-6">
-            <FileText className="w-4 h-4 text-[#0076CE]" />
-            <span className="text-sm font-medium text-[#0076CE]">Formulário de contato</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
+            <FileText className="w-4 h-4 text-white/90" />
+            <span className="text-sm font-medium text-white/90">Formulário de contato</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
-            Solicitar{" "}
-            <span className="bg-gradient-to-r from-[#0076CE] to-[#06B6D4] bg-clip-text text-transparent">
-              análise
-            </span>{" "}
-            do projeto
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
+            Solicitar análise do projeto
           </h2>
           <p className="text-white/60 text-lg leading-relaxed">
             Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
@@ -263,7 +262,7 @@ export function FormularioSection() {
                   <SelectTrigger className={inputStyles}>
                     <SelectValue placeholder="Selecione" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#0a0a1f] border-white/10 text-white">
+                  <SelectContent className="bg-[#030014] border-white/10 text-white">
                     <SelectItem value="saas">Plataforma SaaS</SelectItem>
                     <SelectItem value="custom">Software sob medida</SelectItem>
                     <SelectItem value="ecommerce">E-commerce</SelectItem>
@@ -304,7 +303,7 @@ export function FormularioSection() {
                 <SelectTrigger className={inputStyles}>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#0a0a1f] border-white/10 text-white">
+                <SelectContent className="bg-[#030014] border-white/10 text-white">
                   <SelectItem value="ate-100k">Até R$ 100k/ano</SelectItem>
                   <SelectItem value="100k-500k">R$ 100k - R$ 500k/ano</SelectItem>
                   <SelectItem value="500k-1m">R$ 500k - R$ 1M/ano</SelectItem>
@@ -320,7 +319,7 @@ export function FormularioSection() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#06B6D4] text-white text-lg py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300"
+              className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-lg py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300"
             >
               {isSubmitting ? (
                 <>

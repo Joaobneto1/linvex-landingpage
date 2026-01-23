@@ -5,108 +5,116 @@ const problemas = [
     icon: AlertTriangle,
     title: "Falta de time técnico",
     description: "Não tem desenvolvedores internos ou o time está sobrecarregado com demandas",
-    color: "from-red-500/20 to-orange-500/20",
-    iconColor: "text-red-400",
-    borderColor: "hover:border-red-500/30",
+    gradient: "from-[#0076CE]/20 to-[#0076CE]/5",
+    iconBg: "from-[#0076CE]/30 to-[#0076CE]/10",
+    borderGlow: "rgba(0, 118, 206, 0.2)",
   },
   {
     icon: Clock,
     title: "Atrasos e promessas não cumpridas",
     description: "Projetos que se arrastam sem prazo definido ou que nunca saem do papel",
-    color: "from-orange-500/20 to-yellow-500/20",
-    iconColor: "text-orange-400",
-    borderColor: "hover:border-orange-500/30",
+    gradient: "from-[#0099FF]/20 to-[#0099FF]/5",
+    iconBg: "from-[#0099FF]/30 to-[#0099FF]/10",
+    borderGlow: "rgba(0, 153, 255, 0.2)",
   },
   {
     icon: DollarSign,
     title: "Custos fora de controle",
     description: "Orçamentos que explodem sem previsibilidade ou transparência nos gastos",
-    color: "from-yellow-500/20 to-amber-500/20",
-    iconColor: "text-yellow-400",
-    borderColor: "hover:border-yellow-500/30",
+    gradient: "from-[#00B8FF]/20 to-[#00B8FF]/5",
+    iconBg: "from-[#00B8FF]/30 to-[#00B8FF]/10",
+    borderGlow: "rgba(0, 184, 255, 0.2)",
   },
   {
     icon: FileX,
     title: "Projetos que não saem do papel",
     description: "Ideias boas que ficam travadas por falta de execução técnica adequada",
-    color: "from-purple-500/20 to-pink-500/20",
-    iconColor: "text-purple-400",
-    borderColor: "hover:border-purple-500/30",
+    gradient: "from-[#0076CE]/20 to-[#0099FF]/5",
+    iconBg: "from-[#0076CE]/30 to-[#0099FF]/10",
+    borderGlow: "rgba(0, 118, 206, 0.25)",
   },
 ];
 
 export function ProblemaSection() {
   return (
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500/5 rounded-full blur-[150px]" />
+      {/* Mesh Background */}
+      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
       
-      {/* Grid Pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px'
-        }}
-      />
+      {/* Background Elements - Apenas azul */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0076CE]/8 rounded-full blur-[200px]" />
+      <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#0099FF]/8 rounded-full blur-[200px]" />
+      
+      {/* Asymmetric Grid Pattern */}
+      <div className="absolute inset-0 asymmetric-grid opacity-[0.08]" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
+        {/* Header - Layout centralizado */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 mb-6">
-            <Zap className="w-4 h-4 text-red-400" />
-            <span className="text-sm font-medium text-red-300">Dores comuns no mercado</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
+            <Zap className="w-4 h-4 text-white/90" />
+            <span className="text-sm font-medium text-white/90">Dores comuns no mercado</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
-            Você já passou por{" "}
-            <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-              algum desses problemas?
-            </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
+            Você já passou por algum desses problemas?
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">
             Esses são os desafios mais comuns que empresas enfrentam ao tentar desenvolver software
           </p>
         </div>
 
-        {/* Problem Cards */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Problem Cards - Layout único com apenas azul */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           {problemas.map((problema, index) => {
             const Icon = problema.icon;
+            const isEven = index % 2 === 0;
             return (
               <div
                 key={index}
-                className={`group relative p-8 rounded-2xl bg-gradient-to-br ${problema.color} border border-white/[0.08] ${problema.borderColor} hover:scale-[1.02] transition-all duration-300`}
+                className={`group relative p-5 sm:p-6 md:p-8 rounded-2xl bg-gradient-to-br ${problema.gradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-6px] ${isEven ? 'md:-translate-x-1' : 'md:translate-x-1'}`}
+                style={{
+                  boxShadow: `0 4px 24px ${problema.borderGlow}`,
+                }}
               >
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-white/[0.02] to-transparent" />
+                <div 
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: `radial-gradient(circle at center, ${problema.borderGlow}, transparent 70%)`
+                  }}
+                />
                 
                 <div className="relative z-10">
-                  <div className="flex items-start gap-5">
-                    <div className={`flex-shrink-0 w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className={`w-7 h-7 ${problema.iconColor}`} />
+                  <div className="flex items-start gap-4 sm:gap-5">
+                    {/* Icon Container - Estilo único */}
+                    <div className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${problema.iconBg} border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`} style={{ boxShadow: `0 0 20px ${problema.borderGlow}` }}>
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#0076CE]" />
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2 leading-tight">
+                    
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight">
                         {problema.title}
                       </h3>
-                      <p className="text-white/60 leading-relaxed">{problema.description}</p>
+                      <p className="text-sm sm:text-base text-white/70 leading-relaxed">{problema.description}</p>
                     </div>
                   </div>
                 </div>
+
+                {/* Bottom accent line - Apenas azul */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0076CE] via-[#0099FF] to-[#00B8FF] rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             );
           })}
         </div>
 
-        {/* Bottom message */}
-        <div className="mt-12 text-center">
-          <p className="text-white/50 text-lg">
-            Se você se identificou com algum desses problemas, <span className="text-[#0076CE] font-semibold">a LIMVEX pode ajudar</span>.
-          </p>
+        {/* Bottom message - Redesenhado */}
+        <div className="mt-16 text-center">
+          <div className="w-full max-w-2xl mx-auto p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#0076CE]/10 to-[#0099FF]/5 border border-[#0076CE]/20 backdrop-blur-sm">
+            <p className="text-white/80 text-base sm:text-lg">
+              Se você se identificou com algum desses problemas, a LIMVEX pode ajudar.
+            </p>
+          </div>
         </div>
       </div>
     </section>

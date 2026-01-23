@@ -1,6 +1,4 @@
-import { Code2, Cloud, TrendingUp, Sparkles, ArrowRight, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { Code2, Cloud, TrendingUp, Sparkles, Check } from "lucide-react";
 
 const solucoes = [
   {
@@ -9,86 +7,75 @@ const solucoes = [
     description: "Desenvolvimento customizado que resolve exatamente o que você precisa",
     features: ["APIs robustas", "Integrações", "Dashboards"],
     gradient: "from-[#0076CE] to-[#0099FF]",
-    bgGradient: "from-[#0076CE]/20 to-[#0076CE]/5",
+    bgGradient: "from-[#0076CE]/15 to-[#0076CE]/5",
+    glowColor: "rgba(0, 118, 206, 0.25)",
   },
   {
     icon: Cloud,
     title: "Plataformas SaaS",
     description: "Soluções escaláveis prontas para crescer com seu negócio",
     features: ["Multi-tenant", "Escalável", "Cloud-native"],
-    gradient: "from-[#06B6D4] to-[#0EA5E9]",
-    bgGradient: "from-[#06B6D4]/20 to-[#06B6D4]/5",
+    gradient: "from-[#0099FF] to-[#00B8FF]",
+    bgGradient: "from-[#0099FF]/15 to-[#0099FF]/5",
+    glowColor: "rgba(0, 153, 255, 0.25)",
   },
   {
     icon: TrendingUp,
     title: "Arquitetura escalável",
     description: "Tecnologia pensada para crescer sem precisar refazer",
     features: ["Microserviços", "CI/CD", "Alta performance"],
-    gradient: "from-[#8B5CF6] to-[#A855F7]",
-    bgGradient: "from-[#8B5CF6]/20 to-[#8B5CF6]/5",
+    gradient: "from-[#00B8FF] to-[#0076CE]",
+    bgGradient: "from-[#00B8FF]/15 to-[#00B8FF]/5",
+    glowColor: "rgba(0, 184, 255, 0.25)",
   },
 ];
 
 export function SolucaoSection() {
-  const whatsappLink = getWhatsAppLink("solucao");
-
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#030014] via-[#0a0a1f] to-[#030014] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-1/4 -left-32 w-80 h-80 bg-[#0076CE] rounded-full blur-[180px] opacity-20" />
-      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-[#8B5CF6] rounded-full blur-[180px] opacity-15" />
+    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+      {/* Mesh Background */}
+      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
       
-      {/* Animated Grid */}
-      <div 
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0, 118, 206, 0.5) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 118, 206, 0.5) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px'
-        }}
-      />
+      {/* Background Elements - Apenas azul */}
+      <div className="absolute top-1/4 -left-32 w-80 h-80 bg-[#0076CE] rounded-full blur-[180px] opacity-18" />
+      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-[#0099FF] rounded-full blur-[180px] opacity-15" />
       
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/20 mb-6">
-            <Sparkles className="w-4 h-4 text-[#0076CE]" />
-            <span className="text-sm font-medium text-[#0076CE]">Nossa especialidade</span>
+        {/* Header - Layout centralizado */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
+            <Sparkles className="w-4 h-4 text-white/90" />
+            <span className="text-sm font-medium text-white/90">Nossa especialidade</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
-            A solução{" "}
-            <span className="bg-gradient-to-r from-[#0076CE] via-[#06B6D4] to-[#8B5CF6] bg-clip-text text-transparent">
-              LIMVEX
-            </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight max-w-3xl mx-auto">
+            A solução LIMVEX
           </h2>
-          <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">
             Tecnologia que resolve problemas reais e entrega resultados mensuráveis para o seu negócio
           </p>
         </div>
 
-        {/* Solution Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        {/* Solution Cards - Layout diagonal/overlap */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
           {solucoes.map((solucao, index) => {
             const Icon = solucao.icon;
             return (
               <div
                 key={index}
-                className="group relative"
+                className={`group relative ${index === 1 ? 'md:translate-y-5' : ''}`}
               >
                 {/* Card */}
-                <div className={`h-full p-8 rounded-2xl bg-gradient-to-br ${solucao.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-8px]`}>
+                <div className={`h-full p-5 sm:p-6 md:p-8 rounded-2xl bg-gradient-to-br ${solucao.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-8px]`} style={{ boxShadow: `0 8px 32px ${solucao.glowColor}` }}>
                   {/* Icon */}
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${solucao.gradient} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className="w-8 h-8 text-white" />
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${solucao.gradient} flex items-center justify-center mb-4 sm:mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`} style={{ boxShadow: `0 0 20px ${solucao.glowColor}` }}>
+                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                   </div>
                   
                   {/* Title & Description */}
-                  <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 leading-tight">
                     {solucao.title}
                   </h3>
-                  <p className="text-white/60 leading-relaxed mb-6">{solucao.description}</p>
+                  <p className="text-sm sm:text-base text-white/65 leading-relaxed mb-4 sm:mb-6">{solucao.description}</p>
                   
                   {/* Features */}
                   <div className="space-y-2">
@@ -105,25 +92,6 @@ export function SolucaoSection() {
           })}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="group bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#06B6D4] text-white px-8 py-6 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300"
-            >
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                Quero meu SaaS
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-            </Button>
-          </div>
-          
-          <p className="mt-6 text-white/40 text-sm">
-            ✓ Análise gratuita do seu projeto • ✓ Proposta em até 48h
-          </p>
-        </div>
       </div>
     </section>
   );

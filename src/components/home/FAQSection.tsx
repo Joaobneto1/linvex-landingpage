@@ -1,10 +1,13 @@
-import { HelpCircle } from "lucide-react";
+import { Check, PhoneCall, HelpCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 const faqs = [
   {
@@ -34,42 +37,86 @@ const faqs = [
 ];
 
 export function FAQSection() {
+  const whatsappLink = getWhatsAppLink("faq");
+
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#030014] via-[#050520] to-[#030014] relative overflow-hidden">
-      {/* Background Elements */}
+    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+      {/* Mesh Background */}
+      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
+      
+      {/* Background Elements - Apenas azul */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0076CE]/5 rounded-full blur-[200px]" />
       
-      <div className="container mx-auto max-w-3xl relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/20 mb-6">
-            <HelpCircle className="w-4 h-4 text-[#06B6D4]" />
-            <span className="text-sm font-medium text-[#06B6D4]">Tire suas dúvidas</span>
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+          {/* Left Side - Content */}
+          <div className="flex gap-10 flex-col">
+            <div className="flex gap-4 flex-col">
+              <div>
+                <Badge 
+                  variant="outline" 
+                  className="border-[#0076CE]/30 text-[#0076CE] bg-[#0076CE]/10 hover:bg-[#0076CE]/15"
+                >
+                  FAQ
+                </Badge>
+              </div>
+              <div className="flex gap-2 flex-col">
+                <h4 className="text-3xl md:text-4xl lg:text-5xl tracking-tight max-w-xl text-left font-extrabold text-white">
+                  Perguntas frequentes
+                </h4>
+                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-white/65 text-left">
+                  Tire suas dúvidas sobre como trabalhamos e como podemos ajudar seu negócio a crescer com tecnologia de ponta.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 mt-4">
+                <div className="flex items-center gap-2 text-white/70">
+                  <Check className="w-5 h-5 text-[#0076CE]" />
+                  <span className="text-sm">Resposta rápida e transparente</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/70">
+                  <Check className="w-5 h-5 text-[#0076CE]" />
+                  <span className="text-sm">Informações claras sobre nosso processo</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/70">
+                  <Check className="w-5 h-5 text-[#0076CE]" />
+                  <span className="text-sm">Suporte contínuo após a entrega</span>
+                </div>
+              </div>
+              <div className="mt-4">
+                <Button 
+                  asChild
+                  className="gap-4 border-white/20 bg-white/5 hover:bg-white/10 hover:border-[#0076CE]/50 text-white"
+                  variant="outline"
+                >
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                    Alguma dúvida? Entre em contato
+                    <PhoneCall className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">
-            Perguntas{" "}
-            <span className="bg-gradient-to-r from-[#06B6D4] to-[#0076CE] bg-clip-text text-transparent">
-              frequentes
-            </span>
-          </h2>
-        </div>
 
-        <Accordion type="single" collapsible className="w-full space-y-3">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="border border-white/[0.08] rounded-xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] px-6 hover:border-[#0076CE]/30 transition-all duration-300 data-[state=open]:border-[#0076CE]/30"
-            >
-              <AccordionTrigger className="text-left text-white hover:text-[#06B6D4] py-6 font-semibold text-lg hover:no-underline">
-                {faq.pergunta}
-              </AccordionTrigger>
-              <AccordionContent className="text-white/60 leading-relaxed pb-6">
-                {faq.resposta}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+          {/* Right Side - Accordion */}
+          <div className="w-full">
+            <Accordion type="single" collapsible className="w-full space-y-3">
+              {faqs.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="border border-white/[0.08] rounded-xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] px-6 hover:border-[#0076CE]/30 transition-all duration-300 data-[state=open]:border-[#0076CE]/30"
+                >
+                  <AccordionTrigger className="text-left text-white hover:text-[#0099FF] py-6 font-semibold text-lg hover:no-underline">
+                    {faq.pergunta}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-white/65 leading-relaxed pb-6">
+                    {faq.resposta}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -115,16 +115,16 @@
   }
 
   body {
-    @apply bg-[#0a1628] text-white font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    letter-spacing: -0.012em;
+    @apply bg-[#030014] text-white font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.01em;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
-    letter-spacing: -0.025em;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    @apply font-bold;
+    letter-spacing: -0.03em;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
   h1 {
@@ -205,6 +205,53 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Paleta Azul - Variações únicas */
+  .text-gradient-blue-tech {
+    background: linear-gradient(135deg, #0076CE 0%, #0099FF 50%, #00B8FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-blue-soft {
+    background: linear-gradient(135deg, #0076CE 0%, #0099FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-blue-bright {
+    background: linear-gradient(135deg, #0099FF 0%, #00B8FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effects azul */
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 118, 206, 0.4), 0 0 40px rgba(0, 118, 206, 0.2);
+  }
+
+  .glow-blue-bright {
+    box-shadow: 0 0 30px rgba(0, 153, 255, 0.5), 0 0 60px rgba(0, 153, 255, 0.3);
+  }
+
+  /* Pattern único - não genérico */
+  .tech-mesh-pattern {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(0, 118, 206, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(0, 184, 255, 0.04) 0%, transparent 50%);
+  }
+
+  /* Grid assimétrico */
+  .asymmetric-grid {
+    background-image: 
+      linear-gradient(90deg, rgba(0, 118, 206, 0.1) 1px, transparent 1px),
+      linear-gradient(rgba(0, 118, 206, 0.1) 1px, transparent 1px);
+    background-size: 48px 64px, 64px 48px;
   }
 }
 
