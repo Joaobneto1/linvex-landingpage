@@ -1,142 +1,110 @@
+import { ArrowRight, Code2, Cpu, Database, Globe, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function HeroSection() {
   const whatsappLink = getWhatsAppLink("hero");
 
   return (
-    <section className="pt-12 pb-24 md:pt-20 md:pb-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col">
-      {/* Deep ocean background */}
-      <div className="absolute inset-0 bg-[#0a1628]" />
-      
-      {/* Subtle glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#0076CE]/10 rounded-full blur-[150px] animate-pulse" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#0076CE]/8 rounded-full blur-[120px]" />
-      <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-[#0099FF]/5 rounded-full blur-[100px]" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030014]">
+      {/* Background Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(0, 118, 206, 0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 118, 206, 0.3) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      />
 
-      {/* Animated organic wave lines - Blue Ocean style */}
-      <svg
-        className="absolute bottom-0 left-0 w-full h-[450px] opacity-40"
-        viewBox="0 0 1440 450"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        {/* Wave 1 - Main wave */}
-        <path
-          d="M-100 350 C 200 280, 400 380, 720 320 C 1040 260, 1240 340, 1540 300"
-          stroke="url(#wave-gradient-1)"
-          strokeWidth="2"
-          fill="none"
-          className="animate-pulse"
-          style={{ animationDuration: '6s' }}
-        />
-        {/* Wave 2 */}
-        <path
-          d="M-100 370 C 180 310, 380 400, 700 350 C 1020 300, 1220 370, 1540 330"
-          stroke="url(#wave-gradient-1)"
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.7"
-        />
-        {/* Wave 3 */}
-        <path
-          d="M-100 390 C 160 340, 360 420, 680 380 C 1000 340, 1200 400, 1540 360"
-          stroke="url(#wave-gradient-1)"
-          strokeWidth="1"
-          fill="none"
-          opacity="0.5"
-        />
-        {/* Wave 4 - deeper */}
-        <path
-          d="M-100 410 C 140 370, 340 440, 660 410 C 980 380, 1180 430, 1540 390"
-          stroke="url(#wave-gradient-1)"
-          strokeWidth="0.8"
-          fill="none"
-          opacity="0.3"
-        />
-        {/* Fill gradient below waves */}
-        <path
-          d="M-100 350 C 200 280, 400 380, 720 320 C 1040 260, 1240 340, 1540 300 L1540 450 L-100 450 Z"
-          fill="url(#wave-fill-gradient)"
-          opacity="0.15"
-        />
-        <defs>
-          <linearGradient id="wave-gradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#0076CE" stopOpacity="0.2" />
-            <stop offset="30%" stopColor="#0099FF" stopOpacity="0.6" />
-            <stop offset="70%" stopColor="#0076CE" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#0076CE" stopOpacity="0.2" />
-          </linearGradient>
-          <linearGradient id="wave-fill-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#0076CE" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#0076CE" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#0076CE] rounded-full blur-[150px] opacity-30 animate-pulse" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#8B5CF6] rounded-full blur-[150px] opacity-25 animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#06B6D4] rounded-full blur-[200px] opacity-10" />
 
-      {/* Floating particles */}
+      {/* Floating Tech Icons */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-[#0076CE]/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          />
-        ))}
+        <div className="absolute top-20 left-[10%] opacity-20 animate-float">
+          <Code2 className="w-8 h-8 text-[#0076CE]" />
+        </div>
+        <div className="absolute top-40 right-[15%] opacity-15 animate-float" style={{ animationDelay: '0.5s' }}>
+          <Database className="w-10 h-10 text-[#8B5CF6]" />
+        </div>
+        <div className="absolute bottom-32 left-[20%] opacity-20 animate-float" style={{ animationDelay: '1s' }}>
+          <Cpu className="w-12 h-12 text-[#06B6D4]" />
+        </div>
+        <div className="absolute top-1/3 right-[8%] opacity-15 animate-float" style={{ animationDelay: '1.5s' }}>
+          <Globe className="w-9 h-9 text-[#0076CE]" />
+        </div>
+        <div className="absolute bottom-40 right-[25%] opacity-20 animate-float" style={{ animationDelay: '2s' }}>
+          <Zap className="w-8 h-8 text-[#F59E0B]" />
+        </div>
       </div>
 
-      <div className="container mx-auto max-w-3xl text-center relative z-10 flex-1 flex flex-col justify-center">
-        {/* Nome LIMVEX no topo */}
-        <div className="mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide">LIMVEX</h2>
-        </div>
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Logo/Nome LIMVEX */}
+          <div className="mb-8 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white">
+              LIMVEX
+            </h2>
+          </div>
 
-        {/* Badge superior */}
-        <div className="flex justify-center mb-10 animate-fade-in">
-          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-sm font-semibold backdrop-blur-sm">
-            <span className="text-white/90">🚀 Software escalável e previsível</span>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#0076CE]/20 to-[#8B5CF6]/20 border border-[#0076CE]/30 backdrop-blur-sm mb-8 animate-fade-in" style={{ animationDelay: '0.05s' }}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0076CE] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0076CE]"></span>
+            </span>
+            <span className="text-sm font-medium text-white/90">Software sob medida para empresas que querem escalar</span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-[1.1] animate-fade-in" style={{ animationDelay: '0.15s' }}>
+            <span className="text-white">Transformamos ideias em </span>
+            <span className="bg-gradient-to-r from-[#0076CE] via-[#06B6D4] to-[#8B5CF6] bg-clip-text text-transparent">
+              soluções digitais
+            </span>
+            <span className="text-white"> que geram resultado</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-in" style={{ animationDelay: '0.25s' }}>
+            Desenvolvemos <span className="text-[#06B6D4] font-semibold">SaaS</span> e <span className="text-[#0076CE] font-semibold">software personalizado</span> com 
+            foco em prazo, qualidade e escalabilidade. Seu projeto com a previsibilidade que você precisa.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style={{ animationDelay: '0.35s' }}>
+            <Button
+              asChild
+              size="lg"
+              className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#06B6D4] text-white text-lg px-8 py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300"
+            >
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                Falar com especialista
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-lg px-8 py-7 h-auto rounded-xl transition-all duration-300"
+            >
+              <a href="#como-funciona">
+                Como funciona
+              </a>
+            </Button>
           </div>
         </div>
-
-        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-8 leading-[1.05] tracking-[-0.04em] text-white animate-slide-up">
-          Transformamos tecnologia em{" "}
-          <span className="text-[#0076CE]">
-            crescimento real
-          </span>{" "}
-          para empresas que querem escalar
-        </h1>
-
-        <p className="text-lg md:text-xl lg:text-2xl text-white/70 mb-12 max-w-3xl mx-auto leading-relaxed font-light animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          SaaS e soluções sob medida com foco em resultado, prazo e previsibilidade
-        </p>
-
-        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <Button
-            asChild
-            size="lg"
-            className="bg-[#0076CE] hover:bg-[#0099FF] hover:shadow-[0_0_40px_rgba(0,118,206,0.5)] text-white text-lg px-10 py-7 h-auto font-semibold transition-all duration-300 rounded-xl group"
-          >
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="Falar com um especialista no WhatsApp">
-              Falar com um especialista
-              <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-          </Button>
-        </div>
       </div>
 
-      {/* Keyframe for floating particles */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-          50% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
-        }
-      `}</style>
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#030014] to-transparent" />
     </section>
   );
 }

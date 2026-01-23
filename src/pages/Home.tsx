@@ -1,6 +1,5 @@
+import { useEffect } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
-import { ParaQuemSection } from "@/components/home/ParaQuemSection";
-import { ParaQuemNaoSection } from "@/components/home/ParaQuemNaoSection";
 import { ProblemaSection } from "@/components/home/ProblemaSection";
 import { SolucaoSection } from "@/components/home/SolucaoSection";
 import { ComoFuncionaSection } from "@/components/home/ComoFuncionaSection";
@@ -14,12 +13,28 @@ import { Footer } from "@/components/home/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export default function Home() {
+  useEffect(() => {
+    // Garante que a página sempre comece no topo quando carregar
+    // A menos que haja um hash específico na URL (para permitir links diretos)
+    const handleLoad = () => {
+      if (!window.location.hash || window.location.hash === '#') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
+    };
+
+    // Executa imediatamente e também após o carregamento completo
+    handleLoad();
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#0a1628] text-white">
+    <div className="min-h-screen text-white bg-[#030014]">
       <main>
         <HeroSection />
-        <ParaQuemSection />
-        <ParaQuemNaoSection />
         <ProblemaSection />
         <SolucaoSection />
         <ComoFuncionaSection />

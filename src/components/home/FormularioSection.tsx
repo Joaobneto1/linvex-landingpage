@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2 } from "lucide-react";
+import { Loader2, Send, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -100,7 +100,7 @@ export function FormularioSection() {
       };
 
       const controller = new AbortController();
-      timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos de timeout
+      timeoutId = setTimeout(() => controller.abort(), 10000);
 
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -120,14 +120,11 @@ export function FormularioSection() {
       navigate("/obrigado");
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
-
-      // Fallback para WhatsApp em caso de erro
       toast.warning(
         "Não foi possível enviar o formulário. Redirecionando para WhatsApp...",
         { duration: 3000 }
       );
 
-      // Pequeno delay para o usuário ver a mensagem
       setTimeout(() => {
         openWhatsAppFallback(data);
         toast.info(
@@ -143,183 +140,202 @@ export function FormularioSection() {
     }
   };
 
+  const inputStyles = "bg-white/5 border-white/10 text-white placeholder:text-white/40 hover:border-white/20 focus:border-[#0076CE] focus:ring-[#0076CE]/20 rounded-xl transition-all duration-200";
+  const labelStyles = "text-white/80 font-medium";
+
   return (
-    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="container mx-auto max-w-2xl">
+    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#030014] to-[#050520] relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/10 rounded-full blur-[200px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#8B5CF6]/10 rounded-full blur-[200px]" />
+      
+      <div className="container mx-auto max-w-2xl relative z-10">
+        {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/30 text-[#0076CE] text-sm font-semibold mb-6">
-            <span>📋 Formulário de contato</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/20 mb-6">
+            <FileText className="w-4 h-4 text-[#0076CE]" />
+            <span className="text-sm font-medium text-[#0076CE]">Formulário de contato</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-[#0a1628] tracking-tight">
-            Solicitar análise do projeto
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white tracking-tight">
+            Solicitar{" "}
+            <span className="bg-gradient-to-r from-[#0076CE] to-[#06B6D4] bg-clip-text text-transparent">
+              análise
+            </span>{" "}
+            do projeto
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
+          <p className="text-white/60 text-lg leading-relaxed">
             Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="nome" className="text-[#0a1628]">
-                Nome completo *
-              </Label>
-              <Input
-                id="nome"
-                {...register("nome")}
-                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
-                placeholder="Seu nome completo"
-              />
-              {errors.nome && (
-                <p className="text-sm text-red-500">{errors.nome.message}</p>
-              )}
+        {/* Form Card */}
+        <div className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/[0.08] backdrop-blur-sm">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="nome" className={labelStyles}>
+                  Nome completo *
+                </Label>
+                <Input
+                  id="nome"
+                  {...register("nome")}
+                  className={inputStyles}
+                  placeholder="Seu nome completo"
+                />
+                {errors.nome && (
+                  <p className="text-sm text-red-400">{errors.nome.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="whatsapp" className={labelStyles}>
+                  WhatsApp *
+                </Label>
+                <Input
+                  id="whatsapp"
+                  {...register("whatsapp")}
+                  className={inputStyles}
+                  placeholder="(11) 99999-9999"
+                />
+                {errors.whatsapp && (
+                  <p className="text-sm text-red-400">{errors.whatsapp.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="email" className={labelStyles}>
+                  E-mail *
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  className={inputStyles}
+                  placeholder="seu@email.com"
+                />
+                {errors.email && (
+                  <p className="text-sm text-red-400">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="empresa" className={labelStyles}>
+                  Empresa *
+                </Label>
+                <Input
+                  id="empresa"
+                  {...register("empresa")}
+                  className={inputStyles}
+                  placeholder="Nome da empresa"
+                />
+                {errors.empresa && (
+                  <p className="text-sm text-red-400">{errors.empresa.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="cargo" className={labelStyles}>
+                  Cargo *
+                </Label>
+                <Input
+                  id="cargo"
+                  {...register("cargo")}
+                  className={inputStyles}
+                  placeholder="Seu cargo"
+                />
+                {errors.cargo && (
+                  <p className="text-sm text-red-400">{errors.cargo.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="tipoProjeto" className={labelStyles}>
+                  Tipo de projeto *
+                </Label>
+                <Select
+                  value={tipoProjeto}
+                  onValueChange={(value) => setValue("tipoProjeto", value)}
+                >
+                  <SelectTrigger className={inputStyles}>
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#0a0a1f] border-white/10 text-white">
+                    <SelectItem value="saas">Plataforma SaaS</SelectItem>
+                    <SelectItem value="custom">Software sob medida</SelectItem>
+                    <SelectItem value="ecommerce">E-commerce</SelectItem>
+                    <SelectItem value="mobile">Aplicativo mobile</SelectItem>
+                    <SelectItem value="integracao">Integração de sistemas</SelectItem>
+                    <SelectItem value="outro">Outro</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.tipoProjeto && (
+                  <p className="text-sm text-red-400">{errors.tipoProjeto.message}</p>
+                )}
+              </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-[#0a1628]">
-                WhatsApp *
+              <Label htmlFor="objetivoProjeto" className={labelStyles}>
+                Objetivo do projeto *
               </Label>
-              <Input
-                id="whatsapp"
-                {...register("whatsapp")}
-                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
-                placeholder="(11) 99999-9999"
-              />
-              {errors.whatsapp && (
-                <p className="text-sm text-red-400">{errors.whatsapp.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-[#0a1628]">
-                E-mail *
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                {...register("email")}
-                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
-                placeholder="seu@email.com"
-              />
-              {errors.email && (
-                <p className="text-sm text-red-400">{errors.email.message}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="empresa" className="text-[#0a1628]">
-                Empresa *
-              </Label>
-              <Input
-                id="empresa"
-                {...register("empresa")}
-                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
-                placeholder="Nome da empresa"
-              />
-              {errors.empresa && (
-                <p className="text-sm text-red-400">{errors.empresa.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="cargo" className="text-[#0a1628]">
-                Cargo *
-              </Label>
-              <Input
-                id="cargo"
-                {...register("cargo")}
-                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200"
-                placeholder="Seu cargo"
-              />
-              {errors.cargo && (
-                <p className="text-sm text-red-400">{errors.cargo.message}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="tipoProjeto" className="text-[#0a1628]">
-                Tipo de projeto *
-              </Label>
-              <Select
-                value={tipoProjeto}
-                onValueChange={(value) => setValue("tipoProjeto", value)}
-              >
-                <SelectTrigger className="bg-white border-gray-300 text-[#0a1628] hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200">
-                  <SelectValue placeholder="Selecione" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border-gray-300 rounded-lg">
-                  <SelectItem value="saas">Plataforma SaaS</SelectItem>
-                  <SelectItem value="custom">Software sob medida</SelectItem>
-                  <SelectItem value="ecommerce">E-commerce</SelectItem>
-                  <SelectItem value="mobile">Aplicativo mobile</SelectItem>
-                  <SelectItem value="integracao">Integração de sistemas</SelectItem>
-                  <SelectItem value="outro">Outro</SelectItem>
-                </SelectContent>
-              </Select>
-              {errors.tipoProjeto && (
-                <p className="text-sm text-red-400">{errors.tipoProjeto.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="objetivoProjeto" className="text-[#0a1628]">
-              Objetivo do projeto *
-            </Label>
               <Textarea
                 id="objetivoProjeto"
                 {...register("objetivoProjeto")}
-                className="bg-white border-gray-300 text-[#0a1628] placeholder:text-gray-400 hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200 min-h-[120px]"
+                className={`${inputStyles} min-h-[120px]`}
                 placeholder="Descreva o objetivo principal do projeto..."
               />
-            {errors.objetivoProjeto && (
-              <p className="text-sm text-red-400">{errors.objetivoProjeto.message}</p>
-            )}
-          </div>
+              {errors.objetivoProjeto && (
+                <p className="text-sm text-red-400">{errors.objetivoProjeto.message}</p>
+              )}
+            </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="faturamento" className="text-[#0a1628]">
-              Faturamento *
-            </Label>
-            <Select
-              value={faturamento}
-              onValueChange={(value) => setValue("faturamento", value)}
+            <div className="space-y-2">
+              <Label htmlFor="faturamento" className={labelStyles}>
+                Faturamento *
+              </Label>
+              <Select
+                value={faturamento}
+                onValueChange={(value) => setValue("faturamento", value)}
+              >
+                <SelectTrigger className={inputStyles}>
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#0a0a1f] border-white/10 text-white">
+                  <SelectItem value="ate-100k">Até R$ 100k/ano</SelectItem>
+                  <SelectItem value="100k-500k">R$ 100k - R$ 500k/ano</SelectItem>
+                  <SelectItem value="500k-1m">R$ 500k - R$ 1M/ano</SelectItem>
+                  <SelectItem value="1m-5m">R$ 1M - R$ 5M/ano</SelectItem>
+                  <SelectItem value="acima-5m">Acima de R$ 5M/ano</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.faturamento && (
+                <p className="text-sm text-red-400">{errors.faturamento.message}</p>
+              )}
+            </div>
+
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#06B6D4] text-white text-lg py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300"
             >
-              <SelectTrigger className="bg-white border-gray-300 text-[#0a1628] hover:border-gray-400 focus:border-[#0076CE] rounded-lg transition-all duration-200">
-                <SelectValue placeholder="Selecione" />
-              </SelectTrigger>
-              <SelectContent className="bg-white border-gray-300 rounded-lg">
-                <SelectItem value="ate-100k">Até R$ 100k/ano</SelectItem>
-                <SelectItem value="100k-500k">R$ 100k - R$ 500k/ano</SelectItem>
-                <SelectItem value="500k-1m">R$ 500k - R$ 1M/ano</SelectItem>
-                <SelectItem value="1m-5m">R$ 1M - R$ 5M/ano</SelectItem>
-                <SelectItem value="acima-5m">Acima de R$ 5M/ano</SelectItem>
-              </SelectContent>
-            </Select>
-            {errors.faturamento && (
-              <p className="text-sm text-red-400">{errors.faturamento.message}</p>
-            )}
-          </div>
-
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-[#0076CE] hover:bg-[#0099FF] hover:shadow-[0_0_20px_rgba(0,118,206,0.4)] text-white text-lg py-7 h-auto font-semibold transition-all duration-200 rounded-lg"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Enviando...
-              </>
-            ) : (
-              "Solicitar análise do projeto"
-            )}
-          </Button>
-        </form>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Enviando...
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 h-5 w-5" />
+                  Solicitar análise do projeto
+                </>
+              )}
+            </Button>
+          </form>
+        </div>
       </div>
     </section>
   );
