@@ -163,18 +163,18 @@ export function FormularioSection() {
             <FileText className="w-4 h-4 text-white/90" />
             <span className="text-sm font-medium text-white/90">Formulário de contato</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-6 text-white tracking-tight">
             Solicitar análise do projeto
           </h2>
-          <p className="text-white/70 text-lg leading-relaxed max-w-xl mx-auto">
+          <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-xl mx-auto px-2">
             Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
           </p>
         </div>
 
         {/* Form Card com design melhorado */}
-        <div className="p-8 sm:p-10 md:p-12 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/[0.12] backdrop-blur-sm shadow-[0_8px_32px_rgba(0,118,206,0.15)] hover:border-white/20 transition-all duration-300">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+        <div className="p-5 sm:p-8 md:p-10 lg:p-12 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/[0.12] backdrop-blur-sm shadow-[0_8px_32px_rgba(0,118,206,0.15)] hover:border-white/20 transition-all duration-300">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <Label htmlFor="nome" className={labelStyles}>
                   Nome completo *
@@ -206,7 +206,7 @@ export function FormularioSection() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <Label htmlFor="email" className={labelStyles}>
                   E-mail *
@@ -239,7 +239,7 @@ export function FormularioSection() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <Label htmlFor="cargo" className={labelStyles}>
                   Cargo *
@@ -323,17 +323,17 @@ export function FormularioSection() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-lg py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300"
+              className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg py-5 sm:py-6 md:py-7 h-auto min-h-[48px] font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300 flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Enviando...
+                  <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                  <span>Enviando...</span>
                 </>
               ) : (
                 <>
-                  <Send className="mr-2 h-5 w-5" />
-                  Solicitar análise do projeto
+                  <Send className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Solicitar análise do projeto</span>
                 </>
               )}
             </Button>
