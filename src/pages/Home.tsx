@@ -10,7 +10,6 @@ import { FAQSection } from "@/components/home/FAQSection";
 import { ChamadaFinalSection } from "@/components/home/ChamadaFinalSection";
 import { FormularioSection } from "@/components/home/FormularioSection";
 import { Footer } from "@/components/home/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export default function Home() {
   useEffect(() => {
@@ -47,7 +46,6 @@ export default function Home() {
       </main>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 }
