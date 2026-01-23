@@ -1,8 +1,8 @@
-import { AlertTriangle, Clock, DollarSign, FileX, Zap } from "lucide-react";
+import { Users, Clock, TrendingDown, FileX, Zap } from "lucide-react";
 
 const problemas = [
   {
-    icon: AlertTriangle,
+    icon: Users,
     title: "Falta de time técnico",
     description: "Não tem desenvolvedores internos ou o time está sobrecarregado com demandas",
     gradient: "from-[#0076CE]/20 to-[#0076CE]/5",
@@ -18,7 +18,7 @@ const problemas = [
     borderGlow: "rgba(0, 153, 255, 0.2)",
   },
   {
-    icon: DollarSign,
+    icon: TrendingDown,
     title: "Custos fora de controle",
     description: "Orçamentos que explodem sem previsibilidade ou transparência nos gastos",
     gradient: "from-[#00B8FF]/20 to-[#00B8FF]/5",

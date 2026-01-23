@@ -1,32 +1,38 @@
-import { Code2, Cloud, TrendingUp, Sparkles, Check } from "lucide-react";
+import { Sparkles, Check } from "lucide-react";
+import cloudBankingIcon from "@/assets/cloud-banking.png";
+import softwareMedidaIcon from "@/assets/software-medida.png";
+import architectureIcon from "@/assets/architechture.png";
 
 const solucoes = [
   {
-    icon: Code2,
+    icon: null,
     title: "Software sob medida",
     description: "Desenvolvimento customizado que resolve exatamente o que você precisa",
     features: ["APIs robustas", "Integrações", "Dashboards"],
     gradient: "from-[#0076CE] to-[#0099FF]",
     bgGradient: "from-[#0076CE]/15 to-[#0076CE]/5",
     glowColor: "rgba(0, 118, 206, 0.25)",
+    customIcon: softwareMedidaIcon,
   },
   {
-    icon: Cloud,
+    icon: null,
     title: "Plataformas SaaS",
     description: "Soluções escaláveis prontas para crescer com seu negócio",
     features: ["Multi-tenant", "Escalável", "Cloud-native"],
     gradient: "from-[#0099FF] to-[#00B8FF]",
     bgGradient: "from-[#0099FF]/15 to-[#0099FF]/5",
     glowColor: "rgba(0, 153, 255, 0.25)",
+    customIcon: cloudBankingIcon,
   },
   {
-    icon: TrendingUp,
+    icon: null,
     title: "Arquitetura escalável",
     description: "Tecnologia pensada para crescer sem precisar refazer",
     features: ["Microserviços", "CI/CD", "Alta performance"],
     gradient: "from-[#00B8FF] to-[#0076CE]",
     bgGradient: "from-[#00B8FF]/15 to-[#00B8FF]/5",
     glowColor: "rgba(0, 184, 255, 0.25)",
+    customIcon: architectureIcon,
   },
 ];
 
@@ -58,7 +64,6 @@ export function SolucaoSection() {
         {/* Solution Cards - Layout diagonal/overlap */}
         <div className="grid md:grid-cols-3 gap-6 mb-16">
           {solucoes.map((solucao, index) => {
-            const Icon = solucao.icon;
             return (
               <div
                 key={index}
@@ -67,8 +72,15 @@ export function SolucaoSection() {
                 {/* Card */}
                 <div className={`h-full p-5 sm:p-6 md:p-8 rounded-2xl bg-gradient-to-br ${solucao.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-8px]`} style={{ boxShadow: `0 8px 32px ${solucao.glowColor}` }}>
                   {/* Icon */}
-                  <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${solucao.gradient} flex items-center justify-center mb-4 sm:mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`} style={{ boxShadow: `0 0 20px ${solucao.glowColor}` }}>
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${solucao.gradient} flex items-center justify-center mb-4 sm:mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`} style={{ boxShadow: `0 0 20px ${solucao.glowColor}` }}>
+                    {solucao.customIcon && (
+                      <img 
+                        src={solucao.customIcon} 
+                        alt={solucao.title}
+                        className="w-full h-full object-contain brightness-0 invert"
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                      />
+                    )}
                   </div>
                   
                   {/* Title & Description */}

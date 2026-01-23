@@ -140,35 +140,39 @@ export function FormularioSection() {
     }
   };
 
-  const inputStyles = "bg-white/5 border-white/10 text-white placeholder:text-white/40 hover:border-white/20 focus:border-[#0076CE] focus:ring-[#0076CE]/20 rounded-xl transition-all duration-200";
-  const labelStyles = "text-white/80 font-medium";
+  const inputStyles = "bg-white/5 border-white/10 text-white placeholder:text-white/40 hover:border-white/20 focus:border-[#0076CE] focus:ring-2 focus:ring-[#0076CE]/20 rounded-xl transition-all duration-200 focus:bg-white/[0.08]";
+  const labelStyles = "text-white/90 font-semibold";
 
   return (
     <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
       {/* Mesh Background */}
       <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
       
-      {/* Background Elements - Apenas azul */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/10 rounded-full blur-[200px]" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#0099FF]/10 rounded-full blur-[200px]" />
+      {/* Asymmetric Grid Pattern */}
+      <div className="absolute inset-0 asymmetric-grid opacity-[0.08]" />
       
-      <div className="container mx-auto max-w-2xl relative z-10">
-        {/* Header */}
+      {/* Background Elements - Apenas azul com mais profundidade */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/12 rounded-full blur-[200px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#0099FF]/10 rounded-full blur-[200px]" />
+      <div className="absolute top-1/2 left-0 w-[350px] h-[350px] bg-[#00B8FF]/8 rounded-full blur-[180px]" />
+      
+      <div className="container mx-auto max-w-3xl relative z-10">
+        {/* Header com layout melhorado */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6 backdrop-blur-sm">
             <FileText className="w-4 h-4 text-white/90" />
             <span className="text-sm font-medium text-white/90">Formulário de contato</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
             Solicitar análise do projeto
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed">
+          <p className="text-white/70 text-lg leading-relaxed max-w-xl mx-auto">
             Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
           </p>
         </div>
 
-        {/* Form Card */}
-        <div className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/[0.08] backdrop-blur-sm">
+        {/* Form Card com design melhorado */}
+        <div className="p-8 sm:p-10 md:p-12 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/[0.12] backdrop-blur-sm shadow-[0_8px_32px_rgba(0,118,206,0.15)] hover:border-white/20 transition-all duration-300">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
