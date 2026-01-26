@@ -1,6 +1,113 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { canSendEmail, registerEmailSend } from './utils/emailRateLimit';
+
+// ========== RATE LIMITING (inline para evitar problemas de import) ==========
+interface EmailCounter {
+  month: string; // formato: YYYY-MM
+  count: number;
+}
+
+const RATE_LIMIT = 3000;
+const COUNTER_FILE = '/tmp/email-counter.json';
+
+function getCurrentMonth(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  return `${year}-${month}`;
+}
+
+async function readLocalCounter(): Promise<EmailCounter> {
+  try {
+    const fs = await import('fs/promises');
+    const data = await fs.readFile(COUNTER_FILE, 'utf-8');
+    const counter: EmailCounter = JSON.parse(data);
+    if (counter.month !== getCurrentMonth()) {
+      return { month: getCurrentMonth(), count: 0 };
+    }
+    return counter;
+  } catch (error) {
+    return { month: getCurrentMonth(), count: 0 };
+  }
+}
+
+async function writeLocalCounter(counter: EmailCounter): Promise<void> {
+  try {
+    const fs = await import('fs/promises');
+    await fs.mkdir('/tmp', { recursive: true });
+    await fs.writeFile(COUNTER_FILE, JSON.stringify(counter, null, 2), 'utf-8');
+  } catch (error) {
+    console.error('[Lead API] Erro ao escrever contador local:', error);
+  }
+}
+
+async function canSendEmail(): Promise<boolean> {
+  try {
+    // Tentar usar Vercel KV se disponível
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      try {
+        const kvModule = await import('@vercel/kv').catch(() => null);
+        if (kvModule) {
+          const { kv } = kvModule;
+          const currentMonth = getCurrentMonth();
+          const key = `email-count-${currentMonth}`;
+          const count = await kv.get<number>(key) || 0;
+          return count < RATE_LIMIT;
+        }
+      } catch (error) {
+        console.warn('[Lead API] KV não disponível, usando fallback local:', error instanceof Error ? error.message : String(error));
+      }
+    }
+
+    // Fallback: usar arquivo local
+    try {
+      const counter = await readLocalCounter();
+      return counter.count < RATE_LIMIT;
+    } catch (error) {
+      console.warn('[Lead API] Erro ao ler contador local, permitindo envio:', error instanceof Error ? error.message : String(error));
+      return true; // Fail-open
+    }
+  } catch (error) {
+    console.error('[Lead API] Erro ao verificar rate limit:', error);
+    return true; // Fail-open
+  }
+}
+
+async function registerEmailSend(): Promise<void> {
+  try {
+    // Tentar usar Vercel KV se disponível
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      try {
+        const kvModule = await import('@vercel/kv').catch(() => null);
+        if (kvModule) {
+          const { kv } = kvModule;
+          const currentMonth = getCurrentMonth();
+          const key = `email-count-${currentMonth}`;
+          const count = await kv.get<number>(key) || 0;
+          await kv.set(key, count + 1, { ex: 60 * 60 * 24 * 32 }); // Expira em 32 dias
+          return;
+        }
+      } catch (error) {
+        console.warn('[Lead API] KV não disponível, usando fallback local:', error instanceof Error ? error.message : String(error));
+      }
+    }
+
+    // Fallback: usar arquivo local
+    try {
+      const counter = await readLocalCounter();
+      const newCounter: EmailCounter = {
+        month: getCurrentMonth(),
+        count: counter.month === getCurrentMonth() ? counter.count + 1 : 1,
+      };
+      await writeLocalCounter(newCounter);
+    } catch (error) {
+      console.warn('[Lead API] Erro ao escrever contador local (não crítico):', error instanceof Error ? error.message : String(error));
+    }
+  } catch (error) {
+    console.error('[Lead API] Erro ao registrar envio (não crítico):', error);
+  }
+}
+// ========== FIM RATE LIMITING ==========
 
 // API key do Resend - usar variável de ambiente ou fallback
 const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_6WEoM8uW_ExoKjqHMM7zf5vwcqcF2sHsM';
@@ -226,10 +333,14 @@ export default async function handler(
     }
 
     // Log detalhado para debug
-    console.log('[Lead API] LEAD RECEIVED:', JSON.stringify(payload, null, 2));
+    console.log('[Lead API] ========== LEAD RECEIVED ==========');
+    console.log('[Lead API] Payload:', JSON.stringify(payload, null, 2));
     console.log('[Lead API] RESEND_API_KEY:', RESEND_API_KEY ? `${RESEND_API_KEY.substring(0, 10)}...` : 'NÃO CONFIGURADA');
+    console.log('[Lead API] RESEND_API_KEY length:', RESEND_API_KEY?.length || 0);
     console.log('[Lead API] EMAIL_TO:', EMAIL_TO);
     console.log('[Lead API] IS_DEV:', IS_DEV);
+    console.log('[Lead API] VERCEL:', !!process.env.VERCEL);
+    console.log('[Lead API] NODE_ENV:', process.env.NODE_ENV);
 
     // Verificar rate limit antes de enviar
     if (!(await canSendEmail())) {
@@ -264,38 +375,75 @@ export default async function handler(
 
     // Verificar se tem API key válida
     if (!RESEND_API_KEY || RESEND_API_KEY.length < 10) {
-      console.error('[Lead API] RESEND_API_KEY inválida ou ausente');
+      console.error('[Lead API] ❌ RESEND_API_KEY inválida ou ausente');
+      console.error('[Lead API] RESEND_API_KEY value:', RESEND_API_KEY ? 'EXISTS' : 'NULL/UNDEFINED');
+      console.error('[Lead API] RESEND_API_KEY length:', RESEND_API_KEY?.length || 0);
       return res.status(500).json({
         ok: false,
         error: 'Configuração de e-mail inválida. Entre em contato com o suporte.',
       });
     }
 
+    // Verificar se Resend foi inicializado
+    if (!resend) {
+      console.error('[Lead API] ❌ Resend não foi inicializado');
+      return res.status(500).json({
+        ok: false,
+        error: 'Serviço de e-mail não disponível. Entre em contato com o suporte.',
+      });
+    }
+
     // Enviar e-mail via Resend
-    console.log('[Lead API] Tentando enviar email via Resend...');
+    console.log('[Lead API] ========== ENVIANDO EMAIL ==========');
     console.log('[Lead API] From: onboarding@resend.dev');
     console.log('[Lead API] To:', EMAIL_TO);
     console.log('[Lead API] Subject:', assunto);
+    console.log('[Lead API] Body length:', corpoEmail.length);
 
     try {
-      const { data, error } = await resend.emails.send({
+      // Preparar dados do email
+      const emailData = {
         from: 'onboarding@resend.dev',
         to: EMAIL_TO,
         subject: assunto,
         html: `<div style="font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 20px; border-radius: 8px; line-height: 1.6;">${corpoEmail.replace(/\n/g, '<br>')}</div>`,
         text: corpoEmail,
+      };
+
+      console.log('[Lead API] Email data prepared:', {
+        from: emailData.from,
+        to: emailData.to,
+        subject: emailData.subject,
+        htmlLength: emailData.html.length,
+        textLength: emailData.text.length,
       });
 
+      // Tentar enviar email
+      console.log('[Lead API] Calling resend.emails.send...');
+      const result = await resend.emails.send(emailData);
+      const { data, error } = result;
+      
+      console.log('[Lead API] Resend response received');
+      console.log('[Lead API] Has data:', !!data);
+      console.log('[Lead API] Has error:', !!error);
+
       if (error) {
-        console.error('[Lead API] EMAIL SEND ERROR:', JSON.stringify(error, null, 2));
+        console.error('[Lead API] ❌ EMAIL SEND ERROR');
+        console.error('[Lead API] Error type:', typeof error);
+        console.error('[Lead API] Error:', JSON.stringify(error, null, 2));
+        console.error('[Lead API] Error message:', error?.message || 'Sem mensagem');
+        console.error('[Lead API] Error name:', error?.name || 'Sem nome');
+        
+        // Retornar erro mais detalhado
         return res.status(500).json({
           ok: false,
           error: error.message || 'Erro ao enviar e-mail. Verifique as configurações do servidor.',
           details: IS_DEV ? JSON.stringify(error, null, 2) : undefined,
+          errorType: error?.name || 'UnknownError',
         });
       }
 
-      console.log('[Lead API] EMAIL SENT SUCCESSFULLY');
+      console.log('[Lead API] ✅ EMAIL SENT SUCCESSFULLY');
       console.log('[Lead API] Message ID:', data?.id);
 
       // Registrar envio no rate limit
@@ -309,31 +457,51 @@ export default async function handler(
       // Retornar sucesso
       return res.status(200).json({ ok: true, messageId: data?.id });
     } catch (sendError) {
-      console.error('[Lead API] EXCEPTION ao enviar email:', sendError);
+      console.error('[Lead API] ❌ EXCEPTION ao enviar email');
+      console.error('[Lead API] Exception type:', typeof sendError);
+      console.error('[Lead API] Exception:', sendError);
+      
       const errorDetails = sendError instanceof Error ? {
         message: sendError.message,
         stack: sendError.stack,
         name: sendError.name,
       } : String(sendError);
 
+      console.error('[Lead API] Error details:', JSON.stringify(errorDetails, null, 2));
+
       return res.status(500).json({
         ok: false,
         error: sendError instanceof Error ? sendError.message : 'Erro inesperado ao enviar e-mail.',
         details: IS_DEV ? JSON.stringify(errorDetails, null, 2) : undefined,
+        errorType: sendError instanceof Error ? sendError.name : 'UnknownException',
       });
     }
   } catch (error) {
-    console.error('[Lead API] Erro inesperado no handler:', error);
+    console.error('[Lead API] ❌❌❌ ERRO INESPERADO NO HANDLER ❌❌❌');
+    console.error('[Lead API] Error type:', typeof error);
+    console.error('[Lead API] Error:', error);
+    
     const errorDetails = error instanceof Error ? {
       message: error.message,
       stack: error.stack,
       name: error.name,
     } : String(error);
 
+    console.error('[Lead API] Error details:', JSON.stringify(errorDetails, null, 2));
+    console.error('[Lead API] Environment check:', {
+      hasResendKey: !!RESEND_API_KEY,
+      resendKeyLength: RESEND_API_KEY?.length || 0,
+      emailTo: EMAIL_TO,
+      isDev: IS_DEV,
+      vercel: !!process.env.VERCEL,
+      nodeEnv: process.env.NODE_ENV,
+    });
+
     return res.status(500).json({
       ok: false,
       error: 'Erro interno ao processar o formulário.',
       details: IS_DEV ? JSON.stringify(errorDetails, null, 2) : undefined,
+      errorType: error instanceof Error ? error.name : 'UnknownHandlerError',
     });
   }
 }
