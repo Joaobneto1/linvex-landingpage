@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
+import limvexBackground from "@/assets/limvex-background2.jpeg";
 
 export function HeroSection() {
   const scrollToForm = () => {
@@ -10,9 +10,6 @@ export function HeroSection() {
       form.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  // Symmetric pillar heights (percent). Tall at edges, low at center.
-  const pillars = [92, 84, 78, 70, 62, 54, 46, 34, 18, 34, 46, 54, 62, 70, 78, 84, 92];
 
   // State to trigger animations once the component is mounted.
   const [isMounted, setIsMounted] = useState(false);
@@ -41,12 +38,10 @@ export function HeroSection() {
 
           @keyframes subtlePulse {
             0%, 100% {
-              opacity: 0.8;
-              transform: scale(1);
+              opacity: 0.2;
             }
             50% {
-              opacity: 1;
-              transform: scale(1.03);
+              opacity: 0.4;
             }
           }
 
@@ -58,54 +53,26 @@ export function HeroSection() {
 
       <section className="relative isolate h-screen overflow-hidden bg-[#030014] text-white">
         {/* ================== BACKGROUND ================== */}
-        {/* Mesh Background */}
-        <div className="absolute inset-0 tech-mesh-pattern opacity-100 -z-30" />
-
-        {/* Asymmetric Grid */}
-        <div className="absolute inset-0 asymmetric-grid opacity-[0.15] -z-30" />
-
-        {/* Luminous elliptical gradients - Adaptado para azul */}
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-20"
+        {/* Background Image - Imagem principal como background */}
+        <div 
+          className="absolute inset-0 -z-30"
           style={{
-            backgroundImage: [
-              // Main central dome/band (slightly below center) - Azul
-              "radial-gradient(80% 55% at 50% 52%, rgba(0,184,255,0.35) 0%, rgba(0,153,255,0.40) 27%, rgba(0,118,206,0.35) 47%, rgba(3,0,20,0.60) 60%, rgba(3,0,20,0.85) 78%, rgba(3,0,20,1) 88%)",
-              // Cool sweep from top-left - Azul
-              "radial-gradient(85% 60% at 14% 0%, rgba(0,153,255,0.50) 0%, rgba(0,118,206,0.45) 30%, rgba(3,0,20,0.0) 64%)",
-              // Cool rim on top-right - Azul mais claro
-              "radial-gradient(70% 50% at 86% 22%, rgba(0,184,255,0.35) 0%, rgba(3,0,20,0.0) 55%)",
-              // Soft top vignette
-              "linear-gradient(to bottom, rgba(3,0,20,0.25), rgba(3,0,20,0) 40%)",
-            ].join(","),
-            backgroundColor: "#030014",
+            backgroundImage: `url(${limvexBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
           }}
         />
-
-        {/* Vignette corners for extra contrast */}
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(140%_120%_at_50%_0%,transparent_60%,rgba(3,0,20,0.85))]" />
-
-        {/* Grid overlay: vertical columns + subtle curved horizontal arcs */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10 mix-blend-screen opacity-30"
-          style={{
-            backgroundImage: [
-              // Vertical grid lines (major & minor)
-              "repeating-linear-gradient(90deg, rgba(0,118,206,0.15) 0 1px, transparent 1px 96px)",
-              "repeating-linear-gradient(90deg, rgba(0,153,255,0.10) 0 1px, transparent 1px 24px)",
-              // Curved horizontal arcs via repeating elliptical radial gradient
-              "repeating-radial-gradient(80% 55% at 50% 52%, rgba(0,184,255,0.12) 0 1px, transparent 1px 120px)"
-            ].join(","),
-            backgroundBlendMode: "screen",
-          }}
-        />
-
-        {/* Gradient Orbs - Apenas azul */}
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-[#0076CE] rounded-full blur-[180px] opacity-20 animate-pulse -z-10" />
-        <div className="absolute bottom-1/4 -right-32 w-[450px] h-[450px] bg-[#0099FF] rounded-full blur-[180px] opacity-15 animate-pulse -z-10" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#00B8FF] rounded-full blur-[220px] opacity-10 -z-10" />
+        
+        {/* Dark overlay para garantir legibilidade do texto */}
+        <div className="absolute inset-0 -z-20 bg-[#030014]/75" />
+        
+        {/* Subtle gradient overlay para mais profundidade e contraste */}
+        <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#030014]/80 via-[#030014]/50 to-[#030014]/90" />
+        
+        {/* Overlay adicional para destacar a área central do conteúdo */}
+        <div className="absolute inset-0 -z-20 bg-gradient-to-b from-transparent via-transparent to-[#030014]/60" />
 
         {/* ================== COPY ================== */}
         <div className="relative z-10 mx-auto grid w-full max-w-5xl place-items-center px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
@@ -173,32 +140,14 @@ export function HeroSection() {
         </div>
 
         {/* ================== FOREGROUND ================== */}
-        {/* Center-bottom rectangular glow with pulse animation - Adaptado para azul */}
+        {/* Efeito de brilho sutil no centro inferior para destacar a imagem */}
         <div
-          className="pointer-events-none absolute bottom-[128px] left-1/2 z-0 h-36 w-28 -translate-x-1/2 rounded-md bg-gradient-to-b from-[#00B8FF]/60 via-[#0099FF]/50 to-transparent"
-          style={{ animation: 'subtlePulse 6s ease-in-out infinite' }}
+          className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-[40vh] w-full max-w-4xl -translate-x-1/2 opacity-30"
+          style={{ 
+            background: 'radial-gradient(ellipse at center, rgba(0,118,206,0.15) 0%, transparent 70%)',
+            animation: 'subtlePulse 8s ease-in-out infinite' 
+          }}
         />
-
-        {/* Stepped pillars silhouette */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[54vh]">
-          {/* dark fade */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-[#030014]/90 to-transparent" />
-          {/* bars */}
-          <div className="absolute inset-x-0 bottom-0 flex h-full items-end gap-px px-[2px]">
-            {pillars.map((h, i) => (
-              <div
-                key={i}
-                className="flex-1 bg-[#030014] transition-[height] duration-1000 ease-in-out"
-                style={{
-                  // Animate height from 0% to its target value when isMounted is true.
-                  height: isMounted ? `${h}%` : '0%',
-                  // Stagger the animation delay to create a wave effect from the center out.
-                  transitionDelay: `${Math.abs(i - Math.floor(pillars.length / 2)) * 60}ms`
-                }}
-              />
-            ))}
-          </div>
-        </div>
       </section>
     </>
   );
