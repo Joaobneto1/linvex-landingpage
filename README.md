@@ -331,4 +331,4 @@ Para dúvidas ou problemas, entre em contato com a equipe LIMVEX.
 
 ---
 
-**LIMVEX** - Transformando tecnologia em crescimento real
+**LIMVEX** - Transformando tecnologia em crescimento real.
