@@ -6,8 +6,8 @@ const BAUHAUS_CARD_STYLES = `
 .bauhaus-card {
   position: relative;
   z-index: 555;
-  max-width: 20rem;
-  min-height: 20rem;
+  max-width: 100%;
+  min-height: 18rem;
   width: 100%;
   display: grid;
   place-content: center;
@@ -24,10 +24,10 @@ const BAUHAUS_CARD_STYLES = `
   background-clip: padding-box, border-box;
   color: var(--card-text-main, #f0f0f1);
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .bauhaus-card {
-    max-width: 100%;
-    min-height: 18rem;
+    max-width: 20rem;
+    min-height: 20rem;
   }
 }
 .bauhaus-card::before {
@@ -78,27 +78,31 @@ const BAUHAUS_CARD_STYLES = `
   padding: 0.7em 1.25em 0.5em 1.5em;
 }
 .bauhaus-card-body h3 {
-  font-size: 1.375rem;
+  font-size: 1.125rem;
   margin-top: -0.4em;
   margin-bottom: 0.188em;
   font-weight: 600;
   color: var(--card-text-main, #f0f0f1);
   text-align: left;
+  line-height: 1.4;
+  word-break: break-word;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .bauhaus-card-body h3 {
-    font-size: 1.125rem;
+    font-size: 1.375rem;
   }
 }
 .bauhaus-card-body p {
   color: var(--card-text-sub, #a0a1b3);
-  font-size: 1rem;
+  font-size: 0.875rem;
   letter-spacing: 0.031rem;
   text-align: left;
+  line-height: 1.5;
+  word-break: break-word;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .bauhaus-card-body p {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 }
 .bauhaus-progress {

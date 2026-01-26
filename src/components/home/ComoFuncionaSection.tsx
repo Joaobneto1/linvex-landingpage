@@ -1,4 +1,5 @@
 import { Search, CheckCircle2, Code2, Rocket, Workflow } from "lucide-react";
+import { Reveal } from "@/components/ui/reveal";
 
 const passos = [
   {
@@ -44,28 +45,30 @@ export function ComoFuncionaSection() {
     <section id="como-funciona" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
       {/* Mesh Background */}
       <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
-      
+
       {/* Background Elements - Apenas azul */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#0076CE]/8 rounded-full blur-[200px]" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#0099FF]/8 rounded-full blur-[200px]" />
-      
+
       {/* Asymmetric Grid Pattern */}
       <div className="absolute inset-0 asymmetric-grid opacity-[0.06]" />
-      
+
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6">
-            <Workflow className="w-4 h-4 text-white/90" />
-            <span className="text-sm font-medium text-white/90">Processo simplificado</span>
+        <Reveal direction="up" delay={0}>
+          <div className="text-center mb-12 sm:mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6">
+              <Workflow className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
+              <span className="text-xs sm:text-sm font-medium text-white/90">Processo simplificado</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-6 text-white tracking-tight px-2">
+              Como funciona
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/65 max-w-3xl mx-auto leading-relaxed px-2">
+              Um processo claro e transparente do início ao fim do seu projeto
+            </p>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-white tracking-tight">
-            Como funciona
-          </h2>
-          <p className="text-lg md:text-xl text-white/65 max-w-3xl mx-auto leading-relaxed">
-            Um processo claro e transparente do início ao fim do seu projeto
-          </p>
-        </div>
+        </Reveal>
 
         {/* Steps - Layout único com conexões diagonais */}
         <div className="relative mb-16">
@@ -77,7 +80,7 @@ export function ComoFuncionaSection() {
               const isEven = index % 2 === 0;
               const startX = isEven ? 25 : 75;
               const endX = isEven ? 75 : 25;
-              
+
               return (
                 <svg
                   key={index}
@@ -105,55 +108,56 @@ export function ComoFuncionaSection() {
               );
             })}
           </div>
-          
-          <div className="space-y-8 lg:space-y-16 relative">
+
+          <div className="space-y-6 sm:space-y-8 lg:space-y-16 relative">
             {passos.map((passo, index) => {
               const Icon = passo.icon;
               const isEven = index % 2 === 0;
-              
+
               return (
-                <div 
-                  key={index}
-                  className={`relative lg:flex lg:items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}
-                >
-                  {/* Content Card - Layout único */}
-                  <div className={`w-full lg:w-1/2 ${isEven ? 'lg:pr-12' : 'lg:pl-12'}`}>
-                    <div 
-                      className={`group relative p-6 sm:p-8 lg:p-10 rounded-2xl bg-gradient-to-br ${passo.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-6px]`}
-                      style={{ boxShadow: `0 8px 32px ${passo.glowColor}` }}
-                    >
-                      {/* Number Badge - Posição única */}
-                      <div className={`absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg border-2 border-[#030014]`}>
-                        <span className="text-xl sm:text-2xl font-extrabold text-white">{passo.numero}</span>
-                      </div>
-                      
-                      {/* Icon - Dentro do card */}
-                      <div className="flex items-start gap-4 sm:gap-5 mb-4 sm:mb-5">
-                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`} style={{ boxShadow: `0 0 20px ${passo.glowColor}` }}>
-                          <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                <Reveal key={index} direction={isEven ? "right" : "left"} delay={index * 100}>
+                  <div
+                    className={`relative lg:flex lg:items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-6 sm:gap-8`}
+                  >
+                    {/* Content Card - Layout único */}
+                    <div className={`w-full lg:w-1/2 ${isEven ? 'lg:pr-8 lg:pr-12' : 'lg:pl-8 lg:pl-12'}`}>
+                      <div
+                        className={`group relative p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl bg-gradient-to-br ${passo.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-6px]`}
+                        style={{ boxShadow: `0 8px 32px ${passo.glowColor}` }}
+                      >
+                        {/* Number Badge - Posição única */}
+                        <div className={`absolute -top-2 -left-2 sm:-top-3 sm:-left-3 md:-top-4 md:-left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg border-2 border-[#030014]`}>
+                          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold text-white">{passo.numero}</span>
                         </div>
-                        <div className="flex-1 pt-1">
-                          <div className="text-xs font-bold mb-2 text-white/60 uppercase tracking-wider">
-                            Passo {passo.numero}
+
+                        {/* Icon - Dentro do card */}
+                        <div className="flex items-start gap-3 sm:gap-4 md:gap-5 mb-3 sm:mb-4 md:mb-5">
+                          <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`} style={{ boxShadow: `0 0 20px ${passo.glowColor}` }}>
+                            <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
                           </div>
-                          <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-3 leading-tight">
-                            {passo.title}
-                          </h3>
+                          <div className="flex-1 pt-1">
+                            <div className="text-xs sm:text-sm font-bold mb-1 sm:mb-2 text-white/60 uppercase tracking-wider">
+                              Passo {passo.numero}
+                            </div>
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white mb-2 sm:mb-3 leading-tight">
+                              {passo.title}
+                            </h3>
+                          </div>
                         </div>
+
+                        <p className="text-white/70 leading-relaxed text-sm sm:text-base md:text-lg">
+                          {passo.description}
+                        </p>
+
+                        {/* Hover accent */}
+                        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${passo.gradient} rounded-b-xl sm:rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                       </div>
-                      
-                      <p className="text-white/70 leading-relaxed text-base sm:text-lg">
-                        {passo.description}
-                      </p>
-                      
-                      {/* Hover accent */}
-                      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${passo.gradient} rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                     </div>
+
+                    {/* Spacer for opposite side */}
+                    <div className="hidden lg:block lg:w-1/2" />
                   </div>
-                  
-                  {/* Spacer for opposite side */}
-                  <div className="hidden lg:block lg:w-1/2" />
-                </div>
+                </Reveal>
               );
             })}
           </div>

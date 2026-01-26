@@ -22,9 +22,18 @@ export function Reveal({
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    setShouldAnimate(!prefersReducedMotion);
+    const animate = !prefersReducedMotion;
+    setShouldAnimate(animate);
 
-    if (!shouldAnimate) {
+    // Se não deve animar, mostrar imediatamente
+    if (!animate) {
+      setIsVisible(true);
+      return;
+    }
+
+    // Fallback: se IntersectionObserver não existir, mostrar tudo
+    if (typeof IntersectionObserver === 'undefined') {
+      console.warn('[Reveal] IntersectionObserver não suportado, mostrando conteúdo imediatamente');
       setIsVisible(true);
       return;
     }
@@ -42,45 +51,54 @@ export function Reveal({
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
+        // Threshold menor para mobile (mais sensível)
+        threshold: 0.05,
+        // RootMargin ajustado para mobile: -10% do viewport em vez de -50px fixo
+        rootMargin: "0px 0px -10% 0px",
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, [delay, shouldAnimate]);
+  }, [delay]);
 
   const getTransform = () => {
+    // Se não deve animar ou já está visível, sem transformação
     if (!shouldAnimate || isVisible) {
       return "translate(0, 0)";
     }
 
+    // Transformações menores para mobile (melhor performance)
+    const translateAmount = "20px";
+
     switch (direction) {
       case "up":
-        return "translateY(30px)";
+        return `translateY(${translateAmount})`;
       case "down":
-        return "translateY(-30px)";
+        return `translateY(-${translateAmount})`;
       case "left":
-        return "translateX(30px)";
+        return `translateX(${translateAmount})`;
       case "right":
-        return "translateX(-30px)";
+        return `translateX(-${translateAmount})`;
       case "fade":
         return "translate(0, 0)";
       default:
-        return "translateY(30px)";
+        return `translateY(${translateAmount})`;
     }
   };
 
   const getOpacity = () => {
+    // Se não deve animar, sempre visível
     if (!shouldAnimate) return 1;
+    // Se está visível, opacidade 1, senão 0
     return isVisible ? 1 : 0;
   };
 
@@ -91,9 +109,14 @@ export function Reveal({
       style={{
         opacity: getOpacity(),
         transform: getTransform(),
-        transition: shouldAnimate
-          ? "opacity 0.6s ease-out, transform 0.6s ease-out"
+        // Transição mais suave e rápida para mobile
+        transition: shouldAnimate && isVisible
+          ? "opacity 0.5s ease-out, transform 0.5s ease-out"
+          : shouldAnimate
+          ? "opacity 0.3s ease-out, transform 0.3s ease-out"
           : "none",
+        // Garantir que o elemento não fique invisível permanentemente
+        willChange: shouldAnimate && !isVisible ? "opacity, transform" : "auto",
       }}
     >
       {children}

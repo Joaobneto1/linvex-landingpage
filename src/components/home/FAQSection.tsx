@@ -48,18 +48,18 @@ export function FAQSection() {
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
       {/* Mesh Background */}
       <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
-      
+
       {/* Background Elements - Apenas azul */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0076CE]/5 rounded-full blur-[200px]" />
-      
+
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Left Side - Content */}
           <Reveal direction="right" delay={0} className="flex gap-8 sm:gap-10 flex-col">
             <div className="flex gap-3 sm:gap-4 flex-col">
               <div>
-                <Badge 
-                  variant="outline" 
+                <Badge
+                  variant="outline"
                   className="border-[#0076CE]/30 text-[#0076CE] bg-[#0076CE]/10 hover:bg-[#0076CE]/15 text-xs sm:text-sm"
                 >
                   FAQ
@@ -88,7 +88,7 @@ export function FAQSection() {
                 </div>
               </div>
               <div className="mt-3 sm:mt-4">
-                <Button 
+                <Button
                   onClick={scrollToForm}
                   className="gap-3 sm:gap-4 border-white/20 bg-white/5 hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-sm sm:text-base"
                   variant="outline"
@@ -98,7 +98,7 @@ export function FAQSection() {
                 </Button>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Side - Accordion */}
           <Reveal direction="left" delay={100} className="w-full">

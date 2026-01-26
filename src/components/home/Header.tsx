@@ -19,7 +19,7 @@ export function Header() {
         <div className="flex items-center justify-center relative h-16 md:h-20">
           {/* Logo centralizada */}
           <div className="flex items-center">
-            <span className="text-xl md:text-2xl font-bold text-white">LIMVEX</span>
+            <span className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>LIMVEX</span>
           </div>
 
           {/* Desktop Navigation - à direita */}

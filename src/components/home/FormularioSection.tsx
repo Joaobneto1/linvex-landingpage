@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send, FileText, CheckCircle, AlertCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Loader2, Send, FileText, CheckCircle, AlertCircle, Download, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -26,7 +25,9 @@ type SubmitState = "idle" | "loading" | "success" | "error";
 export function FormularioSection() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const navigate = useNavigate();
+
+  // Feature flag para download do PDF
+  const enablePdfDownload = import.meta.env.VITE_ENABLE_PDF_DOWNLOAD === "true";
 
   const {
     register,
@@ -65,19 +66,21 @@ export function FormularioSection() {
 
       clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "Erro ao enviar formulário");
+      const responseData = await response.json().catch(() => ({}));
+
+      // Verificar se a resposta indica sucesso
+      if (!response.ok || responseData.ok === false) {
+        const errorMessage = responseData.error || responseData.message || `Erro ${response.status}: ${response.statusText}`;
+        throw new Error(errorMessage);
+      }
+
+      // Verificar se foi rate limit (não é erro, mas também não é sucesso completo)
+      if (responseData.skipped && responseData.reason === 'RATE_LIMIT') {
+        throw new Error("Limite de envios atingido. Tente novamente mais tarde.");
       }
 
       setSubmitState("success");
       toast.success("Formulário enviado com sucesso!");
-      
-      // Reset form e redirecionar após 1.5s
-      setTimeout(() => {
-        reset();
-        navigate("/obrigado");
-      }, 1500);
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
       setSubmitState("error");
@@ -87,6 +90,12 @@ export function FormularioSection() {
     }
   };
 
+  const handleResetForm = () => {
+    setSubmitState("idle");
+    setErrorMessage("");
+    reset();
+  };
+
   const inputStyles = "bg-white/5 border-white/10 text-white placeholder:text-white/40 hover:border-white/20 focus:border-[#0076CE] focus:ring-2 focus:ring-[#0076CE]/20 rounded-xl transition-all duration-200 focus:bg-white/[0.08] text-base";
   const labelStyles = "text-white/90 font-semibold text-sm sm:text-base";
 
@@ -94,15 +103,15 @@ export function FormularioSection() {
     <section id="formulario" className="py-12 sm:py-16 md:py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
       {/* Mesh Background */}
       <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
-      
+
       {/* Asymmetric Grid Pattern */}
       <div className="absolute inset-0 asymmetric-grid opacity-[0.08]" />
-      
+
       {/* Background Elements - Apenas azul com mais profundidade */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/12 rounded-full blur-[200px]" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#0099FF]/10 rounded-full blur-[200px]" />
       <div className="absolute top-1/2 left-0 w-[350px] h-[350px] bg-[#00B8FF]/8 rounded-full blur-[180px]" />
-      
+
       <div className="container mx-auto max-w-2xl relative z-10">
         {/* Header com layout melhorado */}
         <Reveal direction="up" delay={0}>
@@ -123,7 +132,56 @@ export function FormularioSection() {
         {/* Form Card com design melhorado */}
         <Reveal direction="up" delay={100}>
           <div className="p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/[0.12] backdrop-blur-sm shadow-[0_8px_32px_rgba(0,118,206,0.15)] hover:border-white/20 transition-all duration-300">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5 md:space-y-6">
+            {/* Estado de Sucesso */}
+            {submitState === "success" ? (
+              <div className="space-y-6 sm:space-y-8">
+                {/* Badge e Ícone */}
+                <div className="flex flex-col items-center text-center space-y-4">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-green-500/20 to-green-600/20 border-2 border-green-500/30 flex items-center justify-center">
+                    <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-green-400" />
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/15 border border-green-500/25 backdrop-blur-sm">
+                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    <span className="text-sm font-medium text-green-400">Concluído</span>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
+                      Solicitação enviada com sucesso!
+                    </h3>
+                    <p className="text-white/70 text-sm sm:text-base md:text-lg max-w-md mx-auto leading-relaxed">
+                      Nossa equipe recebeu sua mensagem e entrará em contato em até 24 horas. Enquanto isso, você pode baixar nossa apresentação para conhecer melhor nossos serviços.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Botões de Ação */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  {enablePdfDownload && (
+                    <Button
+                      asChild
+                      className="flex-1 bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-sm sm:text-base py-5 sm:py-6 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <a href="/apresentacao-limvex.pdf" download="Apresentacao-Limvex.pdf">
+                        <Download className="w-4 h-4 sm:w-5 sm:h-5" />
+                        Baixar apresentação
+                      </a>
+                    </Button>
+                  )}
+
+                  <Button
+                    onClick={handleResetForm}
+                    variant="outline"
+                    className={`${enablePdfDownload ? 'flex-1' : 'w-full'} border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-sm sm:text-base py-5 sm:py-6 h-auto rounded-xl transition-all duration-300 flex items-center justify-center gap-2`}
+                  >
+                    <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+                    Enviar outra solicitação
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5 md:space-y-6">
               {/* Nome */}
               <div className="space-y-2">
                 <Label htmlFor="nome" className={labelStyles}>
@@ -229,28 +287,15 @@ export function FormularioSection() {
                 </div>
               )}
 
-              {/* Mensagem de sucesso */}
-              {submitState === "success" && (
-                <div className="p-3 sm:p-4 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
-                  <p className="text-xs sm:text-sm text-green-400">Formulário enviado com sucesso! Redirecionando...</p>
-                </div>
-              )}
-
               <Button
                 type="submit"
-                disabled={submitState === "loading" || submitState === "success"}
+                disabled={submitState === "loading"}
                 className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-sm sm:text-base md:text-lg py-4 sm:py-5 md:py-6 h-auto min-h-[48px] font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {submitState === "loading" ? (
                   <>
                     <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
                     <span>Enviando...</span>
-                  </>
-                ) : submitState === "success" ? (
-                  <>
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span>Enviado!</span>
                   </>
                 ) : (
                   <>
@@ -260,6 +305,7 @@ export function FormularioSection() {
                 )}
               </Button>
             </form>
+            )}
           </div>
         </Reveal>
       </div>
