@@ -22,7 +22,7 @@ function formatEmailBody(payload: LeadPayload): string {
     'startup': 'Candidatura de Startup',
     'produtos': 'Contato - Produtos',
     'para-empresas': 'Contato - Para Empresas',
-    'contato': 'Contato - Solicitar Orçamento',
+    'contato': 'Contato - Formulário de Contato',
     'home': 'Lead - Home (Análise de Projeto)',
   };
 
@@ -159,12 +159,70 @@ export default async function handler(
       });
     }
 
+    // Validação anti-spam básica
+    // Verificar se o email não é muito curto ou suspeito
+    if (payload.email.length < 5 || payload.email.includes('..') || payload.email.startsWith('.') || payload.email.endsWith('.')) {
+      return res.status(400).json({
+        error: 'Email inválido.',
+      });
+    }
+
+    // Verificar se o nome não é muito curto ou contém apenas números
+    if (payload.nome.length < 2 || /^\d+$/.test(payload.nome.trim())) {
+      return res.status(400).json({
+        error: 'Nome inválido.',
+      });
+    }
+
+    // Verificar mensagem (se existir) para spam básico
+    if (payload.mensagem) {
+      const mensagemLower = payload.mensagem.toLowerCase();
+      const spamKeywords = ['http://', 'https://', 'www.', '.com/', 'bit.ly', 'tinyurl'];
+      const hasSpamLink = spamKeywords.some(keyword => mensagemLower.includes(keyword));
+      
+      // Permitir apenas se não tiver muitos links ou palavras repetidas
+      if (hasSpamLink && (mensagemLower.split('http').length - 1) > 2) {
+        return res.status(400).json({
+          error: 'Mensagem contém conteúdo suspeito.',
+        });
+      }
+    }
+
     // Validar origem
     const origensValidas = ['startup', 'produtos', 'para-empresas', 'contato', 'home'];
     if (!payload.origem || !origensValidas.includes(payload.origem)) {
       return res.status(400).json({
         error: 'Origem inválida. Deve ser: startup, produtos, para-empresas, contato ou home.',
       });
+    }
+
+    // Validação anti-spam básica
+    // Verificar se o email não é muito curto ou suspeito
+    if (payload.email.length < 5 || payload.email.includes('..') || payload.email.startsWith('.') || payload.email.endsWith('.')) {
+      return res.status(400).json({
+        error: 'Email inválido.',
+      });
+    }
+
+    // Verificar se o nome não é muito curto ou contém apenas números
+    if (payload.nome.length < 2 || /^\d+$/.test(payload.nome.trim())) {
+      return res.status(400).json({
+        error: 'Nome inválido.',
+      });
+    }
+
+    // Verificar mensagem (se existir) para spam básico
+    if (payload.mensagem) {
+      const mensagemLower = payload.mensagem.toLowerCase();
+      const spamKeywords = ['http://', 'https://', 'www.', '.com/', 'bit.ly', 'tinyurl'];
+      const hasSpamLink = spamKeywords.some(keyword => mensagemLower.includes(keyword));
+      
+      // Permitir apenas se não tiver muitos links ou palavras repetidas
+      if (hasSpamLink && (mensagemLower.split('http').length - 1) > 2) {
+        return res.status(400).json({
+          error: 'Mensagem contém conteúdo suspeito.',
+        });
+      }
     }
 
     // Log detalhado para debug
@@ -182,7 +240,7 @@ export default async function handler(
       'startup': 'Candidatura de Startup',
       'produtos': 'Contato - Produtos',
       'para-empresas': 'Contato - Para Empresas',
-      'contato': 'Contato - Solicitar Orçamento',
+      'contato': 'Contato - Formulário de Contato',
     };
 
     const assunto = `Novo lead - ${origemLabels[payload.origem] || payload.origem}`;
@@ -191,7 +249,7 @@ export default async function handler(
     // Enviar e-mail via Resend
     const { data, error } = await resend.emails.send({
       from: 'Linvex Landing Page <onboarding@resend.dev>',
-      to: process.env.LEAD_EMAIL || 'muriloalbuquerquemartins@gmail.com',
+      to: process.env.LEAD_EMAIL || 'limvex.software@gmail.com',
       subject: assunto,
       text: corpoEmail,
     });

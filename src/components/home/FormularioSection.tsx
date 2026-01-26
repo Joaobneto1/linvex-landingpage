@@ -5,102 +5,54 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send, FileText } from "lucide-react";
+import { Loader2, Send, FileText, CheckCircle, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { Reveal } from "@/components/ui/reveal";
 
 const formSchema = z.object({
   nome: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  whatsapp: z.string().min(10, "WhatsApp inválido"),
   email: z.string().email("E-mail inválido"),
-  empresa: z.string().min(2, "Empresa deve ter pelo menos 2 caracteres"),
-  cargo: z.string().min(2, "Cargo deve ter pelo menos 2 caracteres"),
-  tipoProjeto: z.string().min(1, "Selecione o tipo de projeto"),
-  objetivoProjeto: z.string().min(10, "Objetivo deve ter pelo menos 10 caracteres"),
-  faturamento: z.string().min(1, "Selecione o faturamento"),
+  telefone: z.string().min(10, "Telefone inválido"),
+  empresa: z.string().optional(),
+  mensagem: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
+type SubmitState = "idle" | "loading" | "success" | "error";
+
 export function FormularioSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
-  const tipoProjeto = watch("tipoProjeto");
-  const faturamento = watch("faturamento");
-
-  const formatWhatsAppMessage = (data: FormData): string => {
-    const tipoProjetoLabels: Record<string, string> = {
-      saas: "Plataforma SaaS",
-      custom: "Software sob medida",
-      ecommerce: "E-commerce",
-      mobile: "Aplicativo mobile",
-      integracao: "Integração de sistemas",
-      outro: "Outro",
-    };
-
-    const faturamentoLabels: Record<string, string> = {
-      "ate-100k": "Até R$ 100k/ano",
-      "100k-500k": "R$ 100k - R$ 500k/ano",
-      "500k-1m": "R$ 500k - R$ 1M/ano",
-      "1m-5m": "R$ 1M - R$ 5M/ano",
-      "acima-5m": "Acima de R$ 5M/ano",
-    };
-
-    let message = "Olá! Gostaria de solicitar uma análise do meu projeto.\n\n";
-    message += "📋 *DADOS DO CONTATO*\n";
-    message += `Nome: ${data.nome}\n`;
-    message += `Empresa: ${data.empresa}\n`;
-    message += `Cargo: ${data.cargo}\n`;
-    message += `WhatsApp: ${data.whatsapp}\n`;
-    message += `E-mail: ${data.email}\n\n`;
-    message += "🚀 *DETALHES DO PROJETO*\n";
-    message += `Tipo: ${tipoProjetoLabels[data.tipoProjeto] || data.tipoProjeto}\n`;
-    message += `Faturamento: ${faturamentoLabels[data.faturamento] || data.faturamento}\n\n`;
-    message += `💡 *OBJETIVO*\n${data.objetivoProjeto}\n\n`;
-    message += "Aguardo retorno para conversarmos sobre o projeto!";
-
-    return message;
-  };
-
-  const openWhatsAppFallback = (data: FormData) => {
-    const phoneNumber = "5582991709740";
-    const message = formatWhatsAppMessage(data);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
-  };
-
   const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    let timeoutId: NodeJS.Timeout | null = null;
+    setSubmitState("loading");
+    setErrorMessage("");
 
     try {
       const payload = {
-        ...data,
-        origem: "home" as const,
-        telefone: data.whatsapp,
+        nome: data.nome,
+        email: data.email,
+        telefone: data.telefone,
+        empresa: data.empresa || undefined,
+        mensagem: data.mensagem,
+        origem: "contato" as const,
       };
 
       const controller = new AbortController();
-      timeoutId = setTimeout(() => controller.abort(), 10000);
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
 
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -111,40 +63,35 @@ export function FormularioSection() {
         signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.error || "Erro ao enviar formulário");
       }
 
+      setSubmitState("success");
       toast.success("Formulário enviado com sucesso!");
-      navigate("/obrigado");
+      
+      // Reset form e redirecionar após 1.5s
+      setTimeout(() => {
+        reset();
+        navigate("/obrigado");
+      }, 1500);
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
-      toast.warning(
-        "Não foi possível enviar o formulário. Redirecionando para WhatsApp...",
-        { duration: 3000 }
-      );
-
-      setTimeout(() => {
-        openWhatsAppFallback(data);
-        toast.info(
-          "Você será direcionado para o WhatsApp. Por favor, envie a mensagem que será aberta.",
-          { duration: 5000 }
-        );
-      }, 500);
-    } finally {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      setIsSubmitting(false);
+      setSubmitState("error");
+      const message = error instanceof Error ? error.message : "Erro ao enviar formulário. Tente novamente.";
+      setErrorMessage(message);
+      toast.error(message);
     }
   };
 
-  const inputStyles = "bg-white/5 border-white/10 text-white placeholder:text-white/40 hover:border-white/20 focus:border-[#0076CE] focus:ring-2 focus:ring-[#0076CE]/20 rounded-xl transition-all duration-200 focus:bg-white/[0.08]";
-  const labelStyles = "text-white/90 font-semibold";
+  const inputStyles = "bg-white/5 border-white/10 text-white placeholder:text-white/40 hover:border-white/20 focus:border-[#0076CE] focus:ring-2 focus:ring-[#0076CE]/20 rounded-xl transition-all duration-200 focus:bg-white/[0.08] text-base";
+  const labelStyles = "text-white/90 font-semibold text-sm sm:text-base";
 
   return (
-    <section id="formulario" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+    <section id="formulario" className="py-12 sm:py-16 md:py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
       {/* Mesh Background */}
       <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
       
@@ -156,25 +103,28 @@ export function FormularioSection() {
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#0099FF]/10 rounded-full blur-[200px]" />
       <div className="absolute top-1/2 left-0 w-[350px] h-[350px] bg-[#00B8FF]/8 rounded-full blur-[180px]" />
       
-      <div className="container mx-auto max-w-3xl relative z-10">
+      <div className="container mx-auto max-w-2xl relative z-10">
         {/* Header com layout melhorado */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-6 backdrop-blur-sm">
-            <FileText className="w-4 h-4 text-white/90" />
-            <span className="text-sm font-medium text-white/90">Formulário de contato</span>
+        <Reveal direction="up" delay={0}>
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6 backdrop-blur-sm">
+              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
+              <span className="text-xs sm:text-sm font-medium text-white/90">Formulário de contato</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 md:mb-6 text-white tracking-tight px-2">
+              Entre em contato
+            </h2>
+            <p className="text-white/70 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mx-auto px-2">
+              Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-6 text-white tracking-tight">
-            Solicitar análise do projeto
-          </h2>
-          <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-xl mx-auto px-2">
-            Preencha os dados abaixo e nossa equipe entrará em contato em até 24h
-          </p>
-        </div>
+        </Reveal>
 
         {/* Form Card com design melhorado */}
-        <div className="p-5 sm:p-8 md:p-10 lg:p-12 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/[0.12] backdrop-blur-sm shadow-[0_8px_32px_rgba(0,118,206,0.15)] hover:border-white/20 transition-all duration-300">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+        <Reveal direction="up" delay={100}>
+          <div className="p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/[0.12] backdrop-blur-sm shadow-[0_8px_32px_rgba(0,118,206,0.15)] hover:border-white/20 transition-all duration-300">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5 md:space-y-6">
+              {/* Nome */}
               <div className="space-y-2">
                 <Label htmlFor="nome" className={labelStyles}>
                   Nome completo *
@@ -184,161 +134,134 @@ export function FormularioSection() {
                   {...register("nome")}
                   className={inputStyles}
                   placeholder="Seu nome completo"
+                  disabled={submitState === "loading" || submitState === "success"}
                 />
                 {errors.nome && (
-                  <p className="text-sm text-red-400">{errors.nome.message}</p>
+                  <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.nome.message}
+                  </p>
                 )}
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="whatsapp" className={labelStyles}>
-                  WhatsApp *
-                </Label>
-                <Input
-                  id="whatsapp"
-                  {...register("whatsapp")}
-                  className={inputStyles}
-                  placeholder="(11) 99999-9999"
-                />
-                {errors.whatsapp && (
-                  <p className="text-sm text-red-400">{errors.whatsapp.message}</p>
-                )}
-              </div>
-            </div>
+              {/* Email e Telefone em grid no desktop */}
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className={labelStyles}>
+                    E-mail *
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    {...register("email")}
+                    className={inputStyles}
+                    placeholder="seu@email.com"
+                    disabled={submitState === "loading" || submitState === "success"}
+                  />
+                  {errors.email && (
+                    <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
 
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="email" className={labelStyles}>
-                  E-mail *
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  {...register("email")}
-                  className={inputStyles}
-                  placeholder="seu@email.com"
-                />
-                {errors.email && (
-                  <p className="text-sm text-red-400">{errors.email.message}</p>
-                )}
+                <div className="space-y-2">
+                  <Label htmlFor="telefone" className={labelStyles}>
+                    Telefone *
+                  </Label>
+                  <Input
+                    id="telefone"
+                    type="tel"
+                    {...register("telefone")}
+                    className={inputStyles}
+                    placeholder="(11) 99999-9999"
+                    disabled={submitState === "loading" || submitState === "success"}
+                  />
+                  {errors.telefone && (
+                    <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {errors.telefone.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
+              {/* Empresa (opcional) */}
               <div className="space-y-2">
                 <Label htmlFor="empresa" className={labelStyles}>
-                  Empresa *
+                  Empresa <span className="text-white/50 text-xs">(opcional)</span>
                 </Label>
                 <Input
                   id="empresa"
                   {...register("empresa")}
                   className={inputStyles}
                   placeholder="Nome da empresa"
+                  disabled={submitState === "loading" || submitState === "success"}
                 />
-                {errors.empresa && (
-                  <p className="text-sm text-red-400">{errors.empresa.message}</p>
-                )}
               </div>
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+              {/* Mensagem */}
               <div className="space-y-2">
-                <Label htmlFor="cargo" className={labelStyles}>
-                  Cargo *
+                <Label htmlFor="mensagem" className={labelStyles}>
+                  Mensagem *
                 </Label>
-                <Input
-                  id="cargo"
-                  {...register("cargo")}
-                  className={inputStyles}
-                  placeholder="Seu cargo"
+                <Textarea
+                  id="mensagem"
+                  {...register("mensagem")}
+                  className={`${inputStyles} min-h-[120px] sm:min-h-[140px] resize-none`}
+                  placeholder="Conte-nos sobre seu projeto ou dúvida..."
+                  disabled={submitState === "loading" || submitState === "success"}
                 />
-                {errors.cargo && (
-                  <p className="text-sm text-red-400">{errors.cargo.message}</p>
+                {errors.mensagem && (
+                  <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.mensagem.message}
+                  </p>
                 )}
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="tipoProjeto" className={labelStyles}>
-                  Tipo de projeto *
-                </Label>
-                <Select
-                  value={tipoProjeto}
-                  onValueChange={(value) => setValue("tipoProjeto", value)}
-                >
-                  <SelectTrigger className={inputStyles}>
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#030014] border-white/10 text-white">
-                    <SelectItem value="saas">Plataforma SaaS</SelectItem>
-                    <SelectItem value="custom">Software sob medida</SelectItem>
-                    <SelectItem value="ecommerce">E-commerce</SelectItem>
-                    <SelectItem value="mobile">Aplicativo mobile</SelectItem>
-                    <SelectItem value="integracao">Integração de sistemas</SelectItem>
-                    <SelectItem value="outro">Outro</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.tipoProjeto && (
-                  <p className="text-sm text-red-400">{errors.tipoProjeto.message}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="objetivoProjeto" className={labelStyles}>
-                Objetivo do projeto *
-              </Label>
-              <Textarea
-                id="objetivoProjeto"
-                {...register("objetivoProjeto")}
-                className={`${inputStyles} min-h-[120px]`}
-                placeholder="Descreva o objetivo principal do projeto..."
-              />
-              {errors.objetivoProjeto && (
-                <p className="text-sm text-red-400">{errors.objetivoProjeto.message}</p>
+              {/* Mensagem de erro geral */}
+              {submitState === "error" && errorMessage && (
+                <div className="p-3 sm:p-4 rounded-lg bg-red-500/10 border border-red-500/30 flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs sm:text-sm text-red-400">{errorMessage}</p>
+                </div>
               )}
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="faturamento" className={labelStyles}>
-                Faturamento *
-              </Label>
-              <Select
-                value={faturamento}
-                onValueChange={(value) => setValue("faturamento", value)}
+              {/* Mensagem de sucesso */}
+              {submitState === "success" && (
+                <div className="p-3 sm:p-4 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
+                  <p className="text-xs sm:text-sm text-green-400">Formulário enviado com sucesso! Redirecionando...</p>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={submitState === "loading" || submitState === "success"}
+                className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-sm sm:text-base md:text-lg py-4 sm:py-5 md:py-6 h-auto min-h-[48px] font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <SelectTrigger className={inputStyles}>
-                  <SelectValue placeholder="Selecione" />
-                </SelectTrigger>
-                <SelectContent className="bg-[#030014] border-white/10 text-white">
-                  <SelectItem value="ate-100k">Até R$ 100k/ano</SelectItem>
-                  <SelectItem value="100k-500k">R$ 100k - R$ 500k/ano</SelectItem>
-                  <SelectItem value="500k-1m">R$ 500k - R$ 1M/ano</SelectItem>
-                  <SelectItem value="1m-5m">R$ 1M - R$ 5M/ano</SelectItem>
-                  <SelectItem value="acima-5m">Acima de R$ 5M/ano</SelectItem>
-                </SelectContent>
-              </Select>
-              {errors.faturamento && (
-                <p className="text-sm text-red-400">{errors.faturamento.message}</p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg py-5 sm:py-6 md:py-7 h-auto min-h-[48px] font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.3)] hover:shadow-[0_0_50px_rgba(0,118,206,0.5)] transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
-                  <span>Enviando...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                  <span className="whitespace-nowrap">Solicitar análise do projeto</span>
-                </>
-              )}
-            </Button>
-          </form>
-        </div>
+                {submitState === "loading" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                    <span>Enviando...</span>
+                  </>
+                ) : submitState === "success" ? (
+                  <>
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <span>Enviado!</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                    <span>Enviar mensagem</span>
+                  </>
+                )}
+              </Button>
+            </form>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
