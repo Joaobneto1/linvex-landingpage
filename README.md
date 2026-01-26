@@ -183,7 +183,7 @@ Os dados são enviados para `/api/lead` que:
 2. Aplica validação anti-spam básica
 3. Verifica rate limit
 4. Envia e-mail via Resend para `limvex.software@gmail.com`
-5. Retorna sucesso/erro
+5. Retorna sucesso/erro.
 
 ## 🚀 Deploy
 
