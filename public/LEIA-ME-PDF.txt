@@ -1,0 +1,14 @@
+INSTRUÇÕES PARA ADICIONAR O PDF DA APRESENTAÇÃO
+=================================================
+
+Para habilitar o download da apresentação:
+
+1. Adicione o arquivo PDF da apresentação nesta pasta (public/)
+2. Renomeie o arquivo para: apresentacao-limvex.pdf
+3. O arquivo deve estar acessível em: /apresentacao-limvex.pdf
+
+O botão de download só aparecerá se a variável de ambiente
+VITE_ENABLE_PDF_DOWNLOAD estiver configurada como "true".
+
+Para testar localmente, crie um arquivo .env na raiz do projeto com:
+VITE_ENABLE_PDF_DOWNLOAD=true

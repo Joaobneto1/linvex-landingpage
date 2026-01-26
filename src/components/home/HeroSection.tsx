@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { Reveal } from "@/components/ui/reveal";
 
 export function HeroSection() {
-  const whatsappLink = getWhatsAppLink("hero");
-  
+  const scrollToForm = () => {
+    const form = document.getElementById("formulario");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Symmetric pillar heights (percent). Tall at edges, low at center.
   const pillars = [92, 84, 78, 70, 62, 54, 46, 34, 18, 34, 46, 54, 62, 70, 78, 84, 92];
 
@@ -44,7 +49,7 @@ export function HeroSection() {
               transform: scale(1.03);
             }
           }
-          
+
           .animate-fadeInUp {
             animation: fadeInUp 0.8s ease-out forwards;
           }
@@ -55,7 +60,7 @@ export function HeroSection() {
         {/* ================== BACKGROUND ================== */}
         {/* Mesh Background */}
         <div className="absolute inset-0 tech-mesh-pattern opacity-100 -z-30" />
-        
+
         {/* Asymmetric Grid */}
         <div className="absolute inset-0 asymmetric-grid opacity-[0.15] -z-30" />
 
@@ -107,14 +112,14 @@ export function HeroSection() {
           <div className={`mx-auto text-center ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}>
             {/* Logo/Nome LIMVEX */}
             <div className="mb-6">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
                 LIMVEX
               </h2>
             </div>
 
             {/* Badge */}
-            <span 
-              style={{ animationDelay: '100ms' }} 
+            <span
+              style={{ animationDelay: '100ms' }}
               className={`inline-flex items-center gap-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/30 px-3 py-1 text-[11px] uppercase tracking-wider text-white/90 backdrop-blur ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               <span className="relative flex h-1.5 w-1.5">
@@ -125,35 +130,33 @@ export function HeroSection() {
             </span>
 
             {/* Main Headline */}
-            <h1 
-              style={{ animationDelay: '200ms' }} 
+            <h1
+              style={{ animationDelay: '200ms' }}
               className={`mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               Transformamos ideias em soluções digitais que geram resultado
             </h1>
 
             {/* Subheadline */}
-            <p 
-              style={{ animationDelay: '300ms' }} 
+            <p
+              style={{ animationDelay: '300ms' }}
               className={`mx-auto mt-5 max-w-2xl text-balance text-white/75 md:text-lg lg:text-xl leading-relaxed ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               Desenvolvemos SaaS e software personalizado com foco em prazo, qualidade e escalabilidade.
             </p>
 
             {/* CTA Buttons */}
-            <div 
-              style={{ animationDelay: '400ms' }} 
+            <div
+              style={{ animationDelay: '400ms' }}
               className={`mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               <Button
-                asChild
+                onClick={scrollToForm}
                 size="lg"
                 className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 md:py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
               >
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                  Falar com especialista
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-                </a>
+                Entrar em contato
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
               </Button>
               <Button
                 asChild

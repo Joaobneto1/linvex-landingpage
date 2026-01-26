@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { Reveal } from "@/components/ui/reveal";
 
 const items = [
   "Empresas que querem escalar com tecnologia",
@@ -10,7 +10,12 @@ const items = [
 ];
 
 export function ParaQuemSection() {
-  const whatsappLink = getWhatsAppLink("para-quem");
+  const scrollToForm = () => {
+    const form = document.getElementById("formulario");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -33,16 +38,16 @@ export function ParaQuemSection() {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button
-            asChild
-            className="bg-[#0076CE] hover:bg-[#0099FF] hover:shadow-[0_0_20px_rgba(0,118,206,0.4)] text-white border-0 px-8 py-6 h-auto transition-all duration-200 rounded-lg font-semibold"
-          >
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="Ver se faz sentido para mim no WhatsApp">
+        <Reveal direction="up" delay={200}>
+          <div className="text-center mt-12">
+            <Button
+              onClick={scrollToForm}
+              className="bg-[#0076CE] hover:bg-[#0099FF] hover:shadow-[0_0_20px_rgba(0,118,206,0.4)] text-white border-0 px-8 py-6 h-auto transition-all duration-200 rounded-lg font-semibold"
+            >
               Ver se faz sentido para mim
-            </a>
-          </Button>
-        </div>
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

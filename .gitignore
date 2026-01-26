@@ -31,3 +31,8 @@ dist-ssr
 .cursor/
 .codex/
 .gemini/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
