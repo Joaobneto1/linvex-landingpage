@@ -15,6 +15,7 @@ interface LeadPayload {
   empresa?: string;
   telefone?: string;
   cargo?: string;
+  segmento?: string;
   mensagem?: string;
   descricao?: string;
   origem: 'startup' | 'produtos' | 'para-empresas' | 'contato';
@@ -38,10 +39,6 @@ function formatEmailBody(payload: LeadPayload): string {
   body += `Nome: ${payload.nome}\n`;
   body += `Email: ${payload.email}\n`;
 
-  if (payload.empresa) {
-    body += `Empresa: ${payload.empresa}\n`;
-  }
-
   if (payload.telefone) {
     body += `Telefone: ${payload.telefone}\n`;
   }
@@ -52,6 +49,14 @@ function formatEmailBody(payload: LeadPayload): string {
 
   if (payload.cargo) {
     body += `Cargo: ${payload.cargo}\n`;
+  }
+
+  if (payload.segmento) {
+    body += `Segmento da empresa: ${payload.segmento}\n`;
+  }
+
+  if (payload.empresa) {
+    body += `Empresa: ${payload.empresa}\n`;
   }
 
   if (payload.produto) {
@@ -136,24 +141,37 @@ export default async function handler(
 ) {
   // Permitir apenas método POST
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido. Use POST.' });
+    return res.status(405).json({ ok: false, error: 'Método não permitido. Use POST.' });
   }
 
   try {
-    // Parse do body (Vercel já faz o parse automático para JSON)
+    // Parse do body
     let payload: LeadPayload;
 
-    if (typeof req.body === 'string') {
-      payload = JSON.parse(req.body);
-    } else {
-      payload = req.body as LeadPayload;
-    }
-
-    // Validação básica
-    if (!payload.nome || !payload.email) {
+    try {
+      if (typeof req.body === 'string') {
+        payload = JSON.parse(req.body);
+      } else if (req.body && typeof req.body === 'object') {
+        payload = req.body as LeadPayload;
+      } else {
+        return res.status(400).json({
+          ok: false,
+          error: 'Body inválido ou ausente. JSON esperado.',
+        });
+      }
+    } catch (parseError) {
+      console.error('[Lead API] Erro ao fazer parse do body:', parseError);
       return res.status(400).json({
         ok: false,
-        error: 'Campos obrigatórios faltando: nome e email são necessários.',
+        error: 'Body inválido. JSON malformado.',
+      });
+    }
+
+    // Validação básica - campos obrigatórios
+    if (!payload.nome || !payload.email || !payload.telefone) {
+      return res.status(400).json({
+        ok: false,
+        error: 'Campos obrigatórios faltando: nome, email e telefone são necessários.',
       });
     }
 
@@ -255,38 +273,67 @@ export default async function handler(
 
     // Enviar e-mail via Resend
     console.log('[Lead API] Tentando enviar email via Resend...');
-    const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: EMAIL_TO,
-      subject: assunto,
-      html: `<pre style="font-family: monospace; white-space: pre-wrap;">${corpoEmail.replace(/\n/g, '<br>')}</pre>`,
-      text: corpoEmail,
-    });
+    console.log('[Lead API] From: onboarding@resend.dev');
+    console.log('[Lead API] To:', EMAIL_TO);
+    console.log('[Lead API] Subject:', assunto);
 
-    if (error) {
-      console.error('[Lead API] EMAIL SEND ERROR:', JSON.stringify(error, null, 2));
+    try {
+      const { data, error } = await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: EMAIL_TO,
+        subject: assunto,
+        html: `<div style="font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 20px; border-radius: 8px; line-height: 1.6;">${corpoEmail.replace(/\n/g, '<br>')}</div>`,
+        text: corpoEmail,
+      });
+
+      if (error) {
+        console.error('[Lead API] EMAIL SEND ERROR:', JSON.stringify(error, null, 2));
+        return res.status(500).json({
+          ok: false,
+          error: error.message || 'Erro ao enviar e-mail. Verifique as configurações do servidor.',
+          details: IS_DEV ? JSON.stringify(error, null, 2) : undefined,
+        });
+      }
+
+      console.log('[Lead API] EMAIL SENT SUCCESSFULLY');
+      console.log('[Lead API] Message ID:', data?.id);
+
+      // Registrar envio no rate limit
+      try {
+        await registerEmailSend();
+      } catch (rateLimitError) {
+        console.error('[Lead API] Erro ao registrar rate limit (não crítico):', rateLimitError);
+        // Não falhar o envio por causa do rate limit
+      }
+
+      // Retornar sucesso
+      return res.status(200).json({ ok: true, messageId: data?.id });
+    } catch (sendError) {
+      console.error('[Lead API] EXCEPTION ao enviar email:', sendError);
+      const errorDetails = sendError instanceof Error ? {
+        message: sendError.message,
+        stack: sendError.stack,
+        name: sendError.name,
+      } : String(sendError);
+
       return res.status(500).json({
         ok: false,
-        error: error.message || 'Erro ao enviar e-mail. Verifique as configurações do servidor.',
-        details: IS_DEV ? error : undefined,
+        error: sendError instanceof Error ? sendError.message : 'Erro inesperado ao enviar e-mail.',
+        details: IS_DEV ? JSON.stringify(errorDetails, null, 2) : undefined,
       });
     }
-
-    console.log('[Lead API] EMAIL SENT SUCCESSFULLY');
-    console.log('[Lead API] Message ID:', data?.id);
-
-    // Registrar envio no rate limit
-    await registerEmailSend();
-
-    // Retornar sucesso
-    return res.status(200).json({ ok: true, messageId: data?.id });
   } catch (error) {
-    console.error('[Lead API] Erro inesperado:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+    console.error('[Lead API] Erro inesperado no handler:', error);
+    const errorDetails = error instanceof Error ? {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+    } : String(error);
+
     return res.status(500).json({
       ok: false,
       error: 'Erro interno ao processar o formulário.',
-      details: IS_DEV ? errorMessage : undefined,
+      details: IS_DEV ? JSON.stringify(errorDetails, null, 2) : undefined,
     });
   }
 }

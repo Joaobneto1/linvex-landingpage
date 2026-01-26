@@ -65,19 +65,29 @@ export async function canSendEmail(): Promise<boolean> {
     // Tentar usar Vercel KV se disponível
     if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
       try {
-        const { kv } = await import('@vercel/kv');
-        const currentMonth = getCurrentMonth();
-        const key = `email-count-${currentMonth}`;
-        const count = await kv.get<number>(key) || 0;
-        return count < RATE_LIMIT;
+        // Tentar importar @vercel/kv dinamicamente
+        const kvModule = await import('@vercel/kv').catch(() => null);
+        if (kvModule) {
+          const { kv } = kvModule;
+          const currentMonth = getCurrentMonth();
+          const key = `email-count-${currentMonth}`;
+          const count = await kv.get<number>(key) || 0;
+          return count < RATE_LIMIT;
+        }
       } catch (error) {
-        console.warn('[EmailRateLimit] KV não disponível, usando fallback local');
+        console.warn('[EmailRateLimit] KV não disponível, usando fallback local:', error instanceof Error ? error.message : String(error));
       }
     }
 
     // Fallback: usar arquivo local
-    const counter = await readLocalCounter();
-    return counter.count < RATE_LIMIT;
+    try {
+      const counter = await readLocalCounter();
+      return counter.count < RATE_LIMIT;
+    } catch (error) {
+      console.warn('[EmailRateLimit] Erro ao ler contador local, permitindo envio:', error instanceof Error ? error.message : String(error));
+      // Em caso de erro, permitir envio (fail-open)
+      return true;
+    }
   } catch (error) {
     console.error('[EmailRateLimit] Erro ao verificar rate limit:', error);
     // Em caso de erro, permitir envio (fail-open)
@@ -93,26 +103,35 @@ export async function registerEmailSend(): Promise<void> {
     // Tentar usar Vercel KV se disponível
     if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
       try {
-        const { kv } = await import('@vercel/kv');
-        const currentMonth = getCurrentMonth();
-        const key = `email-count-${currentMonth}`;
-        const count = await kv.get<number>(key) || 0;
-        await kv.set(key, count + 1, { ex: 60 * 60 * 24 * 32 }); // Expira em 32 dias
-        return;
+        // Tentar importar @vercel/kv dinamicamente
+        const kvModule = await import('@vercel/kv').catch(() => null);
+        if (kvModule) {
+          const { kv } = kvModule;
+          const currentMonth = getCurrentMonth();
+          const key = `email-count-${currentMonth}`;
+          const count = await kv.get<number>(key) || 0;
+          await kv.set(key, count + 1, { ex: 60 * 60 * 24 * 32 }); // Expira em 32 dias
+          return;
+        }
       } catch (error) {
-        console.warn('[EmailRateLimit] KV não disponível, usando fallback local');
+        console.warn('[EmailRateLimit] KV não disponível, usando fallback local:', error instanceof Error ? error.message : String(error));
       }
     }
 
     // Fallback: usar arquivo local
-    const counter = await readLocalCounter();
-    const newCounter: EmailCounter = {
-      month: getCurrentMonth(),
-      count: counter.month === getCurrentMonth() ? counter.count + 1 : 1,
-    };
-    await writeLocalCounter(newCounter);
+    try {
+      const counter = await readLocalCounter();
+      const newCounter: EmailCounter = {
+        month: getCurrentMonth(),
+        count: counter.month === getCurrentMonth() ? counter.count + 1 : 1,
+      };
+      await writeLocalCounter(newCounter);
+    } catch (error) {
+      console.warn('[EmailRateLimit] Erro ao escrever contador local (não crítico):', error instanceof Error ? error.message : String(error));
+    }
   } catch (error) {
-    console.error('[EmailRateLimit] Erro ao registrar envio:', error);
+    console.error('[EmailRateLimit] Erro ao registrar envio (não crítico):', error);
+    // Não lançar erro - rate limiting não deve quebrar o envio
   }
 }
 

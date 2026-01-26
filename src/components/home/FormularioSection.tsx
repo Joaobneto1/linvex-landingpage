@@ -1,21 +1,45 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, Send, FileText, CheckCircle, AlertCircle, Download, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/ui/reveal";
+
+// Opções de segmento da empresa
+const SEGMENTOS_EMPRESA = [
+  "Tecnologia e Software",
+  "E-commerce e Varejo",
+  "Saúde e Bem-estar",
+  "Educação",
+  "Financeiro e Fintech",
+  "Imobiliário",
+  "Alimentação e Bebidas",
+  "Automotivo",
+  "Manufatura e Indústria",
+  "Serviços Profissionais",
+  "Marketing e Publicidade",
+  "Logística e Transporte",
+  "Energia e Sustentabilidade",
+  "Turismo e Hospitalidade",
+  "Agronegócio",
+  "Construção Civil",
+  "Telecomunicações",
+  "Entretenimento e Mídia",
+  "Consultoria",
+  "Outro",
+] as const;
 
 const formSchema = z.object({
   nome: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
   email: z.string().email("E-mail inválido"),
   telefone: z.string().min(10, "Telefone inválido"),
-  empresa: z.string().optional(),
-  mensagem: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+  cargo: z.string().optional(),
+  segmento: z.string().min(1, "Selecione o segmento da empresa"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -32,6 +56,7 @@ export function FormularioSection() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     reset,
   } = useForm<FormData>({
@@ -47,8 +72,8 @@ export function FormularioSection() {
         nome: data.nome,
         email: data.email,
         telefone: data.telefone,
-        empresa: data.empresa || undefined,
-        mensagem: data.mensagem,
+        cargo: data.cargo || undefined,
+        segmento: data.segmento,
         origem: "contato" as const,
       };
 
@@ -185,13 +210,13 @@ export function FormularioSection() {
               {/* Nome */}
               <div className="space-y-2">
                 <Label htmlFor="nome" className={labelStyles}>
-                  Nome completo *
+                  Nome *
                 </Label>
                 <Input
                   id="nome"
                   {...register("nome")}
                   className={inputStyles}
-                  placeholder="Seu nome completo"
+                  placeholder="Seu nome"
                   disabled={submitState === "loading" || submitState === "success"}
                 />
                 {errors.nome && (
@@ -245,38 +270,58 @@ export function FormularioSection() {
                 </div>
               </div>
 
-              {/* Empresa (opcional) */}
-              <div className="space-y-2">
-                <Label htmlFor="empresa" className={labelStyles}>
-                  Empresa <span className="text-white/50 text-xs">(opcional)</span>
-                </Label>
-                <Input
-                  id="empresa"
-                  {...register("empresa")}
-                  className={inputStyles}
-                  placeholder="Nome da empresa"
-                  disabled={submitState === "loading" || submitState === "success"}
-                />
-              </div>
+              {/* Cargo e Segmento em grid no desktop */}
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                <div className="space-y-2">
+                  <Label htmlFor="cargo" className={labelStyles}>
+                    Cargo <span className="text-white/50 text-xs">(opcional)</span>
+                  </Label>
+                  <Input
+                    id="cargo"
+                    {...register("cargo")}
+                    className={inputStyles}
+                    placeholder="Seu cargo"
+                    disabled={submitState === "loading" || submitState === "success"}
+                  />
+                </div>
 
-              {/* Mensagem */}
-              <div className="space-y-2">
-                <Label htmlFor="mensagem" className={labelStyles}>
-                  Mensagem *
-                </Label>
-                <Textarea
-                  id="mensagem"
-                  {...register("mensagem")}
-                  className={`${inputStyles} min-h-[120px] sm:min-h-[140px] resize-none`}
-                  placeholder="Conte-nos sobre seu projeto ou dúvida..."
-                  disabled={submitState === "loading" || submitState === "success"}
-                />
-                {errors.mensagem && (
-                  <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    {errors.mensagem.message}
-                  </p>
-                )}
+                <div className="space-y-2">
+                  <Label htmlFor="segmento" className={labelStyles}>
+                    Segmento da empresa *
+                  </Label>
+                  <Controller
+                    name="segmento"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        disabled={submitState === "loading" || submitState === "success"}
+                      >
+                        <SelectTrigger className={`${inputStyles} h-auto py-3`}>
+                          <SelectValue placeholder="Selecione o segmento" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-[#0a0a1a] border-white/10 text-white max-h-[300px]">
+                          {SEGMENTOS_EMPRESA.map((segmento) => (
+                            <SelectItem
+                              key={segmento}
+                              value={segmento}
+                              className="focus:bg-[#0076CE]/20 focus:text-white cursor-pointer hover:bg-white/5"
+                            >
+                              {segmento}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  {errors.segmento && (
+                    <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {errors.segmento.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
               {/* Mensagem de erro geral */}
