@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageCircle, Zap, Clock, CheckCircle } from "lucide-react";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { ArrowRight, Zap, Clock, CheckCircle } from "lucide-react";
+import { Reveal } from "@/components/ui/reveal";
 
 export function ChamadaFinalSection() {
   const scrollToForm = () => {
@@ -9,8 +9,6 @@ export function ChamadaFinalSection() {
       form.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const whatsappLink = getWhatsAppLink("chamada-final");
 
   return (
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
@@ -53,30 +51,20 @@ export function ChamadaFinalSection() {
         </div>
         
         {/* CTA Buttons com layout melhorado */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <Button
-            asChild
-            size="lg"
-            className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-8 sm:px-10 md:px-12 py-6 sm:py-7 md:py-8 h-auto font-semibold rounded-xl shadow-[0_0_40px_rgba(0,118,206,0.4)] hover:shadow-[0_0_60px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto hover:scale-105"
-          >
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-              <MessageCircle className="mr-2 w-5 h-5" />
-              Falar agora no WhatsApp
-              <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-          </Button>
-          <Button
-            onClick={scrollToForm}
-            size="lg"
-            variant="outline"
-            className="group border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 md:py-8 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto hover:scale-105"
-          >
-            <span className="flex items-center justify-center">
-              Preferir formulário
-              <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-            </span>
-          </Button>
-        </div>
+        <Reveal direction="up" delay={100}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Button
+              onClick={scrollToForm}
+              size="lg"
+              className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-8 sm:px-10 md:px-12 py-6 sm:py-7 md:py-8 h-auto font-semibold rounded-xl shadow-[0_0_40px_rgba(0,118,206,0.4)] hover:shadow-[0_0_60px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto hover:scale-105"
+            >
+              <span className="flex items-center justify-center">
+                Entrar em contato
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+              </span>
+            </Button>
+          </div>
+        </Reveal>
         
         {/* Trust Indicators com design melhorado */}
         <div className="flex flex-wrap justify-center gap-8 pt-10 border-t border-white/[0.08]">

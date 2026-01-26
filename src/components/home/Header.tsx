@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
-import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const whatsappLink = getWhatsAppLink("hero");
 
   const scrollToForm = () => {
     const form = document.getElementById("formulario");
@@ -26,19 +24,11 @@ export function Header() {
 
           {/* Desktop Navigation - à direita */}
           <nav className="hidden md:flex items-center gap-8 absolute right-0">
-            <button
-              onClick={scrollToForm}
-              className="text-sm text-white/60 hover:text-white/80 transition-colors"
-            >
-              Preferir formulário
-            </button>
             <Button
-              asChild
+              onClick={scrollToForm}
               className="bg-[#0076CE] hover:bg-[#0099FF] text-white"
             >
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="Falar com especialista no WhatsApp">
-                Falar com especialista
-              </a>
+              Entrar em contato
             </Button>
           </nav>
 
@@ -56,19 +46,11 @@ export function Header() {
         {menuOpen && (
           <div className="md:hidden pb-4 border-t border-white/10 mt-2 pt-4">
             <div className="flex flex-col gap-4">
-              <button
-                onClick={scrollToForm}
-                className="text-sm text-white/60 hover:text-white/80 transition-colors text-left"
-              >
-                Preferir formulário
-              </button>
               <Button
-                asChild
+                onClick={scrollToForm}
                 className="bg-[#0076CE] hover:bg-[#0099FF] text-white w-full"
               >
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="Falar com especialista no WhatsApp">
-                  Falar com especialista
-                </a>
+                Entrar em contato
               </Button>
             </div>
           </div>
