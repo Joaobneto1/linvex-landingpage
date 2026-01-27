@@ -63,7 +63,7 @@ async function createDevServer() {
     console.log(`🚀 Servidor de desenvolvimento rodando em http://localhost:${port}`);
     console.log(`📧 API disponível em http://localhost:${port}/api/lead`);
     console.log(`📝 RESEND_API_KEY: ${process.env.RESEND_API_KEY ? '✅ Configurada' : '❌ Não configurada'}`);
-    console.log(`📧 EMAIL_TO: ${process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'limvex.software@gmail.com'}`);
+    console.log(`📧 EMAIL_TO: ${process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'linvex.software@gmail.com'}`);
   });
 }
 

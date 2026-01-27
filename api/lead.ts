@@ -46,12 +46,13 @@ async function canSendEmail(): Promise<boolean> {
     // Tentar usar Vercel KV se disponível
     if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
       try {
+        // @ts-expect-error - @vercel/kv pode não estar instalado, mas o código trata isso
         const kvModule = await import('@vercel/kv').catch(() => null);
-        if (kvModule) {
+        if (kvModule && kvModule.kv) {
           const { kv } = kvModule;
           const currentMonth = getCurrentMonth();
           const key = `email-count-${currentMonth}`;
-          const count = await kv.get<number>(key) || 0;
+          const count = (await kv.get(key) as number | null) || 0;
           return count < RATE_LIMIT;
         }
       } catch (error) {
@@ -78,12 +79,13 @@ async function registerEmailSend(): Promise<void> {
     // Tentar usar Vercel KV se disponível
     if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
       try {
+        // @ts-expect-error - @vercel/kv pode não estar instalado, mas o código trata isso
         const kvModule = await import('@vercel/kv').catch(() => null);
-        if (kvModule) {
+        if (kvModule && kvModule.kv) {
           const { kv } = kvModule;
           const currentMonth = getCurrentMonth();
           const key = `email-count-${currentMonth}`;
-          const count = await kv.get<number>(key) || 0;
+          const count = (await kv.get(key) as number | null) || 0;
           await kv.set(key, count + 1, { ex: 60 * 60 * 24 * 32 }); // Expira em 32 dias
           return;
         }
@@ -111,7 +113,7 @@ async function registerEmailSend(): Promise<void> {
 
 // API key do Resend - usar variável de ambiente ou fallback
 const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_6WEoM8uW_ExoKjqHMM7zf5vwcqcF2sHsM';
-const EMAIL_TO = process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'limvex.software@gmail.com';
+const EMAIL_TO = process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'linvex.software@gmail.com';
 // Email remetente - usar variável de ambiente ou fallback para domínio verificado
 const EMAIL_FROM = process.env.RESEND_FROM_EMAIL || 'noreply@limvex.com';
 const IS_DEV = process.env.NODE_ENV === 'development' || !process.env.VERCEL;
