@@ -83,6 +83,7 @@ Configure as seguintes variáveis no painel da Vercel:
 
 - `RESEND_API_KEY` - API key do Resend para envio de e-mails (obrigatório para produção)
 - `LEAD_EMAIL` - E-mail de destino para receber os leads (padrão: `limvex.software@gmail.com`)
+- `RESEND_FROM_EMAIL` - E-mail remetente (padrão: `noreply@limvex.com`). **IMPORTANTE**: Use um e-mail do seu domínio verificado no Resend
 - `VITE_ENABLE_PDF_DOWNLOAD` - Habilitar botão de download do PDF (padrão: `false`)
 - `KV_REST_API_URL` - URL do Vercel KV para rate limiting (opcional, mas recomendado)
 - `KV_REST_API_TOKEN` - Token do Vercel KV para rate limiting (opcional, mas recomendado)
@@ -93,8 +94,17 @@ O sistema utiliza **Resend** como provedor de e-mail. Para configurar:
 
 1. Crie uma conta em [Resend](https://resend.com)
 2. Obtenha sua API key
-3. Configure a variável `RESEND_API_KEY` na Vercel
-4. O e-mail padrão de destino é `limvex.software@gmail.com`, mas pode ser alterado via `LEAD_EMAIL`
+3. **Configure seu domínio no Resend** (obrigatório para produção):
+   - Acesse [resend.com/domains](https://resend.com/domains)
+   - Clique em "Add Domain"
+   - Adicione seu domínio (ex: `limvex.com`)
+   - Configure os registros DNS conforme instruções do Resend
+   - Aguarde a verificação (pode levar alguns minutos)
+4. Configure a variável `RESEND_API_KEY` na Vercel
+5. Configure a variável `RESEND_FROM_EMAIL` na Vercel com um e-mail do seu domínio (ex: `noreply@limvex.com` ou `contato@limvex.com`)
+6. O e-mail padrão de destino é `limvex.software@gmail.com`, mas pode ser alterado via `LEAD_EMAIL`
+
+**⚠️ IMPORTANTE**: Sem verificar um domínio no Resend, você só poderá enviar e-mails para o próprio endereço da sua conta. Para enviar para qualquer destinatário, é necessário verificar um domínio.
 
 ### Rate Limiting
 

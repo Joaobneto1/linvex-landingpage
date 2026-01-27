@@ -112,6 +112,8 @@ async function registerEmailSend(): Promise<void> {
 // API key do Resend - usar variável de ambiente ou fallback
 const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_6WEoM8uW_ExoKjqHMM7zf5vwcqcF2sHsM';
 const EMAIL_TO = process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'limvex.software@gmail.com';
+// Email remetente - usar variável de ambiente ou fallback para domínio verificado
+const EMAIL_FROM = process.env.RESEND_FROM_EMAIL || 'noreply@limvex.com';
 const IS_DEV = process.env.NODE_ENV === 'development' || !process.env.VERCEL;
 
 const resend = new Resend(RESEND_API_KEY);
@@ -395,7 +397,7 @@ export default async function handler(
 
     // Enviar e-mail via Resend
     console.log('[Lead API] ========== ENVIANDO EMAIL ==========');
-    console.log('[Lead API] From: onboarding@resend.dev');
+    console.log('[Lead API] From:', EMAIL_FROM);
     console.log('[Lead API] To:', EMAIL_TO);
     console.log('[Lead API] Subject:', assunto);
     console.log('[Lead API] Body length:', corpoEmail.length);
@@ -403,7 +405,7 @@ export default async function handler(
     try {
       // Preparar dados do email
       const emailData = {
-        from: 'onboarding@resend.dev',
+        from: EMAIL_FROM,
         to: EMAIL_TO,
         subject: assunto,
         html: `<div style="font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 20px; border-radius: 8px; line-height: 1.6;">${corpoEmail.replace(/\n/g, '<br>')}</div>`,
