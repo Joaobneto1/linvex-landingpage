@@ -146,7 +146,7 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
-// Função para formatar email em HTML profissional
+// Função para formatar email em HTML premium
 function formatEmailHtml(payload: LeadPayload): string {
   const origemLabels: Record<string, string> = {
     'startup': 'Candidatura de Startup',
@@ -159,13 +159,50 @@ function formatEmailHtml(payload: LeadPayload): string {
   const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
   const origemLabel = origemLabels[payload.origem] || payload.origem;
 
-  // Função auxiliar para criar campos
-  const createField = (label: string, value: string | undefined) => {
+  // Função auxiliar para criar campos premium
+  const createField = (label: string, value: string | undefined, icon?: string) => {
     if (!value) return '';
     return `
       <tr>
-        <td style="padding: 8px 0; font-weight: 600; color: #374151; width: 180px;">${escapeHtml(label)}:</td>
-        <td style="padding: 8px 0; color: #1f2937;">${escapeHtml(value)}</td>
+        <td style="padding: 12px 0; vertical-align: top;">
+          <table role="presentation" style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 0; width: 200px;">
+                <div style="display: inline-block; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #f8fafc; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                  ${icon ? `${icon} ` : ''}${escapeHtml(label)}
+                </div>
+              </td>
+              <td style="padding: 0 0 0 16px; vertical-align: middle;">
+                <div style="color: #0f172a; font-size: 15px; font-weight: 500; line-height: 1.5;">
+                  ${escapeHtml(value)}
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    `;
+  };
+
+  // Função para criar seção de mensagem premium
+  const createMessageSection = (title: string, content: string, icon: string) => {
+    return `
+      <tr>
+        <td style="padding: 0 0 32px 0;">
+          <div style="position: relative; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);">
+            <div style="display: flex; align-items: center; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 2px solid #e2e8f0;">
+              <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 20px;">
+                ${icon}
+              </div>
+              <h3 style="margin: 0; color: #0f172a; font-size: 18px; font-weight: 700; letter-spacing: -0.5px;">
+                ${escapeHtml(title)}
+              </h3>
+            </div>
+            <div style="color: #475569; font-size: 15px; line-height: 1.7; white-space: pre-wrap; font-family: 'Georgia', 'Times New Roman', serif;">
+              ${escapeHtml(content)}
+            </div>
+          </div>
+        </td>
       </tr>
     `;
   };
@@ -177,114 +214,160 @@ function formatEmailHtml(payload: LeadPayload): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Novo Lead - ${escapeHtml(origemLabel)}</title>
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td {font-family: Arial, sans-serif !important;}
+  </style>
+  <![endif]-->
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6; padding: 20px;">
+<body style="margin: 0; padding: 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); background-attachment: fixed;">
+  <!-- Background Pattern -->
+  <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0.03; background-image: radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0); background-size: 40px 40px; pointer-events: none;"></div>
+  
+  <table role="presentation" style="width: 100%; border-collapse: collapse; min-height: 100vh; padding: 40px 20px;">
     <tr>
-      <td align="center" style="padding: 20px 0;">
-        <table role="presentation" style="width: 100%; max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
-          <!-- Header -->
+      <td align="center" style="padding: 0;">
+        <!-- Main Container -->
+        <table role="presentation" style="width: 100%; max-width: 680px; border-collapse: collapse; background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);">
+          
+          <!-- Premium Header with Gradient -->
           <tr>
-            <td style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 32px 24px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Novo Lead Recebido</h1>
-              <p style="margin: 8px 0 0 0; color: #e0e7ff; font-size: 14px;">${escapeHtml(origemLabel)}</p>
+            <td style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); padding: 0; position: relative; overflow: hidden;">
+              <!-- Decorative Elements -->
+              <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+              <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%;"></div>
+              
+              <table role="presentation" style="width: 100%; border-collapse: collapse; position: relative; z-index: 1;">
+                <tr>
+                  <td style="padding: 48px 40px 40px 40px; text-align: left;">
+                    <!-- Badge -->
+                    <div style="display: inline-block; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 16px; border-radius: 8px; margin-bottom: 20px;">
+                      <span style="color: #f8fafc; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">${escapeHtml(origemLabel)}</span>
+                    </div>
+                    <h1 style="margin: 0 0 12px 0; color: #ffffff; font-size: 36px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; font-family: 'Georgia', 'Times New Roman', serif;">
+                      Novo Lead Recebido
+                    </h1>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 16px; font-weight: 400; line-height: 1.5;">
+                      Uma nova oportunidade de negócio aguarda sua atenção
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
           
-          <!-- Content -->
+          <!-- Content Section -->
           <tr>
-            <td style="padding: 32px 24px;">
-              <!-- Dados Básicos -->
-              <h2 style="margin: 0 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
-                📋 Dados Básicos
-              </h2>
-              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
-                ${createField('Nome', payload.nome)}
-                ${createField('Email', payload.email)}
-                ${createField('Telefone', payload.telefone)}
-                ${createField('WhatsApp', payload.whatsapp)}
-                ${createField('Cargo', payload.cargo)}
-                ${createField('Empresa', payload.empresa)}
-                ${createField('Segmento', payload.segmento)}
-                ${createField('Produto de interesse', payload.produto)}
-                ${createField('Tipo de projeto', payload.tipoProjeto)}
-                ${createField('Objetivo do projeto', payload.objetivoProjeto)}
-                ${createField('Faturamento', payload.faturamento)}
+            <td style="padding: 48px 40px; background: #ffffff;">
+              <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                
+                <!-- Dados Básicos Section -->
+                <tr>
+                  <td style="padding: 0 0 40px 0;">
+                    <div style="display: flex; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 3px solid #0f172a;">
+                      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        📋
+                      </div>
+                      <h2 style="margin: 0; color: #0f172a; font-size: 24px; font-weight: 800; letter-spacing: -0.5px; font-family: 'Georgia', 'Times New Roman', serif;">
+                        Dados Básicos
+                      </h2>
+                    </div>
+                    
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      ${createField('Nome', payload.nome, '👤')}
+                      ${createField('Email', payload.email, '✉️')}
+                      ${createField('Telefone', payload.telefone, '📞')}
+                      ${createField('WhatsApp', payload.whatsapp, '💬')}
+                      ${createField('Cargo', payload.cargo, '💼')}
+                      ${createField('Empresa', payload.empresa, '🏢')}
+                      ${createField('Segmento', payload.segmento, '🏷️')}
+                      ${createField('Produto de interesse', payload.produto, '🎯')}
+                      ${createField('Tipo de projeto', payload.tipoProjeto, '📊')}
+                      ${createField('Objetivo do projeto', payload.objetivoProjeto, '🎯')}
+                      ${createField('Faturamento', payload.faturamento, '💰')}
+                    </table>
+                  </td>
+                </tr>
+
+                ${payload.mensagem ? createMessageSection('Mensagem', payload.mensagem, '💬') : ''}
+                ${payload.descricao ? createMessageSection('Descrição da Demanda', payload.descricao, '📝') : ''}
+
+                ${payload.origem === 'startup' ? `
+                <!-- Startup Section -->
+                <tr>
+                  <td style="padding: 0 0 40px 0;">
+                    <div style="display: flex; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 3px solid #0f172a;">
+                      <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        🚀
+                      </div>
+                      <h2 style="margin: 0; color: #0f172a; font-size: 24px; font-weight: 800; letter-spacing: -0.5px; font-family: 'Georgia', 'Times New Roman', serif;">
+                        Dados da Startup
+                      </h2>
+                    </div>
+                    
+                    <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                      ${createField('Fundadores', payload.foundersNames, '👥')}
+                      ${createField('Emails de contato', payload.contactEmails, '📧')}
+                      ${createField('Telefones', payload.phones, '📱')}
+                      ${createField('Links dos fundadores', payload.foundersLinks, '🔗')}
+                      ${createField('Estágio atual', payload.currentStage, '📈')}
+                    </table>
+                    
+                    ${payload.foundersBackground ? createMessageSection('Background dos Fundadores', payload.foundersBackground, '📚') : ''}
+                    ${payload.ideaDescription ? createMessageSection('Descrição da Ideia', payload.ideaDescription, '💡') : ''}
+                    ${payload.whyNow ? createMessageSection('Por que agora', payload.whyNow, '⏰') : ''}
+                    ${payload.extraNotes ? createMessageSection('Observações adicionais', payload.extraNotes, '📝') : ''}
+                  </td>
+                </tr>
+                ` : ''}
+
+                <!-- Metadata Footer -->
+                <tr>
+                  <td style="padding: 32px 0 0 0; border-top: 2px solid #e2e8f0;">
+                    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                      <tr>
+                        <td style="padding: 16px 0 8px 0;">
+                          <div style="display: inline-block; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); padding: 12px 20px; border-radius: 8px; border-left: 4px solid #0f172a;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                              <tr>
+                                <td style="padding: 4px 0; color: #64748b; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Origem</td>
+                                <td style="padding: 4px 0; color: #0f172a; font-size: 13px; font-weight: 700; text-align: right;">${escapeHtml(payload.origem)}</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px 0; color: #64748b; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Data/Hora</td>
+                                <td style="padding: 4px 0; color: #0f172a; font-size: 13px; font-weight: 700; text-align: right;">${escapeHtml(dataHora)}</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
               </table>
-
-              ${payload.mensagem ? `
-              <h2 style="margin: 24px 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
-                💬 Mensagem
-              </h2>
-              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; border-left: 4px solid #2563eb; margin-bottom: 24px;">
-                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.mensagem)}</p>
-              </div>
-              ` : ''}
-
-              ${payload.descricao ? `
-              <h2 style="margin: 24px 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
-                💬 Descrição da Demanda
-              </h2>
-              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; border-left: 4px solid #2563eb; margin-bottom: 24px;">
-                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.descricao)}</p>
-              </div>
-              ` : ''}
-
-              ${payload.origem === 'startup' ? `
-              <h2 style="margin: 24px 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
-                🚀 Dados da Startup
-              </h2>
-              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
-                ${createField('Fundadores', payload.foundersNames)}
-                ${createField('Emails de contato', payload.contactEmails)}
-                ${createField('Telefones', payload.phones)}
-                ${createField('Links dos fundadores', payload.foundersLinks)}
-                ${createField('Estágio atual', payload.currentStage)}
-              </table>
-              ${payload.foundersBackground ? `
-              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">📚 Background dos Fundadores</h3>
-              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
-                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.foundersBackground)}</p>
-              </div>
-              ` : ''}
-              ${payload.ideaDescription ? `
-              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">💡 Descrição da Ideia</h3>
-              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
-                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.ideaDescription)}</p>
-              </div>
-              ` : ''}
-              ${payload.whyNow ? `
-              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">⏰ Por que agora</h3>
-              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
-                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.whyNow)}</p>
-              </div>
-              ` : ''}
-              ${payload.extraNotes ? `
-              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">📝 Observações adicionais</h3>
-              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
-                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.extraNotes)}</p>
-              </div>
-              ` : ''}
-              ` : ''}
-
-              <!-- Footer Info -->
-              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
-                <table role="presentation" style="width: 100%; border-collapse: collapse;">
-                  <tr>
-                    <td style="padding: 4px 0; color: #6b7280; font-size: 13px;"><strong>Origem:</strong> ${escapeHtml(payload.origem)}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 4px 0; color: #6b7280; font-size: 13px;"><strong>Data/Hora:</strong> ${escapeHtml(dataHora)}</td>
-                  </tr>
-                </table>
-              </div>
             </td>
           </tr>
           
-          <!-- Footer -->
+          <!-- Premium Footer -->
           <tr>
-            <td style="background-color: #f9fafb; padding: 20px 24px; text-align: center; border-top: 1px solid #e5e7eb;">
-              <p style="margin: 0; color: #6b7280; font-size: 12px;">Este é um e-mail automático do sistema de leads da Linvex</p>
+            <td style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 32px 40px; text-align: center; border-top: 1px solid #e2e8f0;">
+              <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 0 0 12px 0;">
+                    <div style="display: inline-block; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+                      LINVEX
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 0;">
+                    <p style="margin: 0; color: #64748b; font-size: 12px; font-weight: 400; line-height: 1.6;">
+                      Este é um e-mail automático do sistema de leads da Limvex<br>
+                      <span style="color: #94a3b8;">Gerado em ${escapeHtml(dataHora)}</span>
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>
