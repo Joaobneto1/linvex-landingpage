@@ -134,6 +134,171 @@ interface LeadPayload {
   [key: string]: any;
 }
 
+// Função para escapar HTML (prevenir XSS)
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
+// Função para formatar email em HTML profissional
+function formatEmailHtml(payload: LeadPayload): string {
+  const origemLabels: Record<string, string> = {
+    'startup': 'Candidatura de Startup',
+    'produtos': 'Contato - Produtos',
+    'para-empresas': 'Contato - Para Empresas',
+    'contato': 'Contato - Formulário de Contato',
+    'home': 'Lead - Home (Análise de Projeto)',
+  };
+
+  const dataHora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+  const origemLabel = origemLabels[payload.origem] || payload.origem;
+
+  // Função auxiliar para criar campos
+  const createField = (label: string, value: string | undefined) => {
+    if (!value) return '';
+    return `
+      <tr>
+        <td style="padding: 8px 0; font-weight: 600; color: #374151; width: 180px;">${escapeHtml(label)}:</td>
+        <td style="padding: 8px 0; color: #1f2937;">${escapeHtml(value)}</td>
+      </tr>
+    `;
+  };
+
+  let html = `
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Lead - ${escapeHtml(origemLabel)}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f3f4f6; padding: 20px;">
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+        <table role="presentation" style="width: 100%; max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 32px 24px; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Novo Lead Recebido</h1>
+              <p style="margin: 8px 0 0 0; color: #e0e7ff; font-size: 14px;">${escapeHtml(origemLabel)}</p>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding: 32px 24px;">
+              <!-- Dados Básicos -->
+              <h2 style="margin: 0 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
+                📋 Dados Básicos
+              </h2>
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                ${createField('Nome', payload.nome)}
+                ${createField('Email', payload.email)}
+                ${createField('Telefone', payload.telefone)}
+                ${createField('WhatsApp', payload.whatsapp)}
+                ${createField('Cargo', payload.cargo)}
+                ${createField('Empresa', payload.empresa)}
+                ${createField('Segmento', payload.segmento)}
+                ${createField('Produto de interesse', payload.produto)}
+                ${createField('Tipo de projeto', payload.tipoProjeto)}
+                ${createField('Objetivo do projeto', payload.objetivoProjeto)}
+                ${createField('Faturamento', payload.faturamento)}
+              </table>
+
+              ${payload.mensagem ? `
+              <h2 style="margin: 24px 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
+                💬 Mensagem
+              </h2>
+              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; border-left: 4px solid #2563eb; margin-bottom: 24px;">
+                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.mensagem)}</p>
+              </div>
+              ` : ''}
+
+              ${payload.descricao ? `
+              <h2 style="margin: 24px 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
+                💬 Descrição da Demanda
+              </h2>
+              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; border-left: 4px solid #2563eb; margin-bottom: 24px;">
+                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.descricao)}</p>
+              </div>
+              ` : ''}
+
+              ${payload.origem === 'startup' ? `
+              <h2 style="margin: 24px 0 16px 0; color: #111827; font-size: 18px; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">
+                🚀 Dados da Startup
+              </h2>
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                ${createField('Fundadores', payload.foundersNames)}
+                ${createField('Emails de contato', payload.contactEmails)}
+                ${createField('Telefones', payload.phones)}
+                ${createField('Links dos fundadores', payload.foundersLinks)}
+                ${createField('Estágio atual', payload.currentStage)}
+              </table>
+              ${payload.foundersBackground ? `
+              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">📚 Background dos Fundadores</h3>
+              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.foundersBackground)}</p>
+              </div>
+              ` : ''}
+              ${payload.ideaDescription ? `
+              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">💡 Descrição da Ideia</h3>
+              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.ideaDescription)}</p>
+              </div>
+              ` : ''}
+              ${payload.whyNow ? `
+              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">⏰ Por que agora</h3>
+              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.whyNow)}</p>
+              </div>
+              ` : ''}
+              ${payload.extraNotes ? `
+              <h3 style="margin: 16px 0 8px 0; color: #374151; font-size: 16px; font-weight: 600;">📝 Observações adicionais</h3>
+              <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                <p style="margin: 0; color: #374151; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(payload.extraNotes)}</p>
+              </div>
+              ` : ''}
+              ` : ''}
+
+              <!-- Footer Info -->
+              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 4px 0; color: #6b7280; font-size: 13px;"><strong>Origem:</strong> ${escapeHtml(payload.origem)}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 4px 0; color: #6b7280; font-size: 13px;"><strong>Data/Hora:</strong> ${escapeHtml(dataHora)}</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f9fafb; padding: 20px 24px; text-align: center; border-top: 1px solid #e5e7eb;">
+              <p style="margin: 0; color: #6b7280; font-size: 12px;">Este é um e-mail automático do sistema de leads da Linvex</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `;
+
+  return html.trim();
+}
+
+// Função para formatar email em texto simples (fallback)
 function formatEmailBody(payload: LeadPayload): string {
   const origemLabels: Record<string, string> = {
     'startup': 'Candidatura de Startup',
@@ -406,12 +571,13 @@ export default async function handler(
 
     try {
       // Preparar dados do email
+      const emailHtml = formatEmailHtml(payload);
       const emailData = {
         from: EMAIL_FROM,
         to: EMAIL_TO,
         subject: assunto,
-        html: `<div style="font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 20px; border-radius: 8px; line-height: 1.6;">${corpoEmail.replace(/\n/g, '<br>')}</div>`,
-        text: corpoEmail,
+        html: emailHtml,
+        text: corpoEmail, // Versão texto simples para clientes que não suportam HTML
       };
 
       console.log('[Lead API] Email data prepared:', {
