@@ -43,12 +43,23 @@ const SEGMENTOS_EMPRESA = [
   "Outro",
 ] as const;
 
+// Opções de faturamento anual
+const FATURAMENTO_ANUAL = [
+  "Até R$ 100 mil",
+  "R$ 100 mil a R$ 500 mil",
+  "R$ 500 mil a R$ 1 milhão",
+  "R$ 1 milhão a R$ 5 milhões",
+  "R$ 5 milhões a R$ 10 milhões",
+  "Prefiro não informar",
+] as const;
+
 const formSchema = z.object({
   nome: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
   email: z.string().email("E-mail inválido"),
   telefone: z.string().min(10, "Telefone inválido"),
   cargo: z.string().optional(),
   segmento: z.string().min(1, "Selecione o segmento da empresa"),
+  faturamentoAnual: z.string().min(1, "Selecione o faturamento anual"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -83,6 +94,7 @@ export function FormularioSection() {
         telefone: data.telefone,
         cargo: data.cargo || undefined,
         segmento: data.segmento,
+        faturamento: data.faturamentoAnual,
         origem: "contato" as const,
       };
 
@@ -226,7 +238,7 @@ export function FormularioSection() {
                   {...register("nome")}
                   className={inputStyles}
                   placeholder="Seu nome"
-                  disabled={submitState === "loading" || submitState === "success"}
+                  disabled={submitState === "loading"}
                 />
                 {errors.nome && (
                   <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
@@ -248,7 +260,7 @@ export function FormularioSection() {
                     {...register("email")}
                     className={inputStyles}
                     placeholder="seu@email.com"
-                    disabled={submitState === "loading" || submitState === "success"}
+                    disabled={submitState === "loading"}
                   />
                   {errors.email && (
                     <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
@@ -268,7 +280,7 @@ export function FormularioSection() {
                     {...register("telefone")}
                     className={inputStyles}
                     placeholder="(11) 99999-9999"
-                    disabled={submitState === "loading" || submitState === "success"}
+                    disabled={submitState === "loading"}
                   />
                   {errors.telefone && (
                     <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
@@ -290,7 +302,7 @@ export function FormularioSection() {
                     {...register("cargo")}
                     className={inputStyles}
                     placeholder="Seu cargo"
-                    disabled={submitState === "loading" || submitState === "success"}
+                    disabled={submitState === "loading"}
                   />
                 </div>
 
@@ -305,7 +317,7 @@ export function FormularioSection() {
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
-                        disabled={submitState === "loading" || submitState === "success"}
+                        disabled={submitState === "loading"}
                       >
                         <SelectTrigger className={`${inputStyles} h-auto py-3`}>
                           <SelectValue placeholder="Selecione o segmento" />
@@ -331,6 +343,45 @@ export function FormularioSection() {
                     </p>
                   )}
                 </div>
+              </div>
+
+              {/* Faturamento anual */}
+              <div className="space-y-2">
+                <Label htmlFor="faturamentoAnual" className={labelStyles}>
+                  Faturamento anual *
+                </Label>
+                <Controller
+                  name="faturamentoAnual"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      disabled={submitState === "loading"}
+                    >
+                      <SelectTrigger className={`${inputStyles} h-auto py-3`}>
+                        <SelectValue placeholder="Selecione o faturamento anual" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#0a0a1a] border-white/10 text-white max-h-[300px]">
+                        {FATURAMENTO_ANUAL.map((opcao) => (
+                          <SelectItem
+                            key={opcao}
+                            value={opcao}
+                            className="focus:bg-[#0076CE]/20 focus:text-white cursor-pointer hover:bg-white/5"
+                          >
+                            {opcao}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {errors.faturamentoAnual && (
+                  <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.faturamentoAnual.message}
+                  </p>
+                )}
               </div>
 
               {/* Mensagem de erro geral */}
