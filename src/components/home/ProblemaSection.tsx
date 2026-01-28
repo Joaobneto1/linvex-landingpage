@@ -1,5 +1,7 @@
 import { Users, Clock, TrendingDown, FileX, Zap } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { Button } from "@/components/ui/button";
+import { scrollToLeadForm } from "@/lib/utils";
 
 const problemas = [
   {
@@ -115,10 +117,18 @@ export function ProblemaSection() {
         {/* Bottom message - Redesenhado */}
         <Reveal direction="up" delay={400}>
           <div className="mt-12 sm:mt-16 text-center">
-            <div className="w-full max-w-2xl mx-auto p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#0076CE]/10 to-[#0099FF]/5 border border-[#0076CE]/20 backdrop-blur-sm">
-              <p className="text-white/80 text-sm sm:text-base md:text-lg px-2">
+            <div className="w-full max-w-2xl mx-auto p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#0076CE]/10 to-[#0099FF]/5 border border-[#0076CE]/20 backdrop-blur-sm mb-6">
+              <p className="text-white/80 text-sm sm:text-base md:text-lg px-2 mb-4">
                 Se você se identificou com algum desses problemas, a LIMVEX pode ajudar.
               </p>
+              <Button
+                onClick={scrollToLeadForm}
+                size="lg"
+                variant="outline"
+                className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
+              >
+                Agendar uma conversa
+              </Button>
             </div>
           </div>
         </Reveal>
