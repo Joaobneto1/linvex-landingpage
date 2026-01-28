@@ -1,14 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Clock, CheckCircle } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { scrollToLeadForm } from "@/lib/utils";
 
 export function ChamadaFinalSection() {
-  const scrollToForm = () => {
-    const form = document.getElementById("formulario");
-    if (form) {
-      form.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
@@ -54,12 +49,12 @@ export function ChamadaFinalSection() {
         <Reveal direction="up" delay={100}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button
-              onClick={scrollToForm}
+              onClick={scrollToLeadForm}
               size="lg"
               className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-8 sm:px-10 md:px-12 py-6 sm:py-7 md:py-8 h-auto font-semibold rounded-xl shadow-[0_0_40px_rgba(0,118,206,0.4)] hover:shadow-[0_0_60px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto hover:scale-105"
             >
               <span className="flex items-center justify-center">
-                Entrar em contato
+                Receber um plano de execução
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
               </span>
             </Button>
