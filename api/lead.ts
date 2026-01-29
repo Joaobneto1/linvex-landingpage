@@ -111,14 +111,15 @@ async function registerEmailSend(): Promise<void> {
 }
 // ========== FIM RATE LIMITING ==========
 
-// API key do Resend - usar variável de ambiente ou fallback
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_6WEoM8uW_ExoKjqHMM7zf5vwcqcF2sHsM';
+// API key do Resend - usar variável de ambiente 
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const EMAIL_TO = process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'linvex.software@gmail.com';
 // Email remetente - usar variável de ambiente ou fallback para domínio verificado
 const EMAIL_FROM = process.env.RESEND_FROM_EMAIL || 'noreply@limvex.com';
 const IS_DEV = process.env.NODE_ENV === 'development' || !process.env.VERCEL;
 
-const resend = new Resend(RESEND_API_KEY);
+// Inicializa o client do Resend somente se houver chave configurada
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : undefined;
 
 interface LeadPayload {
   nome: string;
@@ -530,8 +531,8 @@ export default async function handler(
     // Log detalhado para debug
     console.log('[Lead API] ========== LEAD RECEIVED ==========');
     console.log('[Lead API] Payload:', JSON.stringify(payload, null, 2));
-    console.log('[Lead API] RESEND_API_KEY:', RESEND_API_KEY ? `${RESEND_API_KEY.substring(0, 10)}...` : 'NÃO CONFIGURADA');
-    console.log('[Lead API] RESEND_API_KEY length:', RESEND_API_KEY?.length || 0);
+    console.log('[Lead API] RESEND_API_KEY configured:', !!RESEND_API_KEY);
+    console.log('[Lead API] RESEND_API_KEY length:', RESEND_API_KEY ? RESEND_API_KEY.length : 0);
     console.log('[Lead API] EMAIL_TO:', EMAIL_TO);
     console.log('[Lead API] IS_DEV:', IS_DEV);
     console.log('[Lead API] VERCEL:', !!process.env.VERCEL);
