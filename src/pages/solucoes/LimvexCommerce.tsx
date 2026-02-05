@@ -11,38 +11,40 @@ import {
   Headphones,
   ArrowRight,
   CheckCircle2,
+  Store,
+  Link2,
 } from "lucide-react";
 
 const features = [
   {
     icon: <Zap className="w-6 h-6" />,
     title: "Plataforma Escalável",
-    description: "Infraestrutura que cresce junto com seu negócio, suportando milhares de transações.",
+    description: "Infraestrutura cloud-native que cresce junto com seu negócio, suportando milhares de transações simultâneas.",
   },
   {
     icon: <Package className="w-6 h-6" />,
     title: "Gestão de Estoque Automatizada",
-    description: "Controle inteligente de inventário com alertas e reposição automática.",
+    description: "Controle inteligente de inventário com alertas, reposição automática e sincronização multi-canal.",
   },
   {
     icon: <BarChart3 className="w-6 h-6" />,
-    title: "Análise de Dados em Tempo Real",
-    description: "Dashboards completos para acompanhar vendas, conversões e métricas importantes.",
+    title: "Analytics em Tempo Real",
+    description: "Dashboards completos para acompanhar vendas, conversões, ticket médio e métricas de performance.",
   },
   {
     icon: <CreditCard className="w-6 h-6" />,
     title: "Checkout Otimizado",
-    description: "Experiência de compra fluida com múltiplas opções de pagamento integradas.",
+    description: "Experiência de compra fluida com múltiplas opções de pagamento e taxa de conversão otimizada.",
   },
   {
-    icon: <ShoppingCart className="w-6 h-6" />,
-    title: "Integrações com Marketplaces",
-    description: "Conecte sua loja aos principais marketplaces como Mercado Livre, Amazon e mais.",
+    icon: <Store className="w-6 h-6" />,
+    title: "Multi-canal Integrado",
+    description: "Gerencie vendas do site próprio, Mercado Livre, Amazon, Shopee e outros marketplaces em um só lugar.",
   },
   {
-    icon: <Headphones className="w-6 h-6" />,
-    title: "Suporte Técnico Especializado",
-    description: "Equipe dedicada para ajudar você em todas as etapas do seu e-commerce.",
+    icon: <Link2 className="w-6 h-6" />,
+    title: "Integrações Nativas",
+    description: "Conecta com ERPs, transportadoras, gateways de pagamento e sistemas que você já usa.",
   },
 ];
 
@@ -52,6 +54,7 @@ const benefits = [
   "Integração com os principais ERPs do mercado",
   "Relatórios personalizados e automatizados",
   "Conformidade com LGPD e segurança de dados",
+  "Suporte técnico especializado incluso",
 ];
 
 export default function LimvexCommerce() {
@@ -69,7 +72,7 @@ export default function LimvexCommerce() {
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#0076CE]/20 border border-[#0076CE]/30 rounded-full text-[#0076CE] text-sm font-medium mb-6">
                 <ShoppingCart className="w-4 h-4" />
-                Solução E-commerce
+                Plataforma E-commerce
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -79,16 +82,14 @@ export default function LimvexCommerce() {
                 </span>
               </h1>
 
-              <p className="text-xl text-white/70 mb-8 leading-relaxed">
-                Transforme suas vendas online com tecnologia de ponta. O Limvex Commerce é a solução
-                completa para empresas que desejam escalar suas operações de e-commerce com
-                eficiência e segurança.
+              <p className="text-xl text-white/70 mb-6 leading-relaxed">
+                Plataforma completa de e-commerce com gestão de estoque, integrações com marketplaces e checkout otimizado. Escale suas vendas online com tecnologia de ponta.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/contato">
                   <Button className="bg-[#0076CE] hover:bg-[#0099FF] text-white font-semibold px-8 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0076CE]/30">
-                    Solicitar Demonstração
+                    Agendar Demonstração
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>
@@ -110,24 +111,21 @@ export default function LimvexCommerce() {
         <div className="container mx-auto max-w-6xl">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Sobre o Limvex Commerce
+              Tudo que você precisa para vender mais
             </h2>
             <p className="text-lg text-white/70 leading-relaxed">
-              O Limvex Commerce foi desenvolvido para atender às necessidades específicas de
-              pequenas e médias empresas que desejam profissionalizar suas operações de vendas
-              online. Nossa plataforma combina facilidade de uso com recursos avançados,
-              permitindo que você foque no que importa: vender mais.
+              O Limvex Commerce é uma plataforma pronta para uso, desenvolvida para empresas que querem profissionalizar e escalar suas operações de vendas online. Implementação em dias, não em meses.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {benefits.map((benefit, index) => (
               <div
                 key={index}
                 className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl"
               >
-                <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0" />
-                <span className="text-white/80">{benefit}</span>
+                <CheckCircle2 className="w-5 h-5 text-[#0076CE] flex-shrink-0" />
+                <span className="text-white/80 text-sm">{benefit}</span>
               </div>
             ))}
           </div>
@@ -163,19 +161,55 @@ export default function LimvexCommerce() {
         </div>
       </section>
 
+      {/* Por que escolher Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/[0.02]">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Próximos passos
+            </h2>
+            <p className="text-lg text-white/60">
+              Conheça nossa plataforma e solicite uma proposta personalizada
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-[#0076CE]/10 to-[#0076CE]/5 border border-[#0076CE]/20 rounded-2xl p-8 text-center">
+            <div className="grid sm:grid-cols-3 gap-4 mb-8">
+              <div className="p-4 bg-white/5 rounded-xl">
+                <p className="text-[#0076CE] font-semibold">Implementação</p>
+                <p className="text-white/60 text-sm">Rápida e estruturada</p>
+              </div>
+              <div className="p-4 bg-white/5 rounded-xl">
+                <p className="text-[#0076CE] font-semibold">Treinamento</p>
+                <p className="text-white/60 text-sm">Incluso</p>
+              </div>
+              <div className="p-4 bg-white/5 rounded-xl">
+                <p className="text-[#0076CE] font-semibold">Suporte</p>
+                <p className="text-white/60 text-sm">Prioritário</p>
+              </div>
+            </div>
+
+            <Link to="/contato">
+              <Button className="bg-[#0076CE] hover:bg-[#0099FF] text-white font-semibold px-8 py-4 h-auto rounded-xl transition-all hover:scale-105">
+                Solicitar Proposta Personalizada
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0076CE]/20 via-[#030014] to-[#030014]">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Quer saber mais sobre o Limvex Commerce?
+            Pronto para escalar suas vendas online?
           </h2>
           <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-            Nossa equipe está pronta para entender suas necessidades e mostrar como o Limvex
-            Commerce pode transformar suas vendas online.
+            Agende uma demonstração gratuita e veja o Limvex Commerce em ação com casos de uso do seu segmento.
           </p>
           <Link to="/contato">
             <Button className="bg-[#0076CE] hover:bg-[#0099FF] text-white font-semibold px-10 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0076CE]/30">
-              Falar com Especialista
+              Agendar Demonstração Gratuita
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

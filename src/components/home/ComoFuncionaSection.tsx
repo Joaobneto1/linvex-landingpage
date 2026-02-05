@@ -1,41 +1,41 @@
 import { Link } from "react-router-dom";
-import { Search, CheckCircle2, Code2, Rocket, Workflow } from "lucide-react";
+import { MessageSquare, Target, Settings, TrendingUp, Workflow } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 
-const passos = [
+const fases = [
   {
     numero: "01",
-    icon: Search,
-    title: "Diagnóstico",
-    description: "Entendemos sua necessidade, objetivos e contexto do negócio para propor a melhor solução",
+    icon: MessageSquare,
+    title: "Análise e mapeamento",
+    description: "Due diligence técnica: mapeamento de arquitetura, pontos críticos, análise de viabilidade e definição de roadmap",
     gradient: "from-[#0076CE] to-[#0099FF]",
     bgGradient: "from-[#0076CE]/15 to-[#0076CE]/5",
     glowColor: "rgba(0, 118, 206, 0.3)",
   },
   {
     numero: "02",
-    icon: CheckCircle2,
-    title: "Validação & Escopo",
-    description: "Validamos a viabilidade técnica e definimos escopo claro com prazo e investimento",
+    icon: Target,
+    title: "Arquitetura e planejamento",
+    description: "Design de arquitetura enterprise: modelagem de dados, integrações, estratégia de migração e governança técnica",
     gradient: "from-[#0099FF] to-[#00B8FF]",
     bgGradient: "from-[#0099FF]/15 to-[#0099FF]/5",
     glowColor: "rgba(0, 153, 255, 0.3)",
   },
   {
     numero: "03",
-    icon: Code2,
-    title: "Desenvolvimento",
-    description: "Desenvolvemos com comunicação constante, entregas incrementais e transparência total",
+    icon: Settings,
+    title: "Implementação e integração",
+    description: "Deploy estruturado: infraestrutura, integração de sistemas, migração de dados e testes de performance",
     gradient: "from-[#00B8FF] to-[#0076CE]",
     bgGradient: "from-[#00B8FF]/15 to-[#00B8FF]/5",
     glowColor: "rgba(0, 184, 255, 0.3)",
   },
   {
     numero: "04",
-    icon: Rocket,
-    title: "Entrega & Evolução",
-    description: "Entregamos o projeto funcionando e damos suporte contínuo para evolução",
+    icon: TrendingUp,
+    title: "Operação e evolução",
+    description: "Monitoramento proativo, otimização de performance, evolução arquitetural e suporte de missão crítica",
     gradient: "from-[#0076CE] via-[#0099FF] to-[#00B8FF]",
     bgGradient: "from-[#0076CE]/15 to-[#0099FF]/5",
     glowColor: "rgba(0, 118, 206, 0.35)",
@@ -61,13 +61,13 @@ export function ComoFuncionaSection() {
           <div className="text-center mb-12 sm:mb-16 md:mb-20">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6">
               <Workflow className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
-              <span className="text-xs sm:text-sm font-medium text-white/90">Processo simplificado</span>
+              <span className="text-xs sm:text-sm font-medium text-white/70">Metodologia estruturada</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-6 text-white tracking-tight px-2">
-              Como funciona
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 sm:mb-6 text-white tracking-tight px-2">
+              Processo de implementação
             </h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/65 max-w-3xl mx-auto leading-relaxed px-2">
-              Um processo claro e transparente do início ao fim do seu projeto
+              Metodologia estruturada do diagnóstico ao go-live
             </p>
           </div>
         </Reveal>
@@ -76,7 +76,7 @@ export function ComoFuncionaSection() {
         <div className="relative mb-16">
           {/* Connection Lines - Diagonais únicas */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
-            {passos.slice(0, -1).map((_, index) => {
+            {fases.slice(0, -1).map((_, index) => {
               const startY = index * 25 + 12.5;
               const endY = (index + 1) * 25 + 12.5;
               const isEven = index % 2 === 0;
@@ -112,8 +112,8 @@ export function ComoFuncionaSection() {
           </div>
 
           <div className="space-y-6 sm:space-y-8 lg:space-y-16 relative">
-            {passos.map((passo, index) => {
-              const Icon = passo.icon;
+            {fases.map((fase, index) => {
+              const Icon = fase.icon;
               const isEven = index % 2 === 0;
 
               return (
@@ -124,35 +124,35 @@ export function ComoFuncionaSection() {
                     {/* Content Card - Layout único */}
                     <div className={`w-full lg:w-1/2 ${isEven ? 'lg:pr-8 lg:pr-12' : 'lg:pl-8 lg:pl-12'}`}>
                       <div
-                        className={`group relative p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl bg-gradient-to-br ${passo.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-6px]`}
-                        style={{ boxShadow: `0 8px 32px ${passo.glowColor}` }}
+                        className={`group relative p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl bg-gradient-to-br ${fase.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-6px]`}
+                        style={{ boxShadow: `0 8px 32px ${fase.glowColor}` }}
                       >
                         {/* Number Badge - Posição única */}
-                        <div className={`absolute -top-2 -left-2 sm:-top-3 sm:-left-3 md:-top-4 md:-left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg border-2 border-[#030014]`}>
-                          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-extrabold text-white">{passo.numero}</span>
+                        <div className={`absolute -top-2 -left-2 sm:-top-3 sm:-left-3 md:-top-4 md:-left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${fase.gradient} flex items-center justify-center shadow-lg border-2 border-[#030014]`}>
+                          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-white">{fase.numero}</span>
                         </div>
 
                         {/* Icon - Dentro do card */}
                         <div className="flex items-start gap-3 sm:gap-4 md:gap-5 mb-3 sm:mb-4 md:mb-5">
-                          <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${passo.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`} style={{ boxShadow: `0 0 20px ${passo.glowColor}` }}>
+                          <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${fase.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`} style={{ boxShadow: `0 0 20px ${fase.glowColor}` }}>
                             <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
                           </div>
                           <div className="flex-1 pt-1">
-                            <div className="text-xs sm:text-sm font-bold mb-1 sm:mb-2 text-white/60 uppercase tracking-wider">
-                              Passo {passo.numero}
+                            <div className="text-xs sm:text-sm font-medium mb-1 sm:mb-2 text-white/50 uppercase tracking-wider">
+                              Fase {fase.numero}
                             </div>
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white mb-2 sm:mb-3 leading-tight">
-                              {passo.title}
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3 leading-tight">
+                              {fase.title}
                             </h3>
                           </div>
                         </div>
 
-                        <p className="text-white/70 leading-relaxed text-sm sm:text-base md:text-lg">
-                          {passo.description}
+                        <p className="text-white/65 leading-relaxed text-sm sm:text-base md:text-lg">
+                          {fase.description}
                         </p>
 
                         {/* Hover accent */}
-                        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${passo.gradient} rounded-b-xl sm:rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${fase.gradient} rounded-b-xl sm:rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                       </div>
                     </div>
 
@@ -171,10 +171,9 @@ export function ComoFuncionaSection() {
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
+              className="bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
             >
-              <Link to="/contato">Quero começar meu projeto</Link>
+              <Link to="/contato">Solicitar proposta técnica</Link>
             </Button>
           </div>
         </Reveal>

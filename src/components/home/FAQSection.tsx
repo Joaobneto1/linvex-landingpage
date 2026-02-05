@@ -11,28 +11,28 @@ import { Reveal } from "@/components/ui/reveal";
 
 const faqs = [
   {
-    pergunta: "Desenvolvem do zero?",
-    resposta: "Sim, desenvolvemos soluções customizadas do zero, sempre pensando na melhor arquitetura para seu caso específico. Também trabalhamos com plataformas SaaS quando faz sentido para o projeto.",
+    pergunta: "Qual a arquitetura de infraestrutura?",
+    resposta: "Arquitetura cloud-native multi-região com Kubernetes, service mesh e API gateway enterprise. Garantimos alta disponibilidade, auto-scaling e disaster recovery automatizado.",
   },
   {
-    pergunta: "Como funciona o prazo?",
-    resposta: "Definimos prazos claros desde o início, baseados no escopo validado. Fazemos entregas incrementais sempre que possível, para que você veja o progresso e possa ajustar durante o desenvolvimento.",
+    pergunta: "Como funciona o modelo de contrato?",
+    resposta: "Contratos enterprise com SLA contratual, suporte dedicado e roadmap co-criado. Modelo de investimento baseado em volume de operações e complexidade de integrações.",
   },
   {
-    pergunta: "Existe suporte após a entrega?",
-    resposta: "Sim, oferecemos suporte contínuo após a entrega. Acreditamos em parceria de longo prazo, então estamos disponíveis para evoluções, manutenções e melhorias conforme seu negócio cresce.",
+    pergunta: "Quais certificações de segurança possuem?",
+    resposta: "Seguimos frameworks NIST e CIS. Realizamos pentests regulares, mantemos políticas de acesso zero-trust e conformidade com LGPD.",
   },
   {
-    pergunta: "Como é definido o investimento?",
-    resposta: "O investimento é definido com base no escopo validado do projeto. Apresentamos uma proposta clara com valor, prazos e entregas, sem surpresas. Para projetos maiores, podemos trabalhar com fases e entregas incrementais.",
+    pergunta: "Como é feita a integração com sistemas legados?",
+    resposta: "Utilizamos camada de integração enterprise com conectores para os principais ERPs (SAP, TOTVS, Oracle), APIs REST/GraphQL e message brokers para comunicação assíncrona.",
   },
   {
-    pergunta: "Quais tecnologias vocês utilizam?",
-    resposta: "Trabalhamos com as tecnologias mais modernas do mercado: React, Next.js, Node.js, TypeScript, PostgreSQL, AWS, entre outras. Escolhemos a stack ideal para cada projeto baseado nas necessidades específicas.",
+    pergunta: "Qual o modelo de deployment?",
+    resposta: "Multi-tenant cloud-native ou single-tenant dedicado conforme requisitos de compliance. Oferecemos também deployment on-premises para casos específicos.",
   },
   {
-    pergunta: "Vocês fazem apenas projetos grandes?",
-    resposta: "Não! Atendemos projetos de diversos tamanhos. O importante é que haja um objetivo claro e um escopo bem definido. Desde MVPs até sistemas complexos, encontramos a melhor abordagem para cada caso.",
+    pergunta: "Como funciona a evolução da plataforma?",
+    resposta: "Releases contínuos com backward compatibility garantida. Roadmap técnico co-criado com clientes enterprise e ciclos de feedback estruturados.",
   },
 ];
 
@@ -45,7 +45,7 @@ export function FAQSection() {
   };
 
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
+    <section id="faq" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
       {/* Mesh Background */}
       <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
 
@@ -66,25 +66,25 @@ export function FAQSection() {
                 </Badge>
               </div>
               <div className="flex gap-2 flex-col">
-                <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight max-w-xl text-left font-extrabold text-white">
+                <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight max-w-xl text-left font-semibold text-white">
                   Perguntas frequentes
                 </h4>
                 <p className="text-sm sm:text-base md:text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-white/65 text-left">
-                  Tire suas dúvidas sobre como trabalhamos e como podemos ajudar seu negócio a crescer com tecnologia de ponta.
+                  Informações técnicas sobre arquitetura, infraestrutura e modelo de implementação.
                 </p>
               </div>
               <div className="flex flex-col gap-2 sm:gap-3 mt-3 sm:mt-4">
                 <div className="flex items-center gap-2 text-white/70">
                   <Check className="w-4 h-4 sm:w-5 sm:h-5 text-[#0076CE] flex-shrink-0" />
-                  <span className="text-xs sm:text-sm">Resposta rápida e transparente</span>
+                  <span className="text-xs sm:text-sm">Análise técnica completa</span>
                 </div>
                 <div className="flex items-center gap-2 text-white/70">
                   <Check className="w-4 h-4 sm:w-5 sm:h-5 text-[#0076CE] flex-shrink-0" />
-                  <span className="text-xs sm:text-sm">Informações claras sobre nosso processo</span>
+                  <span className="text-xs sm:text-sm">Proposta de arquitetura</span>
                 </div>
                 <div className="flex items-center gap-2 text-white/70">
                   <Check className="w-4 h-4 sm:w-5 sm:h-5 text-[#0076CE] flex-shrink-0" />
-                  <span className="text-xs sm:text-sm">Suporte contínuo após a entrega</span>
+                  <span className="text-xs sm:text-sm">Projeção de ROI</span>
                 </div>
               </div>
               <div className="mt-3 sm:mt-4">
@@ -93,7 +93,7 @@ export function FAQSection() {
                   className="gap-3 sm:gap-4 border-white/20 bg-white/5 hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-sm sm:text-base"
                   variant="outline"
                 >
-                  Alguma dúvida? Entre em contato
+                  Falar com especialista
                   <PhoneCall className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Button>
               </div>

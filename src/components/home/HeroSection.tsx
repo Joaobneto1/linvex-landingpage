@@ -46,7 +46,7 @@ export function HeroSection() {
         `}
       </style>
 
-      <section className="relative isolate h-screen overflow-hidden bg-[#030014] text-white">
+      <section className="relative isolate min-h-[90vh] overflow-hidden bg-[#030014] text-white flex items-center">
         {/* ================== BACKGROUND ================== */}
         {/* Flow Field Neural Background */}
         <div className="absolute inset-0 -z-30">
@@ -63,64 +63,61 @@ export function HeroSection() {
         <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#030014]/40 via-transparent to-[#030014]/70" />
 
         {/* ================== COPY ================== */}
-        <div className="relative z-10 mx-auto grid w-full max-w-5xl place-items-center px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28">
-          <div className={`mx-auto text-center ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}>
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24 md:py-28">
+          <div className={`mx-auto text-center w-full max-w-4xl ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}>
             {/* Badge */}
-            <span
+            <div
               style={{ animationDelay: '100ms' }}
-              className={`inline-flex items-center gap-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/30 px-3 py-1 text-[11px] uppercase tracking-wider text-white/90 backdrop-blur ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
+              className={`mb-6 sm:mb-8 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0076CE] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#0076CE]"></span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/20 px-4 py-1.5 text-xs sm:text-sm text-white/70 font-medium tracking-wide">
+                Infraestrutura de nível enterprise
               </span>
-              Software sob medida para empresas que querem escalar
-            </span>
+            </div>
 
             {/* Main Headline */}
             <h1
               style={{ animationDelay: '200ms' }}
-              className={`mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white leading-[1.1] ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.15] sm:leading-[1.1] mb-6 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
-              Transformamos ideias em{' '}
+              Infraestrutura de inteligência operacional{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0076CE] to-[#00B8FF]">
-                soluções digitais
-              </span>{' '}
-              que geram resultado
+                para empresas em expansão
+              </span>
             </h1>
 
             {/* Subheadline */}
             <p
               style={{ animationDelay: '300ms' }}
-              className={`mx-auto mt-5 max-w-2xl text-balance text-white/75 md:text-lg lg:text-xl leading-relaxed ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
+              className={`mx-auto max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl text-white/65 leading-relaxed mb-10 sm:mb-12 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
-              Desenvolvemos SaaS e software personalizado com foco em prazo, qualidade e escalabilidade.
+              Plataformas de missão crítica que unificam dados, automatizam processos complexos e entregam inteligência acionável para decisões estratégicas.
             </p>
 
             {/* CTA Buttons */}
             <div
               style={{ animationDelay: '400ms' }}
-              className={`mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
+              className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               <Button
                 asChild
                 size="lg"
-                className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 md:py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
+                className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
               >
                 <Link to="/contato">
-                  Solicitar diagnóstico
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                  Solicitar avaliação técnica
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 md:py-7 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
+                className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
               >
-                <Link to="/contato">
-                  Falar com um especialista
-                </Link>
+                <a href="#plataformas">
+                  Ver plataformas
+                </a>
               </Button>
             </div>
           </div>

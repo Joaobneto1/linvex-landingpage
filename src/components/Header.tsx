@@ -55,9 +55,9 @@ export function Header({ transparent = false }: HeaderProps) {
   };
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 pt-4 px-4">
+    <header className="absolute top-0 left-0 right-0 z-50 pt-4 px-3 sm:px-4">
       <div
-        className={`mx-auto max-w-fit h-12 px-3 flex items-center gap-2 rounded-full transition-all duration-300 ${
+        className={`mx-auto w-full max-w-fit h-11 sm:h-12 px-2 sm:px-3 flex items-center gap-1.5 sm:gap-2 rounded-full transition-all duration-300 ${
           transparent 
             ? "bg-transparent" 
             : "bg-[#0a0a14]/80 backdrop-blur-xl border border-white/[0.1]"
@@ -71,14 +71,14 @@ export function Header({ transparent = false }: HeaderProps) {
               e.preventDefault();
             }
           }}
-          className="flex items-center h-9 px-3 text-lg font-bold text-white hover:text-[#0076CE] transition-colors"
+          className="flex items-center h-8 sm:h-9 px-2 sm:px-3 text-xl sm:text-2xl font-bold tracking-tight text-white hover:text-[#0076CE] transition-colors"
           style={{ fontFamily: "'Oswald', sans-serif" }}
         >
           LIMVEX
         </Link>
 
-        {/* Separador */}
-        <div className="w-px h-5 bg-white/10" />
+        {/* Separador - escondido em telas muito pequenas */}
+        <div className="hidden xs:block w-px h-5 bg-white/10" />
 
         {/* Dropdown Soluções */}
         <div 
@@ -87,15 +87,16 @@ export function Header({ transparent = false }: HeaderProps) {
         >
           <button
             onClick={toggleDropdown}
-            className={`flex items-center gap-1.5 h-9 px-3 text-sm font-medium rounded-full transition-colors ${
+            className={`flex items-center gap-1 sm:gap-1.5 h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-full transition-colors ${
               isSolutionActive
                 ? "text-[#00d9ff] bg-white/5"
                 : "text-white/85 hover:text-white hover:bg-white/5"
             }`}
           >
-            Soluções
+            <span className="hidden sm:inline">Soluções</span>
+            <span className="sm:hidden">Produtos</span>
             <ChevronDown
-              className={`w-3.5 h-3.5 transition-transform duration-200 ${
+              className={`w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 ${
                 dropdownOpen ? "rotate-180" : ""
               }`}
             />
@@ -103,7 +104,7 @@ export function Header({ transparent = false }: HeaderProps) {
 
           {/* Dropdown Menu */}
           <div
-            className={`absolute top-full left-0 mt-3 w-[280px] transition-all duration-200 ${
+            className={`absolute top-full left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-3 w-[250px] sm:w-[280px] transition-all duration-200 ${
               dropdownOpen
                 ? "opacity-100 visible translate-y-0"
                 : "opacity-0 invisible -translate-y-2 pointer-events-none"
@@ -115,7 +116,7 @@ export function Header({ transparent = false }: HeaderProps) {
                   key={solution.href}
                   to={solution.href}
                   onClick={() => setDropdownOpen(false)}
-                  className={`flex flex-col px-4 py-3 rounded-lg transition-colors ${
+                  className={`flex flex-col px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-colors ${
                     isActive(solution.href)
                       ? "bg-[#00d9ff]/10 text-white"
                       : "text-white/80 hover:bg-white/[0.05] hover:text-white"
@@ -132,9 +133,10 @@ export function Header({ transparent = false }: HeaderProps) {
         {/* CTA Button */}
         <Link
           to="/contato"
-          className="inline-flex items-center h-9 px-5 text-sm font-semibold text-white bg-[#0076CE] hover:bg-[#0099FF] rounded-full transition-all"
+          className="inline-flex items-center h-8 sm:h-9 px-3 sm:px-5 text-xs sm:text-sm font-semibold text-white bg-[#0076CE] hover:bg-[#0099FF] rounded-full transition-all whitespace-nowrap"
         >
-          Entre em contato
+          <span className="hidden sm:inline">Conhecer agora</span>
+          <span className="sm:hidden">Conhecer</span>
         </Link>
       </div>
     </header>

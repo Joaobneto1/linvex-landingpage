@@ -8,6 +8,8 @@ import Contato from "./pages/Contato";
 import Obrigado from "./pages/Obrigado";
 import NotFound from "./pages/NotFound";
 import Sobre from "./pages/Sobre";
+import Privacidade from "./pages/Privacidade";
+import Termos from "./pages/Termos";
 import LimvexCommerce from "./pages/solucoes/LimvexCommerce";
 import LimvexLicitacao from "./pages/solucoes/LimvexLicitacao";
 
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/contato" element={<Contato />} />
           <Route path="/obrigado" element={<Obrigado />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/privacidade" element={<Privacidade />} />
+          <Route path="/termos" element={<Termos />} />
           <Route path="/solucoes/limvex-commerce" element={<LimvexCommerce />} />
           <Route path="/solucoes/limvex-licitacao" element={<LimvexLicitacao />} />
           <Route path="*" element={<NotFound />} />

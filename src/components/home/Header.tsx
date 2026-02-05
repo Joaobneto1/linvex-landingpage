@@ -28,7 +28,7 @@ export function Header() {
               onClick={scrollToForm}
               className="bg-[#0076CE] hover:bg-[#0099FF] text-white"
             >
-              Entrar em contato
+              Conhecer agora
             </Button>
           </nav>
 
@@ -50,7 +50,7 @@ export function Header() {
                 onClick={scrollToForm}
                 className="bg-[#0076CE] hover:bg-[#0099FF] text-white w-full"
               >
-                Entrar em contato
+                Conhecer agora
               </Button>
             </div>
           </div>

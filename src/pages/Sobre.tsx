@@ -196,7 +196,7 @@ export default function Sobre() {
               </p>
             </div>
 
-            <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-transparent border border-white/10 rounded-2xl">
+            <div className="p-6 bg-gradient-to-br from-[#0099FF]/10 to-transparent border border-white/10 rounded-2xl">
               <h3 className="text-xl font-semibold mb-3">Automação</h3>
               <p className="text-white/60 text-sm leading-relaxed">
                 Automatização de processos internos, integrações entre sistemas e soluções
@@ -215,7 +215,7 @@ export default function Sobre() {
           </h2>
           <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
             Descubra como podemos ajudar sua empresa a crescer com tecnologia.
-            Entre em contato e vamos conversar sobre seu projeto.
+            Agende uma demonstração e conheça nossos produtos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contato">
