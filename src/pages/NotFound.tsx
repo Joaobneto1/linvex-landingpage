@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Header } from "@/components/home/Header";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/home/Footer";
 
 export default function NotFound() {
@@ -8,7 +8,7 @@ export default function NotFound() {
     <div className="min-h-screen bg-[#000920] text-white">
       <Header />
 
-      <main className="pt-32 pb-20 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8">
+      <main className="pt-28 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-2xl text-center">
           <h1 className="text-6xl md:text-8xl font-bold mb-4 text-[#0076CE]">404</h1>
 

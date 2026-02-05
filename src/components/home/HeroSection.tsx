@@ -63,15 +63,8 @@ export function HeroSection() {
         <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#030014]/40 via-transparent to-[#030014]/70" />
 
         {/* ================== COPY ================== */}
-        <div className="relative z-10 mx-auto grid w-full max-w-5xl place-items-center px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
+        <div className="relative z-10 mx-auto grid w-full max-w-5xl place-items-center px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28">
           <div className={`mx-auto text-center ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}>
-            {/* Logo/Nome LIMVEX */}
-            <div className="mb-6">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                LIMVEX
-              </h2>
-            </div>
-
             {/* Badge */}
             <span
               style={{ animationDelay: '100ms' }}
@@ -87,9 +80,13 @@ export function HeroSection() {
             {/* Main Headline */}
             <h1
               style={{ animationDelay: '200ms' }}
-              className={`mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
+              className={`mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white leading-[1.1] ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
-              Transformamos ideias em soluções digitais que geram resultado
+              Transformamos ideias em{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0076CE] to-[#00B8FF]">
+                soluções digitais
+              </span>{' '}
+              que geram resultado
             </h1>
 
             {/* Subheadline */}
