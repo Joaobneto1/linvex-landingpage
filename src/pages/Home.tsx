@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ProblemaSection } from "@/components/home/ProblemaSection";
 import { SolucaoSection } from "@/components/home/SolucaoSection";
@@ -32,6 +33,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen text-white bg-[#030014]">
+      <Header />
       <main>
         <HeroSection />
         <ProblemaSection />
