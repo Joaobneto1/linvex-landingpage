@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ProblemaSection } from "@/components/home/ProblemaSection";
-import { SolucaoSection } from "@/components/home/SolucaoSection";
 import { ComoFuncionaSection } from "@/components/home/ComoFuncionaSection";
 import { DiferenciaisSection } from "@/components/home/DiferenciaisSection";
 import { TimeSection } from "@/components/home/TimeSection";
@@ -37,7 +36,6 @@ export default function Home() {
       <main>
         <HeroSection />
         <ProblemaSection />
-        <SolucaoSection />
         <ComoFuncionaSection />
         <DiferenciaisSection />
         <TimeSection />

@@ -1,97 +1,119 @@
-import { Server, Shield, Clock, HeadphonesIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import lvxLicitaImage from "@/assets/lvxlicita.png";
+import lvxCommerceImage from "@/assets/lvxcommerce.png";
 
-const garantias = [
+const produtos = [
   {
-    icon: Server,
-    numero: "Arquitetura multi-cloud",
-    descricao: "Infraestrutura cloud-native multi-região",
-    gradient: "from-[#0076CE] to-[#0099FF]",
-    bgGradient: "from-[#0076CE]/15 to-[#0076CE]/5",
-    glowColor: "rgba(0, 118, 206, 0.25)",
+    imagem: lvxLicitaImage,
+    titulo: "LVX Licita",
+    subtitulo: "Automação de licitações públicas em escala",
+    descricao: "Monitore editais, gere propostas automaticamente e acompanhe processos licitatórios com inteligência artificial. Reduza tempo de análise em 80% e aumente taxa de vitórias.",
+    link: "#lvx-licita",
   },
   {
-    icon: Shield,
-    numero: "99.9% SLA",
-    descricao: "Disponibilidade contratual garantida",
-    gradient: "from-[#0099FF] to-[#00B8FF]",
-    bgGradient: "from-[#0099FF]/15 to-[#0099FF]/5",
-    glowColor: "rgba(0, 153, 255, 0.25)",
+    imagem: lvxCommerceImage,
+    titulo: "LVX Commerce",
+    subtitulo: "E-commerce enterprise com IA integrada",
+    descricao: "Plataforma completa de vendas online com automação de marketing, gestão de estoque inteligente e checkout otimizado. Aumente conversão em até 45% com personalização em tempo real.",
+    link: "#lvx-commerce",
   },
   {
-    icon: Clock,
-    numero: "Conformidade LGPD",
-    descricao: "Conformidade regulatória completa",
-    gradient: "from-[#00B8FF] to-[#0076CE]",
-    bgGradient: "from-[#00B8FF]/15 to-[#00B8FF]/5",
-    glowColor: "rgba(0, 184, 255, 0.25)",
-  },
-  {
-    icon: HeadphonesIcon,
-    numero: "24/7/365",
-    descricao: "Suporte de missão crítica",
-    gradient: "from-[#0076CE] via-[#0099FF] to-[#00B8FF]",
-    bgGradient: "from-[#0076CE]/15 to-[#0099FF]/5",
-    glowColor: "rgba(0, 118, 206, 0.25)",
+    imagem: lvxLicitaImage, // Pode trocar depois por terceira imagem
+    titulo: "Desenvolvimento Sob Medida",
+    subtitulo: "Soluções customizadas high-ticket",
+    descricao: "Arquitetura enterprise para desafios únicos que exigem tecnologia proprietária. Investimento a partir de R$ 50k para soluções que realmente movem o ponteiro do seu negócio.",
+    link: "#customizado",
   },
 ];
 
 export function SolucaoSection() {
   return (
-    <section id="garantias" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
-      {/* Mesh Background */}
-      <div className="absolute inset-0 tech-mesh-pattern opacity-100" />
-
-      {/* Background Elements */}
-      <div className="absolute top-1/4 -left-32 w-80 h-80 bg-[#0076CE] rounded-full blur-[180px] opacity-18" />
-      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-[#0099FF] rounded-full blur-[180px] opacity-15" />
+    <section id="solucoes" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background complexo premium */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-[#0a0a1f] to-[#030014]" />
+      <div className="absolute inset-0 tech-mesh-pattern opacity-30" />
+      
+      {/* Glow spots */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/8 rounded-full blur-[180px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#0099FF]/6 rounded-full blur-[200px]" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
+        
         {/* Header */}
         <Reveal direction="up" delay={0}>
-          <div className="mb-12 sm:mb-16 text-center">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6">
-              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
-              <span className="text-xs sm:text-sm font-medium text-white/70">Compromisso enterprise</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 sm:mb-6 text-white tracking-tight max-w-3xl mx-auto px-2">
-              Compromisso enterprise
+          <div className="text-center mb-12 md:mb-16">
+            <span className="inline-block px-4 py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/30 text-white/90 text-sm font-medium mb-6 backdrop-blur-sm">
+              Soluções
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-0">
+              Conheça nossas <span className="text-[#0099FF]">soluções</span>
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed px-2">
-              Garantias contratuais e infraestrutura de nível corporativo
-            </p>
           </div>
         </Reveal>
 
-        {/* Guarantees Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-          {garantias.map((garantia, index) => {
-            const Icon = garantia.icon;
-            return (
-              <Reveal key={index} direction="up" delay={index * 100}>
-                <div
-                  className={`group relative h-full p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${garantia.bgGradient} border border-white/[0.08] hover:border-white/20 transition-all duration-500 hover:translate-y-[-8px] text-center`}
-                  style={{ boxShadow: `0 8px 32px ${garantia.glowColor}` }}
-                >
-                  {/* Icon */}
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${garantia.gradient} flex items-center justify-center mb-2 sm:mb-3 md:mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300 mx-auto`} style={{ boxShadow: `0 0 20px ${garantia.glowColor}` }}>
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
+        {/* Grid de produtos - Estilo Freedom */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {produtos.map((produto, index) => (
+            <Reveal key={index} direction="up" delay={index * 100}>
+              <div className="
+                relative overflow-hidden
+                backdrop-blur-xl bg-white/[0.03]
+                border border-white/10
+                rounded-2xl
+                transition-all duration-300
+                hover:border-[#0076CE]/50 hover:bg-white/[0.05]
+                group
+                cursor-pointer
+              ">
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0076CE]/10 via-transparent to-transparent" />
+                </div>
+
+                <div className="relative z-10">
+                  {/* Imagem no topo */}
+                  <div className="relative w-full h-48 overflow-hidden">
+                    <img 
+                      src={produto.imagem} 
+                      alt={produto.titulo}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      style={{
+                        mixBlendMode: 'lighten',
+                        filter: 'brightness(1.1) contrast(1.1)',
+                      }}
+                    />
+                    {/* Gradient overlay para integração */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030014] to-transparent" />
                   </div>
 
-                  {/* Number */}
-                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-white mb-1 sm:mb-2 leading-tight">
-                    {garantia.numero}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-[10px] sm:text-xs md:text-sm text-white/65 leading-relaxed">
-                    {garantia.descricao}
-                  </p>
+                  {/* Conteúdo */}
+                  <div className="p-6 md:p-8">
+                    <h3 className="text-xl md:text-2xl font-normal text-white mb-2">
+                      {produto.titulo}
+                    </h3>
+                    <p className="text-[#0099FF] font-medium mb-4 text-sm md:text-base">
+                      {produto.subtitulo}
+                    </p>
+                    <p className="text-white/60 mb-6 md:mb-8 text-sm md:text-base leading-relaxed">
+                      {produto.descricao}
+                    </p>
+                    
+                    {/* Link com seta animada */}
+                    <a 
+                      href={produto.link}
+                      className="inline-flex items-center gap-2 text-[#0099FF] font-medium group/link hover:gap-3 transition-all duration-300"
+                    >
+                      <span>Ver {produto.titulo}</span>
+                      <ArrowRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  </div>
                 </div>
-              </Reveal>
-            );
-          })}
+              </div>
+            </Reveal>
+          ))}
         </div>
+
       </div>
     </section>
   );
