@@ -132,6 +132,10 @@ interface LeadPayload {
   descricao?: string;
   origem: 'startup' | 'produtos' | 'para-empresas' | 'contato';
   produto?: string;
+  tipoProjeto?: string;
+  orcamento?: string;
+  urgencia?: string;
+  faturamento?: string;
   [key: string]: any;
 }
 
@@ -252,7 +256,8 @@ function formatEmailHtml(payload: LeadPayload): string {
                       ${createField('Produto de interesse', payload.produto)}
                       ${createField('Tipo de projeto', payload.tipoProjeto)}
                       ${createField('Objetivo do projeto', payload.objetivoProjeto)}
-                      ${createField('Faturamento', payload.faturamento)}
+                      ${createField('Faturamento/Orçamento', payload.faturamento || payload.orcamento)}
+                      ${createField('Urgência', payload.urgencia)}
                     </table>
                   </td>
                 </tr>
@@ -374,8 +379,12 @@ function formatEmailBody(payload: LeadPayload): string {
     body += `Objetivo do projeto: ${payload.objetivoProjeto}\n`;
   }
 
-  if (payload.faturamento) {
-    body += `Faturamento: ${payload.faturamento}\n`;
+  if (payload.faturamento || payload.orcamento) {
+    body += `Faturamento/Orçamento: ${payload.faturamento || payload.orcamento}\n`;
+  }
+
+  if (payload.urgencia) {
+    body += `Urgência: ${payload.urgencia}\n`;
   }
 
   body += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;

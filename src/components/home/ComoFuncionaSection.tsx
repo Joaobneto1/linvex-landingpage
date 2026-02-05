@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { Search, CheckCircle2, Code2, Rocket, Workflow } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { scrollToLeadForm } from "@/lib/utils";
 
 const passos = [
   {
@@ -169,12 +169,12 @@ export function ComoFuncionaSection() {
         <Reveal direction="up" delay={500}>
           <div className="text-center mt-12 sm:mt-16">
             <Button
-              onClick={scrollToLeadForm}
+              asChild
               size="lg"
               variant="outline"
               className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
             >
-              Quero começar meu projeto
+              <Link to="/contato">Quero começar meu projeto</Link>
             </Button>
           </div>
         </Reveal>

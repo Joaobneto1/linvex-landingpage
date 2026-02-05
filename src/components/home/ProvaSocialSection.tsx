@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { Award, Zap } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { scrollToLeadForm } from "@/lib/utils";
 import compromissoImage from "@/assets/Compromisso-Secao.jpg";
 
 export function ProvaSocialSection() {
@@ -32,12 +32,12 @@ export function ProvaSocialSection() {
             </p>
             <div className="px-2">
               <Button
-                onClick={scrollToLeadForm}
+                asChild
                 size="lg"
                 variant="outline"
                 className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
               >
-                Quero algo assim
+                <Link to="/contato">Quero algo assim</Link>
               </Button>
             </div>
           </Reveal>

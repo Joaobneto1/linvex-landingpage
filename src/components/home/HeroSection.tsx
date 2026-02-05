@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { scrollToLeadForm } from "@/lib/utils";
-import limvexBackground from "@/assets/limvex-background2.jpeg";
+import NeuralBackground from "@/components/flow-field-background";
 
 export function HeroSection() {
 
@@ -48,26 +48,19 @@ export function HeroSection() {
 
       <section className="relative isolate h-screen overflow-hidden bg-[#030014] text-white">
         {/* ================== BACKGROUND ================== */}
-        {/* Background Image - Imagem principal como background */}
-        <div 
-          className="absolute inset-0 -z-30"
-          style={{
-            backgroundImage: `url(${limvexBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-          }}
-        />
+        {/* Flow Field Neural Background */}
+        <div className="absolute inset-0 -z-30">
+          <NeuralBackground
+            color="#0076CE"
+            particleCount={700}
+            speed={0.8}
+            trailOpacity={0.08}
+            className="bg-[#030014]"
+          />
+        </div>
         
-        {/* Dark overlay para garantir legibilidade do texto */}
-        <div className="absolute inset-0 -z-20 bg-[#030014]/75" />
-        
-        {/* Subtle gradient overlay para mais profundidade e contraste */}
-        <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#030014]/80 via-[#030014]/50 to-[#030014]/90" />
-        
-        {/* Overlay adicional para destacar a área central do conteúdo */}
-        <div className="absolute inset-0 -z-20 bg-gradient-to-b from-transparent via-transparent to-[#030014]/60" />
+        {/* Gradient overlay para legibilidade e profundidade */}
+        <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#030014]/40 via-transparent to-[#030014]/70" />
 
         {/* ================== COPY ================== */}
         <div className="relative z-10 mx-auto grid w-full max-w-5xl place-items-center px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
@@ -113,20 +106,24 @@ export function HeroSection() {
               className={`mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               <Button
-                onClick={scrollToLeadForm}
+                asChild
                 size="lg"
                 className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 md:py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
               >
-                Solicitar diagnóstico
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                <Link to="/contato">
+                  Solicitar diagnóstico
+                  <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                </Link>
               </Button>
               <Button
-                onClick={scrollToLeadForm}
+                asChild
                 size="lg"
                 variant="outline"
                 className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 md:py-7 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
               >
-                Falar com um especialista
+                <Link to="/contato">
+                  Falar com um especialista
+                </Link>
               </Button>
             </div>
           </div>

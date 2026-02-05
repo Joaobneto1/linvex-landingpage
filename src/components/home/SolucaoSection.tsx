@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { Sparkles, Check } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { scrollToLeadForm } from "@/lib/utils";
 import cloudBankingIcon from "@/assets/cloud-banking.png";
 import softwareMedidaIcon from "@/assets/software-medida.png";
 import architectureIcon from "@/assets/architechture.png";
@@ -115,11 +115,11 @@ export function SolucaoSection() {
         <Reveal direction="up" delay={400}>
           <div className="text-center mt-12 sm:mt-16">
             <Button
-              onClick={scrollToLeadForm}
+              asChild
               size="lg"
               className="bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
             >
-              Quero uma proposta
+              <Link to="/contato">Quero uma proposta</Link>
             </Button>
           </div>
         </Reveal>
