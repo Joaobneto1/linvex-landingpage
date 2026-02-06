@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
+import lvxLicitaImage from "@/assets/lvxlicita.png";
 import {
   FileText,
   Bell,
@@ -62,44 +63,45 @@ export default function LimvexLicitacao() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-28 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0099FF]/10 via-transparent to-transparent" />
+      <section className="relative overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-[70vh]">
+        {/* Background com imagem do produto */}
+        <div className="absolute inset-0 bg-[#030014]">
+          <img
+            src={lvxLicitaImage}
+            alt=""
+            className="w-full h-full object-cover opacity-20"
+          />
+        </div>
+        
+        {/* Gradient overlays para profundidade */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030014]/70 via-transparent to-[#030014]/90" />
 
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#0099FF]/20 border border-[#0099FF]/30 rounded-full text-[#0099FF] text-sm font-medium mb-6">
-                <FileText className="w-4 h-4" />
-                Gestão de Licitações
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Limvex{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0099FF] to-[#00B8FF]">
-                  Bidding
-                </span>
-              </h1>
-
-              <p className="text-xl text-white/70 mb-6 leading-relaxed">
-                Automatize o monitoramento de licitações públicas e aumente suas chances de ganhar contratos governamentais. Plataforma completa com IA para análise de viabilidade.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contato">
-                  <Button className="bg-[#0099FF] hover:bg-[#00B8FF] text-white font-semibold px-8 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0099FF]/30">
-                    Agendar Demonstração
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </Link>
-              </div>
+        {/* Content */}
+        <div className="container mx-auto max-w-4xl relative z-10">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#0099FF]/20 border border-[#0099FF]/30 rounded-full text-[#0099FF] text-sm font-medium mb-6 backdrop-blur-sm">
+              <FileText className="w-4 h-4" />
+              Gestão de Licitações
             </div>
 
-            {/* Illustration placeholder */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="w-full max-w-md aspect-square rounded-3xl bg-gradient-to-br from-[#0099FF]/20 to-[#00B8FF]/10 border border-white/10 flex items-center justify-center">
-                <FileText className="w-32 h-32 text-[#0099FF]/50" />
-              </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              Limvex{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0099FF] to-[#00B8FF]">
+                Bidding
+              </span>
+            </h1>
+
+            <p className="text-xl text-white/70 mb-8 leading-relaxed max-w-2xl mx-auto">
+              Automatize o monitoramento de licitações públicas e aumente suas chances de ganhar contratos governamentais. Plataforma completa com IA para análise de viabilidade.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contato">
+                <Button className="bg-[#0099FF] hover:bg-[#00B8FF] text-white font-semibold px-8 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0099FF]/30">
+                  Agendar Demonstração
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
