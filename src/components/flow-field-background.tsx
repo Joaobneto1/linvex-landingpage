@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface NeuralBackgroundProps {
@@ -33,8 +33,48 @@ export default function NeuralBackground({
 }: NeuralBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  // Track when container has valid dimensions
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const checkDimensions = () => {
+      const { clientWidth, clientHeight } = container;
+      if (clientWidth > 0 && clientHeight > 0) {
+        setIsReady(true);
+      }
+    };
+
+    // Check immediately
+    checkDimensions();
+
+    // Use ResizeObserver to detect when container gets valid dimensions
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        if (width > 0 && height > 0) {
+          setIsReady(true);
+        }
+      }
+    });
+
+    resizeObserver.observe(container);
+
+    // Fallback: check after a short delay (for mobile browsers that may be slow)
+    const fallbackTimer = setTimeout(checkDimensions, 100);
+
+    return () => {
+      resizeObserver.disconnect();
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
 
   useEffect(() => {
+    // Only run animation when container is ready with valid dimensions
+    if (!isReady) return;
+
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
@@ -45,9 +85,14 @@ export default function NeuralBackground({
     // --- CONFIGURATION ---
     let width = container.clientWidth;
     let height = container.clientHeight;
+    
+    // Safety check: don't initialize with invalid dimensions
+    if (width <= 0 || height <= 0) return;
+
     let particles: Particle[] = [];
     let animationFrameId: number;
     let mouse = { x: -1000, y: -1000 }; // Start off-screen
+    let isAnimating = true;
 
     // --- PARTICLE CLASS ---
     class Particle {
@@ -129,6 +174,13 @@ export default function NeuralBackground({
 
     // --- INITIALIZATION ---
     const init = () => {
+      // Get fresh dimensions
+      width = container.clientWidth;
+      height = container.clientHeight;
+      
+      // Safety check
+      if (width <= 0 || height <= 0) return;
+
       // Handle High-DPI screens (Retina)
       const dpr = window.devicePixelRatio || 1;
       canvas.width = width * dpr;
@@ -136,6 +188,10 @@ export default function NeuralBackground({
       ctx.scale(dpr, dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+
+      // Clear canvas completely on init to prevent visual artifacts
+      ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      ctx.fillRect(0, 0, width, height);
 
       particles = [];
       for (let i = 0; i < particleCount; i++) {
@@ -145,10 +201,10 @@ export default function NeuralBackground({
 
     // --- ANIMATION LOOP ---
     const animate = () => {
+      if (!isAnimating) return;
+
       // "Fade" effect: Instead of clearing the canvas, we draw a semi-transparent rect
       // This creates the "Trails" look.
-      // We use the background color of the parent or a dark overlay.
-      // Assuming dark mode for this effect usually:
       ctx.fillStyle = `rgba(0, 0, 0, ${trailOpacity})`; 
       ctx.fillRect(0, 0, width, height);
 
@@ -160,12 +216,19 @@ export default function NeuralBackground({
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // --- EVENT LISTENERS ---
-    const handleResize = () => {
-      width = container.clientWidth;
-      height = container.clientHeight;
-      init();
-    };
+    // --- RESIZE HANDLER with ResizeObserver ---
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width: newWidth, height: newHeight } = entry.contentRect;
+        if (newWidth > 0 && newHeight > 0 && (newWidth !== width || newHeight !== height)) {
+          width = newWidth;
+          height = newHeight;
+          init();
+        }
+      }
+    });
+
+    resizeObserver.observe(container);
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -174,29 +237,61 @@ export default function NeuralBackground({
     };
 
     const handleMouseLeave = () => {
-        mouse.x = -1000;
-        mouse.y = -1000;
-    }
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    // Handle touch events for mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
 
     // Start
     init();
     animate();
 
-    window.addEventListener("resize", handleResize);
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", handleMouseLeave);
+    container.addEventListener("touchmove", handleTouchMove, { passive: true });
+    container.addEventListener("touchend", handleTouchEnd);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      isAnimating = false;
+      resizeObserver.disconnect();
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
+      container.removeEventListener("touchmove", handleTouchMove);
+      container.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [color, trailOpacity, particleCount, speed]);
+  }, [isReady, color, trailOpacity, particleCount, speed]);
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-full bg-black overflow-hidden", className)}>
-      <canvas ref={canvasRef} className="block w-full h-full" />
+    <div 
+      ref={containerRef} 
+      className={cn(
+        "relative w-full h-full overflow-hidden",
+        // Fallback background while canvas initializes
+        !isReady && "bg-[#030014]",
+        className
+      )}
+    >
+      <canvas 
+        ref={canvasRef} 
+        className={cn(
+          "block w-full h-full transition-opacity duration-300",
+          isReady ? "opacity-100" : "opacity-0"
+        )} 
+      />
     </div>
   );
 }
