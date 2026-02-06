@@ -70,7 +70,7 @@ export default function LimvexCommerce() {
           <img
             src={lvxCommerceImage}
             alt=""
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
         
