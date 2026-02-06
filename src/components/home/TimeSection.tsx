@@ -1,6 +1,20 @@
-import { Users, Rocket, Calendar, HeadphonesIcon } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import parceirosImage from "@/assets/Parceiros-secao.jpg";
+
+const stackItems = [
+  {
+    title: "Nuvem e Infraestrutura",
+    description: "AWS, Azure, GCP • Kubernetes, Docker • Terraform, Ansible",
+  },
+  {
+    title: "Backend e Banco de Dados",
+    description: "Node.js, Python, Go • PostgreSQL, MongoDB, Redis",
+  },
+  {
+    title: "DevOps e Monitoramento",
+    description: "CI/CD, GitHub Actions • Datadog, Grafana, Prometheus",
+  },
+];
 
 export function TimeSection() {
   return (
@@ -19,7 +33,7 @@ export function TimeSection() {
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-white/10">
               <img
                 src={parceirosImage}
-                alt="Time de produto Limvex trabalhando na evolução das soluções"
+                alt="Engenharia de plataforma Limvex"
                 loading="lazy"
                 className="w-full h-64 sm:h-80 md:h-96 lg:h-[450px] object-contain sm:object-cover"
                 style={{ objectPosition: 'center center' }}
@@ -30,38 +44,35 @@ export function TimeSection() {
 
           {/* Content Side */}
           <Reveal direction="left" delay={100} className="order-1 lg:order-2 lg:col-span-2 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6">
-              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
-              <span className="text-xs sm:text-sm font-medium text-white/70">Engenharia de produto</span>
+            {/* Badge sem ícone */}
+            <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6">
+              <span className="text-xs sm:text-sm font-medium text-white/70">Stack e Infraestrutura</span>
             </div>
 
+            {/* Título */}
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold mb-3 sm:mb-4 md:mb-6 text-white tracking-tight leading-tight px-1 sm:px-2">
-              Time de engenharia
+              Engenharia de plataforma
             </h2>
 
+            {/* Descrição técnica */}
             <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/65 mb-5 sm:mb-6 md:mb-8 leading-relaxed px-1 sm:px-2">
-              Arquitetos e engenheiros especializados em todas as camadas da stack. Atuamos da infraestrutura cloud até a aplicação. Metodologias ágeis com entrega contínua, qualidade de código e performance.
+              Stack moderna com práticas de engenharia de software corporativo. Arquitetura nativa em nuvem, integração e entrega contínuas, testes rigorosos e monitoramento completo garantem confiabilidade e desempenho em todas as camadas.
             </p>
 
-            {/* Features */}
+            {/* Cards de Stack - sem ícones */}
             <div className="space-y-2 sm:space-y-3 md:space-y-4 px-1 sm:px-0">
-              {[
-                { icon: Rocket, text: "Cloud: AWS, Azure, GCP" },
-                { icon: Calendar, text: "Backend: Node.js, Python, Go" },
-                { icon: HeadphonesIcon, text: "Infraestrutura: Kubernetes, Terraform" },
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <Reveal key={index} direction="up" delay={200 + index * 50}>
-                    <div className="flex items-center gap-2.5 sm:gap-3 md:gap-4 p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-[#0076CE]/30 transition-all duration-300">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-[#0076CE]/20 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#0076CE]" />
-                      </div>
-                      <span className="text-xs sm:text-sm md:text-base text-white/80">{item.text}</span>
-                    </div>
-                  </Reveal>
-                );
-              })}
+              {stackItems.map((item, index) => (
+                <Reveal key={index} direction="up" delay={200 + index * 50}>
+                  <div className="p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-[#0076CE]/30 hover:bg-white/[0.05] transition-all duration-300">
+                    <h3 className="text-sm sm:text-base md:text-lg font-medium text-white mb-1 sm:mb-1.5">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-white/50">
+                      {item.description}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </Reveal>
         </div>

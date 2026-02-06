@@ -25,7 +25,8 @@ const produtos = [
     titulo: "Desenvolvimento Sob Medida",
     subtitulo: "Soluções customizadas high-ticket",
     descricao: "Arquitetura enterprise para desafios únicos que exigem tecnologia proprietária. Soluções que realmente movem o ponteiro do seu negócio.",
-    link: null, // Vai para formulário
+    link: "/solucoes/limvex-custom",
+    textoLink: "Solicitar orçamento",
   },
 ];
 
@@ -116,7 +117,7 @@ export function ProblemaSection() {
                     {/* Link com seta animada */}
                     <div className="inline-flex items-center gap-2 text-[#0099FF] font-medium group/link hover:gap-3 transition-all duration-300">
                       <span>
-                        {produto.link ? `Ver ${produto.titulo}` : 'Solicitar orçamento'}
+                        {produto.textoLink || (produto.link ? `Ver ${produto.titulo}` : 'Solicitar orçamento')}
                       </span>
                       <ArrowRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
                     </div>
