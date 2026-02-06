@@ -7,38 +7,38 @@ import { BauhausCard } from "@/components/ui/bauhaus-card";
 const diferenciais = [
   {
     icon: Zap,
-    title: "Arquitetura cloud-agnostic",
-    description: "Infraestrutura multi-cloud que elimina vendor lock-in e garante portabilidade total",
+    title: "Infraestrutura independente",
+    description: "Arquitetura preparada para múltiplos provedores de nuvem, eliminando dependência de fornecedor e garantindo total portabilidade.",
     number: "01",
   },
   {
     icon: RefreshCw,
-    title: "Observabilidade completa",
-    description: "Telemetria end-to-end com logs estruturados, métricas em tempo real e distributed tracing",
+    title: "Monitoramento avançado",
+    description: "Visibilidade completa com registros estruturados, métricas em tempo real e rastreamento distribuído de ponta a ponta.",
     number: "02",
   },
   {
     icon: Shield,
-    title: "Segurança zero-trust",
-    description: "Modelo de segurança zero-trust com autenticação contínua, criptografia e least-privilege access",
+    title: "Segurança por verificação contínua",
+    description: "Modelo de segurança com verificação contínua de identidade, criptografia de dados e princípio do menor privilégio de acesso.",
     number: "03",
   },
   {
     icon: Link2,
-    title: "Arquitetura API-first",
-    description: "Design API-first que garante integrabilidade, extensibilidade e interoperabilidade total",
+    title: "Integração nativa",
+    description: "Arquitetura orientada a interfaces que garante integração simplificada, extensibilidade e interoperabilidade total.",
     number: "04",
   },
   {
     icon: BarChart3,
     title: "Governança de dados",
-    description: "Framework de governança com data lineage completo, auditoria e conformidade regulatória",
+    description: "Estrutura de governança com rastreabilidade completa de dados, auditoria automatizada e conformidade regulatória.",
     number: "05",
   },
   {
     icon: HeadphonesIcon,
-    title: "Suporte enterprise",
-    description: "Suporte técnico de nível 4 com SLA contratual e engenheiros dedicados",
+    title: "Suporte corporativo",
+    description: "Suporte técnico especializado com acordo de nível de serviço contratual e engenheiros dedicados.",
     number: "06",
   },
 ];
@@ -73,7 +73,7 @@ export function DiferenciaisSection() {
               Por que escolher a Limvex?
             </h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">
-              Tecnologia enterprise com foco em resultados operacionais
+              Tecnologia corporativa com foco em resultados operacionais
             </p>
           </div>
         </Reveal>

@@ -1,41 +1,36 @@
 import { Link } from "react-router-dom";
-import { MessageSquare, Target, Settings, TrendingUp, Workflow } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 
 const fases = [
   {
     numero: "01",
-    icon: MessageSquare,
-    title: "Análise e mapeamento",
-    description: "Due diligence técnica: mapeamento de arquitetura, pontos críticos, análise de viabilidade e definição de roadmap",
+    title: "Análise e diagnóstico",
+    description: "Diagnóstico técnico completo com mapeamento de arquitetura, identificação de pontos críticos, análise de viabilidade e definição do plano de ação.",
     gradient: "from-[#0076CE] to-[#0099FF]",
     bgGradient: "from-[#0076CE]/15 to-[#0076CE]/5",
     glowColor: "rgba(0, 118, 206, 0.3)",
   },
   {
     numero: "02",
-    icon: Target,
     title: "Arquitetura e planejamento",
-    description: "Design de arquitetura enterprise: modelagem de dados, integrações, estratégia de migração e governança técnica",
+    description: "Projeto de arquitetura corporativa com modelagem de dados, definição de integrações, estratégia de migração e governança técnica.",
     gradient: "from-[#0099FF] to-[#00B8FF]",
     bgGradient: "from-[#0099FF]/15 to-[#0099FF]/5",
     glowColor: "rgba(0, 153, 255, 0.3)",
   },
   {
     numero: "03",
-    icon: Settings,
     title: "Implementação e integração",
-    description: "Deploy estruturado: infraestrutura, integração de sistemas, migração de dados e testes de performance",
+    description: "Implantação estruturada com configuração de infraestrutura, integração de sistemas, migração de dados e testes de desempenho.",
     gradient: "from-[#00B8FF] to-[#0076CE]",
     bgGradient: "from-[#00B8FF]/15 to-[#00B8FF]/5",
     glowColor: "rgba(0, 184, 255, 0.3)",
   },
   {
     numero: "04",
-    icon: TrendingUp,
     title: "Operação e evolução",
-    description: "Monitoramento proativo, otimização de performance, evolução arquitetural e suporte de missão crítica",
+    description: "Monitoramento contínuo, otimização de desempenho, evolução arquitetural e suporte dedicado para operações críticas.",
     gradient: "from-[#0076CE] via-[#0099FF] to-[#00B8FF]",
     bgGradient: "from-[#0076CE]/15 to-[#0099FF]/5",
     glowColor: "rgba(0, 118, 206, 0.35)",
@@ -60,14 +55,13 @@ export function ComoFuncionaSection() {
         <Reveal direction="up" delay={0}>
           <div className="text-center mb-12 sm:mb-16 md:mb-20">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0076CE]/15 border border-[#0076CE]/25 mb-4 sm:mb-6">
-              <Workflow className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
               <span className="text-xs sm:text-sm font-medium text-white/70">Metodologia estruturada</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 sm:mb-6 text-white tracking-tight px-2">
               Processo de implementação
             </h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/65 max-w-3xl mx-auto leading-relaxed px-2">
-              Metodologia estruturada do diagnóstico ao go-live
+              Metodologia estruturada do diagnóstico à operação
             </p>
           </div>
         </Reveal>
@@ -113,7 +107,6 @@ export function ComoFuncionaSection() {
 
           <div className="space-y-6 sm:space-y-8 lg:space-y-16 relative">
             {fases.map((fase, index) => {
-              const Icon = fase.icon;
               const isEven = index % 2 === 0;
 
               return (
@@ -132,19 +125,11 @@ export function ComoFuncionaSection() {
                           <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-white">{fase.numero}</span>
                         </div>
 
-                        {/* Icon - Dentro do card */}
-                        <div className="flex items-start gap-3 sm:gap-4 md:gap-5 mb-3 sm:mb-4 md:mb-5">
-                          <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${fase.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`} style={{ boxShadow: `0 0 20px ${fase.glowColor}` }}>
-                            <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
-                          </div>
-                          <div className="flex-1 pt-1">
-                            <div className="text-xs sm:text-sm font-medium mb-1 sm:mb-2 text-white/50 uppercase tracking-wider">
-                              Fase {fase.numero}
-                            </div>
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3 leading-tight">
-                              {fase.title}
-                            </h3>
-                          </div>
+                        {/* Content */}
+                        <div className="mb-3 sm:mb-4 md:mb-5">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3 leading-tight">
+                            {fase.title}
+                          </h3>
                         </div>
 
                         <p className="text-white/65 leading-relaxed text-sm sm:text-base md:text-lg">
