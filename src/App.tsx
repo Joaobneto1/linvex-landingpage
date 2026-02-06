@@ -12,6 +12,7 @@ import Privacidade from "./pages/Privacidade";
 import Termos from "./pages/Termos";
 import LimvexCommerce from "./pages/solucoes/LimvexCommerce";
 import LimvexLicitacao from "./pages/solucoes/LimvexLicitacao";
+import LimvexCustom from "./pages/solucoes/LimvexCustom";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/termos" element={<Termos />} />
           <Route path="/solucoes/limvex-commerce" element={<LimvexCommerce />} />
           <Route path="/solucoes/limvex-licitacao" element={<LimvexLicitacao />} />
+          <Route path="/solucoes/limvex-custom" element={<LimvexCustom />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

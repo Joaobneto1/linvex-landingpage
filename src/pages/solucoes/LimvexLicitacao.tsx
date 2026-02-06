@@ -77,7 +77,7 @@ export default function LimvexLicitacao() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Limvex{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0099FF] to-[#00B8FF]">
-                  Licitação
+                  Bidding
                 </span>
               </h1>
 
@@ -113,7 +113,7 @@ export default function LimvexLicitacao() {
               Conquiste mais contratos públicos
             </h2>
             <p className="text-lg text-white/70 leading-relaxed">
-              O Limvex Licitação é uma plataforma pronta para uso que centraliza todo o processo de licitações em um só lugar. Da busca por editais até a análise de resultados, você tem controle total sobre suas oportunidades no mercado público.
+              O Limvex Bidding é uma plataforma pronta para uso que centraliza todo o processo de licitações em um só lugar. Da busca por editais até a análise de resultados, você tem controle total sobre suas oportunidades no mercado público.
             </p>
           </div>
 
@@ -204,7 +204,7 @@ export default function LimvexLicitacao() {
             Pronto para ganhar mais licitações?
           </h2>
           <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-            Agende uma demonstração gratuita e veja o Limvex Licitação em ação com casos de uso do seu segmento.
+            Agende uma demonstração gratuita e veja o Limvex Bidding em ação com casos de uso do seu segmento.
           </p>
           <Link to="/contato">
             <Button className="bg-[#0099FF] hover:bg-[#00B8FF] text-white font-semibold px-10 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0099FF]/30">

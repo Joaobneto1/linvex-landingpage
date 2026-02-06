@@ -64,7 +64,7 @@ export function ChamadaFinalSection() {
               variant="outline"
               className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-base sm:text-lg px-8 sm:px-10 md:px-12 py-6 sm:py-7 md:py-8 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
             >
-              <a href="#plataformas">Conhecer plataformas</a>
+              <Link to="/solucoes/limvex-custom">Ver Desenvolvimento Sob Medida</Link>
             </Button>
           </div>
         </Reveal>
