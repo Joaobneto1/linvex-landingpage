@@ -109,7 +109,7 @@ O sistema utiliza **Resend** como provedor de e-mail. Para configurar:
 ### Rate Limiting
 
 O sistema de rate limiting de e-mails funciona com:
-- **Vercel KV** (recomendado em produção) - se as variáveis `KV_REST_API_URL` e `KV_REST_API_TOKEN` estiverem configuradas
+- **Vercel KV** (recomendado em produção) - se as variáveis `KV_REST_API_URL` e `KV_REST_API_TOKEN` estiverem configuradas.
 - **Fallback local** - arquivo JSON em `/tmp` (funciona em desenvolvimento).
 
 Limite: 3.000 e-mails por mês
