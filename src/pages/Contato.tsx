@@ -7,6 +7,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, Send, ArrowLeft, CheckCircle, Bot } from "lucide-react";
 
+// Declaração para Facebook Pixel
+declare global {
+  interface Window {
+    fbq?: (action: string, event: string, data?: Record<string, unknown>) => void;
+  }
+}
+
 // Tipos
 interface FormData {
   nome: string;
@@ -331,6 +338,14 @@ export default function Contato() {
 
       if (!response.ok || result.ok === false) {
         throw new Error(result.error || "Erro ao enviar formulário");
+      }
+
+      // Rastrear conversão no Facebook Pixel
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {
+          content_name: 'Formulário de Contato',
+          content_category: payload.tipoProjeto,
+        });
       }
 
       setIsComplete(true);
