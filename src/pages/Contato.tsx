@@ -140,9 +140,6 @@ function TypingIndicator() {
       transition={{ duration: 0.3 }}
       className="flex items-start gap-3 mb-4"
     >
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0076CE] to-[#0099FF] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#0076CE]/20">
-        <Bot className="w-5 h-5 text-white" />
-      </div>
       <div className="bg-white/[0.08] border border-white/10 rounded-2xl rounded-tl-md px-5 py-4">
         <div className="flex items-center gap-1">
           <motion.span
@@ -175,9 +172,6 @@ function BotMessage({ children, delay = 0 }: { children: React.ReactNode; delay?
       transition={{ duration: 0.4, delay }}
       className="flex items-start gap-3 mb-4"
     >
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0076CE] to-[#0099FF] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#0076CE]/20">
-        <Bot className="w-5 h-5 text-white" />
-      </div>
       <div className="bg-white/[0.08] border border-white/10 rounded-2xl rounded-tl-md px-5 py-4 max-w-[85%]">
         <p className="text-white/90 text-base leading-relaxed">{children}</p>
       </div>
@@ -221,7 +215,7 @@ export default function Contato() {
   const [isTyping, setIsTyping] = useState(false);
   const [showCurrentQuestion, setShowCurrentQuestion] = useState(true);
   const [history, setHistory] = useState<Array<{ question: string; answer: string }>>([]);
-  
+
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -261,7 +255,7 @@ export default function Contato() {
   // Avançar para próxima pergunta
   const handleNext = () => {
     const value = currentValue.trim();
-    
+
     // Validação (exceto campos opcionais vazios)
     if (!currentQuestion.optional || value) {
       const validationError = currentQuestion.validation?.(value);
@@ -274,14 +268,14 @@ export default function Contato() {
     // Salvar resposta
     const updatedFormData = { ...formData, [currentQuestion.id]: value };
     setFormData(updatedFormData);
-    
+
     // Adicionar ao histórico
-    const displayValue = currentQuestion.type === "select" 
-      ? getOptionLabel(currentQuestion.id, value) 
-      : currentQuestion.type === "tel" 
+    const displayValue = currentQuestion.type === "select"
+      ? getOptionLabel(currentQuestion.id, value)
+      : currentQuestion.type === "tel"
         ? formatPhone(value)
         : value;
-    
+
     if (value) {
       setHistory((prev) => [
         ...prev,
@@ -297,10 +291,10 @@ export default function Contato() {
     if (currentStep < questions.length - 1) {
       setShowCurrentQuestion(false);
       setIsTyping(true);
-      
+
       // Simular tempo de digitação (1-1.5 segundos)
       const typingDelay = 1000 + Math.random() * 500;
-      
+
       setTimeout(() => {
         setIsTyping(false);
         setCurrentStep((prev) => prev + 1);
@@ -377,13 +371,13 @@ export default function Contato() {
           <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500/20 to-green-600/20 border-2 border-green-500/30 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10 text-green-400" />
           </div>
-          
+
           <h1 className="text-3xl font-bold text-white mb-4">
             Mensagem enviada!
           </h1>
-          
+
           <p className="text-white/70 mb-8 leading-relaxed">
-            Obrigado por entrar em contato, <span className="text-white font-medium">{formData.nome}</span>! 
+            Obrigado por entrar em contato, <span className="text-white font-medium">{formData.nome}</span>!
             Nossa equipe analisará seu projeto e entrará em contato em até 24 horas.
           </p>
 
@@ -402,21 +396,23 @@ export default function Contato() {
     <div className="min-h-screen bg-[#030014] flex flex-col">
       {/* Header */}
       <header className="border-b border-white/10 bg-[#030014]/80 backdrop-blur-lg sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/")}
-            className="text-white/70 hover:text-white hover:bg-white/10"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar
-          </Button>
+        <div className="relative w-full px-4 sm:px-8 py-4 flex items-center justify-center min-h-[64px]">
+          <div className="absolute left-4 sm:left-8">
+            <Button
+              variant="ghost"
+              onClick={() => navigate("/")}
+              className="text-white/70 hover:text-white hover:bg-white/10 -ml-2"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Voltar
+            </Button>
+          </div>
 
           <span className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
             LIMVEX
           </span>
 
-          <div className="text-white/50 text-sm">
+          <div className="absolute right-4 sm:right-8 text-white/50 text-sm">
             {currentStep + 1} de {questions.length}
           </div>
         </div>
@@ -553,7 +549,7 @@ export default function Contato() {
                   type={currentQuestion.type}
                   value={currentQuestion.type === "tel" ? formatPhone(currentValue) : currentValue}
                   onChange={(e) => {
-                    const val = currentQuestion.type === "tel" 
+                    const val = currentQuestion.type === "tel"
                       ? e.target.value.replace(/\D/g, "").slice(0, 11)
                       : e.target.value;
                     setCurrentValue(val);

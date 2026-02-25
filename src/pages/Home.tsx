@@ -4,8 +4,6 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { ProblemaSection } from "@/components/home/ProblemaSection";
 import { ComoFuncionaSection } from "@/components/home/ComoFuncionaSection";
 import { DiferenciaisSection } from "@/components/home/DiferenciaisSection";
-import { TimeSection } from "@/components/home/TimeSection";
-import { ProvaSocialSection } from "@/components/home/ProvaSocialSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { ChamadaFinalSection } from "@/components/home/ChamadaFinalSection";
 import { FormularioSection } from "@/components/home/FormularioSection";
@@ -38,8 +36,6 @@ export default function Home() {
         <ProblemaSection />
         <ComoFuncionaSection />
         <DiferenciaisSection />
-        <TimeSection />
-        <ProvaSocialSection />
         <FAQSection />
         <ChamadaFinalSection />
         <FormularioSection />

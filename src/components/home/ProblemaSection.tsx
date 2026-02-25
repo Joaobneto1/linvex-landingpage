@@ -1,9 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { scrollToLeadForm } from "@/lib/utils";
-import lvxLicitaImage from "@/assets/lvxlicita.png";
-import lvxCommerceImage from "@/assets/lvxcommerce.png";
-import lvxDevSoftImage from "@/assets/lvxDevSoft.png";
+import lvxLicitaImage from "@/assets/IMAGEM-CAPA-LICITACAO.png";
+import lvxCommerceImage from "@/assets/IMAGEM-CAPA-ECOMMERCE.png";
+import lvxDevSoftImage from "@/assets/IMAGEM-CAPA-CUSTOM.png";
 
 const produtos = [
   {
@@ -44,13 +44,13 @@ export function ProblemaSection() {
       {/* Background complexo premium */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-[#0a0a1f] to-[#030014]" />
       <div className="absolute inset-0 tech-mesh-pattern opacity-30" />
-      
+
       {/* Glow spots */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#0076CE]/8 rounded-full blur-[180px]" />
       <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#0099FF]/6 rounded-full blur-[200px]" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        
+
         {/* Header */}
         <Reveal direction="up" delay={0}>
           <div className="text-center mb-12 md:mb-16">
@@ -67,7 +67,7 @@ export function ProblemaSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {produtos.map((produto, index) => (
             <Reveal key={index} direction="up" delay={index * 100}>
-              <div 
+              <div
                 className="
                   relative overflow-hidden
                   backdrop-blur-xl bg-white/[0.03]
@@ -89,8 +89,8 @@ export function ProblemaSection() {
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Imagem no topo */}
                   <div className="relative w-full h-48 overflow-hidden">
-                    <img 
-                      src={produto.imagem} 
+                    <img
+                      src={produto.imagem}
                       alt={produto.titulo}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       style={{
@@ -113,7 +113,7 @@ export function ProblemaSection() {
                     <p className="text-white/60 mb-6 md:mb-8 text-sm md:text-base leading-relaxed flex-1">
                       {produto.descricao}
                     </p>
-                    
+
                     {/* Link com seta animada */}
                     <div className="inline-flex items-center gap-2 text-[#0099FF] font-medium group/link hover:gap-3 transition-all duration-300">
                       <span>

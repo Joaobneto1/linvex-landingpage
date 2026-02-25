@@ -2,47 +2,46 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
-import lvxLicitaImage from "@/assets/lvxlicita.png";
+import iconeImagem from "@/assets/ICON-LICITAÇÕES 2.png";
+import notebookImagem from "@/assets/NOTEBOOK-LICITAÇÕES.png";
 import {
   FileText,
   Bell,
   FolderSearch,
   Shield,
   BarChart3,
-  Clock,
-  ArrowRight,
-  CheckCircle2,
   Bot,
+  CheckCircle2,
 } from "lucide-react";
 
 const features = [
   {
-    icon: <Bell className="w-6 h-6" />,
+    icon: Bell,
     title: "Monitoramento 24/7 de Editais",
     description: "Varredura automática em todos os portais de licitação, 24 horas por dia, 7 dias por semana.",
   },
   {
-    icon: <FolderSearch className="w-6 h-6" />,
+    icon: FolderSearch,
     title: "Alertas Inteligentes Personalizados",
     description: "Notificações configuráveis por categoria, região, órgão, faixa de valor e palavras-chave.",
   },
   {
-    icon: <FileText className="w-6 h-6" />,
+    icon: FileText,
     title: "Gestão Completa de Propostas",
     description: "Organize documentos, gere propostas e acompanhe todo o ciclo da licitação em um só lugar.",
   },
   {
-    icon: <Bot className="w-6 h-6" />,
+    icon: Bot,
     title: "Análise de Viabilidade com IA",
     description: "Inteligência artificial avalia automaticamente suas chances de sucesso em cada edital.",
   },
   {
-    icon: <BarChart3 className="w-6 h-6" />,
+    icon: BarChart3,
     title: "Dashboard de Performance",
     description: "Visão completa de licitações em andamento, ganhas, perdidas e análise de ROI.",
   },
   {
-    icon: <Shield className="w-6 h-6" />,
+    icon: Shield,
     title: "Conformidade Garantida",
     description: "Checklists automáticos e validações para garantir que sua proposta está 100% em conformidade.",
   },
@@ -59,159 +58,177 @@ const benefits = [
 
 export default function LimvexLicitacao() {
   return (
-    <div className="min-h-screen bg-[#030014] text-white">
+    <div className="min-h-screen bg-[#02000A] text-white overflow-x-hidden">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-[70vh]">
-        {/* Background com imagem do produto */}
-        <div className="absolute inset-0 bg-[#030014]">
-          <img
-            src={lvxLicitaImage}
-            alt=""
-            className="w-full h-full object-cover opacity-30"
-          />
-        </div>
-        
-        {/* Gradient overlays para profundidade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030014]/70 via-transparent to-[#030014]/90" />
+      {/* Top Hero Section */}
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 xl:px-12 mt-12 min-h-[70vh] flex items-center overflow-hidden">
 
-        {/* Content */}
-        <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#0099FF]/20 border border-[#0099FF]/30 rounded-full text-[#0099FF] text-sm font-medium mb-6 backdrop-blur-sm">
-              <FileText className="w-4 h-4" />
+        {/* Glow Effects */}
+        <div className="absolute top-1/4 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#0099FF]/15 rounded-full blur-[100px] md:blur-[150px] z-0 animate-pulse-slow pointer-events-none" />
+        <div className="absolute top-1/4 right-[10%] w-[500px] h-[500px] bg-[#0076CE]/10 rounded-full blur-[120px] z-0 pointer-events-none" />
+
+        <div className="container mx-auto max-w-[1440px] relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8">
+
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-2xl w-full lg:w-1/2 relative z-20">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">
+              LVX<span className="font-light">Bidding</span>
+            </h1>
+
+            <div className="text-sm font-bold tracking-widest uppercase text-[#0099FF] mb-2">
               Gestão de Licitações
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Limvex{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0099FF] to-[#00B8FF]">
-                Bidding
-              </span>
-            </h1>
-
-            <p className="text-xl text-white/70 mb-8 leading-relaxed max-w-2xl mx-auto">
-              Automatize o monitoramento de licitações públicas e aumente suas chances de ganhar contratos governamentais. Plataforma completa com IA para análise de viabilidade.
+            <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light">
+              <strong className="text-white font-medium">Automatize o monitoramento de licitações públicas</strong> e aumente suas chances de ganhar contratos governamentais. Plataforma completa com IA para análise de viabilidade.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contato">
-                <Button className="bg-[#0099FF] hover:bg-[#00B8FF] text-white font-semibold px-8 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0099FF]/30">
-                  Agendar Demonstração
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-            </div>
+            <Link to="/contato" className="mt-4">
+              <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
+                Agendar demonstração
+              </Button>
+            </Link>
           </div>
+
+          <div className="w-full lg:w-1/2 relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] flex justify-center lg:justify-end z-0 mt-8 lg:mt-0">
+            <img src={iconeImagem} alt="Limvex Bidding" className="absolute top-1/2 -translate-y-1/2 lg:right-[-10%] xl:right-[-5%] w-[120%] sm:w-[100%] lg:w-[120%] xl:w-[800px] max-w-none animate-float-slow pointer-events-none" />
+          </div>
+
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/[0.02]">
-        <div className="container mx-auto max-w-6xl">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Conquiste mais contratos públicos
+      {/* Notebook Hero Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 min-h-[70vh] flex items-center overflow-hidden">
+
+        {/* Glow Effects */}
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#0076CE]/5 rounded-full blur-[120px] z-0 pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-[#0099FF]/10 rounded-full blur-[150px] z-0 pointer-events-none" />
+
+        <div className="container mx-auto max-w-[1440px] relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+
+          <div className="w-full lg:w-1/2 relative min-h-[350px] sm:min-h-[450px] lg:min-h-[600px] flex justify-center lg:justify-start z-0 mb-8 lg:mb-0">
+            <img src={notebookImagem} alt="Plataforma Dashboard" className="absolute top-1/2 -translate-y-1/2 left-[5%] sm:left-[10%] lg:left-auto lg:-left-[25%] xl:-left-[35%] w-[140%] sm:w-[120%] lg:w-[170%] xl:w-[1200px] max-w-none pointer-events-none" />
+          </div>
+
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-xl lg:w-1/2 relative z-20">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+              Conquiste mais <br className="hidden lg:block" />
+              <span className="text-[#0099FF]">contratos públicos</span>
             </h2>
-            <p className="text-lg text-white/70 leading-relaxed">
+
+            <p className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mt-4">
               O Limvex Bidding é uma plataforma pronta para uso que centraliza todo o processo de licitações em um só lugar. Da busca por editais até a análise de resultados, você tem controle total sobre suas oportunidades no mercado público.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        </div>
+      </section>
+
+      {/* Features Belt Section */}
+      <section className="py-12 bg-[#02000A] relative z-20 mt-12">
+        <div className="container mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
             {benefits.map((benefit, index) => (
               <div
                 key={index}
-                className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl"
+                className="relative flex items-center bg-[#070512] border border-white/10 rounded-xl p-5 sm:p-6 flex-1 min-w-[200px] max-w-[350px] shadow-lg transition-colors hover:border-white/20"
               >
-                <CheckCircle2 className="w-5 h-5 text-[#0099FF] flex-shrink-0" />
-                <span className="text-white/80 text-sm">{benefit}</span>
+                <div className="absolute -top-3 -left-3 bg-[#02000A] rounded-full">
+                  <CheckCircle2 className="w-6 h-6 text-[#0099FF]" />
+                </div>
+                <p className="text-[14px] sm:text-[15px] text-white/90 leading-relaxed font-light m-0">{benefit}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+      {/* Recursos Principais Section */}
+      <section className="py-32 px-4 sm:px-6 lg:px-8 relative">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
               Recursos Principais
             </h2>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Ferramentas completas para você nunca perder uma oportunidade de licitação.
+            <p className="text-lg text-white/60 max-w-2xl mx-auto font-light">
+              Tudo que você precisa para garantir e escalar suas licitações em uma única plataforma.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group p-6 bg-white/[0.03] border border-white/10 rounded-2xl hover:bg-white/[0.05] hover:border-[#0099FF]/30 transition-all duration-300"
+                className="group relative overflow-hidden bg-[#070512] border border-white/5 rounded-2xl p-8 hover:bg-[#0A071A] hover:border-[#0099FF]/40 transition-all duration-300 shadow-xl self-stretch"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#0099FF]/20 flex items-center justify-center text-[#0099FF] mb-4 group-hover:scale-110 transition-transform">
-                  {feature.icon}
+                {/* Background line icon watermark */}
+                <feature.icon className="absolute -right-4 -bottom-4 w-40 h-40 text-[#0099FF]/15 group-hover:text-[#0099FF]/25 transition-colors duration-300" strokeWidth={0.5} />
+
+                <div className="relative z-10 flex flex-col h-full">
+                  <h3 className="text-[#0099FF] text-xl font-bold mb-4">{feature.title}</h3>
+                  <p className="text-white/70 text-base leading-relaxed font-light max-w-md">
+                    {feature.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Por que escolher Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/[0.02]">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Próximos passos
-            </h2>
-            <p className="text-lg text-white/60">
-              Conheça nossa plataforma e solicite uma proposta personalizada
-            </p>
-          </div>
+      {/* Próximos Passos Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5 bg-[#05030F]">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-col lg:flex-row gap-12 items-center justify-between">
 
-          <div className="bg-gradient-to-br from-[#0099FF]/10 to-[#0099FF]/5 border border-[#0099FF]/20 rounded-2xl p-8 text-center">
-            <div className="grid sm:grid-cols-3 gap-4 mb-8">
-              <div className="p-4 bg-white/5 rounded-xl">
-                <p className="text-[#0099FF] font-semibold">Implementação</p>
-                <p className="text-white/60 text-sm">Rápida e estruturada</p>
-              </div>
-              <div className="p-4 bg-white/5 rounded-xl">
-                <p className="text-[#0099FF] font-semibold">Treinamento</p>
-                <p className="text-white/60 text-sm">Incluso</p>
-              </div>
-              <div className="p-4 bg-white/5 rounded-xl">
-                <p className="text-[#0099FF] font-semibold">Suporte</p>
-                <p className="text-white/60 text-sm">Prioritário</p>
-              </div>
+            {/* CTA Left */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left basis-1/3">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-3">
+                Próximos Passos
+              </h2>
+              <p className="text-[#0099FF] text-lg font-medium mb-8">
+                Conheça nossa plataforma e solicite<br className="hidden lg:block" /> uma proposta personalizada
+              </p>
+              <Link to="/contato">
+                <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
+                  Agendar demonstração
+                </Button>
+              </Link>
             </div>
 
-            <Link to="/contato">
-              <Button className="bg-[#0099FF] hover:bg-[#00B8FF] text-white font-semibold px-8 py-4 h-auto rounded-xl transition-all hover:scale-105">
-                Solicitar Proposta Personalizada
-              </Button>
-            </Link>
+            {/* Boxes Right */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 basis-2/3 w-full">
+              {[
+                { title: "Implementação", desc: "Rápida e estruturada" },
+                { title: "Treinamento", desc: "Incluso" },
+                { title: "Suporte", desc: "Prioritário" }
+              ].map((item, idx) => (
+                <div key={idx} className="flex-1 bg-[#02000A] border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:border-white/20 transition-colors shadow-lg">
+                  <h4 className="text-[#0099FF] text-xl font-bold mb-3">{item.title}</h4>
+                  <p className="text-white/80 text-sm font-light">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0099FF]/20 via-[#030014] to-[#030014]">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Pronto para ganhar mais licitações?
+      {/* Final CTA Section */}
+      <section className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-[#02000A]">
+        {/* Glow Effect */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#0099FF]/60 rounded-full blur-[180px] -z-10" />
+
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight leading-tight">
+            Pronto para ganhar <br className="hidden sm:block" />mais <span className="text-[#0099FF]">licitações?</span>
           </h2>
-          <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/70 mb-10 max-w-2xl mx-auto font-light">
             Agende uma demonstração gratuita e veja o Limvex Bidding em ação com casos de uso do seu segmento.
           </p>
           <Link to="/contato">
-            <Button className="bg-[#0099FF] hover:bg-[#00B8FF] text-white font-semibold px-10 py-6 h-auto text-lg rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#0099FF]/30">
-              Agendar Demonstração Gratuita
-              <ArrowRight className="w-5 h-5 ml-2" />
+            <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-4 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_40px_rgba(0,153,255,0.4)] border border-white/10">
+              Agendar demonstração
             </Button>
           </Link>
         </div>
