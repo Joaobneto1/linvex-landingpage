@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
-import iconeImagem from "@/assets/COMPRAS.png";
-import notebookImagem from "@/assets/NOTEBOOK-ECOMMERCE.png";
+import iconeImagem from "@/assets/COMPRAS.webp";
+import notebookImagem from "@/assets/NOTEBOOK-ECOMMERCE.webp";
 import {
   Zap,
   Package,

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
-import iconeImagem from "@/assets/ICON-LICITAÇÕES 2.png";
-import notebookImagem from "@/assets/NOTEBOOK-LICITAÇÕES.png";
+import iconeImagem from "@/assets/ICON-LICITAÇÕES 2.webp";
+import notebookImagem from "@/assets/NOTEBOOK-LICITAÇÕES.webp";
 import {
   FileText,
   Bell,

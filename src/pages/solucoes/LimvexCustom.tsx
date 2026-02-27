@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
-import iconeImagem from "@/assets/ICON-CUSTOM.png";
-import notebookImagem from "@/assets/NOTEBOOK-CUSTOM.png";
+import iconeImagem from "@/assets/ICON-CUSTOM.webp";
+import notebookImagem from "@/assets/NOTEBOOK-CUSTOM.webp";
 import {
     Rocket,
     Users,
