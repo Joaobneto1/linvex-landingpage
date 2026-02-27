@@ -1,9 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { scrollToLeadForm } from "@/lib/utils";
-import lvxLicitaImage from "@/assets/IMAGEM-CAPA-LICITACAO.png";
-import lvxCommerceImage from "@/assets/IMAGEM-CAPA-ECOMMERCE.png";
-import lvxDevSoftImage from "@/assets/IMAGEM-CAPA-CUSTOM.png";
+import lvxLicitaImage from "@/assets/IMAGEM-CAPA-LICITACAO.webp";
+import lvxCommerceImage from "@/assets/IMAGEM-CAPA-ECOMMERCE.webp";
+import lvxDevSoftImage from "@/assets/IMAGEM-CAPA-CUSTOM.webp";
 
 const produtos = [
   {
