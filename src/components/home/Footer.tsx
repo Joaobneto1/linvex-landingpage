@@ -66,11 +66,6 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <Link to="/sobre" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
-                  Sobre nós
-                </Link>
-              </li>
-              <li>
                 <Link to="/contato" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
                   Contato enterprise
                 </Link>

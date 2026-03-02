@@ -15,7 +15,7 @@ const solutions: SolutionItem[] = [
     href: "/solucoes/limvex-commerce",
   },
   {
-    name: "Limvex Bidding",
+    name: "Limvex Licitação",
     description: "Gestão de licitações públicas",
     href: "/solucoes/limvex-licitacao",
   },

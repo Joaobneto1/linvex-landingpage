@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,8 +36,8 @@ interface Question {
   optional?: boolean;
 }
 
-// Configuração das perguntas
-const questions: Question[] = [
+// Fluxo de perguntas - Home
+const questionsHome: Question[] = [
   {
     id: "nome",
     question: "Olá! Bem-vindo à Limvex. Para começarmos, qual é o seu nome?",
@@ -101,23 +101,161 @@ const questions: Question[] = [
     validation: (value) => !value ? "Selecione uma opção" : null,
   },
   {
-    id: "urgencia",
-    question: "Quando você precisa que o projeto esteja pronto?",
+    id: "mensagem",
+    question: "Como podemos ajudar?",
+    type: "textarea",
+    placeholder: "Conte um pouco sobre seu contexto e objetivo... (opcional)",
+    optional: true,
+  },
+];
+
+// Fluxo de perguntas - Licitação
+const questionsLicitacao: Question[] = [
+  {
+    id: "nome",
+    question: "Olá! Que bom ter você aqui. Vamos entender como a Limvex Licitação pode transformar a gestão de licitações da sua empresa. Para começar, qual é o seu nome?",
+    type: "text",
+    placeholder: "Digite seu nome",
+    validation: (value) => value.length < 3 ? "Nome deve ter pelo menos 3 caracteres" : null,
+  },
+  {
+    id: "telefone",
+    question: "Ótimo, {nome}! Qual é o melhor telefone para contato?",
+    type: "tel",
+    placeholder: "(11) 99999-9999",
+    validation: (value) => {
+      const cleaned = value.replace(/\D/g, "");
+      return cleaned.length < 10 ? "Telefone inválido" : null;
+    },
+  },
+  {
+    id: "email",
+    question: "Perfeito! E qual é o seu melhor e-mail?",
+    type: "email",
+    placeholder: "seu@email.com",
+    validation: (value) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return !emailRegex.test(value) ? "E-mail inválido" : null;
+    },
+  },
+  {
+    id: "empresa",
+    question: "Legal! Qual é o nome da sua empresa?",
+    type: "text",
+    placeholder: "Nome da empresa",
+    validation: (value) => value.length < 2 ? "Nome da empresa deve ter pelo menos 2 caracteres" : null,
+  },
+  {
+    id: "tipoProjeto",
+    question: "Quantas licitações sua equipe acompanha em média por mês?",
     type: "select",
     options: [
-      { value: "urgente", label: "Urgente (até 30 dias)" },
-      { value: "medio-prazo", label: "Médio prazo (1-3 meses)" },
-      { value: "longo-prazo", label: "Longo prazo (3-6 meses)" },
-      { value: "flexivel", label: "Flexível" },
+      { value: "1-5", label: "1 a 5" },
+      { value: "6-20", label: "6 a 20" },
+      { value: "21-50", label: "21 a 50" },
+      { value: "mais-50", label: "Mais de 50" },
     ],
     validation: (value) => !value ? "Selecione uma opção" : null,
   },
   {
-    id: "mensagem",
-    question: "Excelente! Quer nos contar mais algum detalhe sobre o projeto?",
-    type: "textarea",
-    placeholder: "Descreva seu projeto, objetivos, funcionalidades desejadas... (opcional)",
-    optional: true,
+    id: "orcamento",
+    question: "Como sua equipe gerencia as licitações hoje?",
+    type: "select",
+    options: [
+      { value: "planilhas-emails", label: "Planilhas e e-mails" },
+      { value: "sistema-proprio", label: "Sistema próprio" },
+      { value: "outro-software", label: "Outro software" },
+      { value: "sem-processo", label: "Sem processo definido" },
+    ],
+    validation: (value) => !value ? "Selecione uma opção" : null,
+  },
+  {
+    id: "urgencia",
+    question: "Qual é o maior desafio atual no processo de licitação?",
+    type: "select",
+    options: [
+      { value: "perder-prazos", label: "Perder prazos" },
+      { value: "gestao-documentos", label: "Gestão de documentos" },
+      { value: "analise-editais", label: "Análise de editais" },
+      { value: "peticoes-juridicas", label: "Geração de petições jurídicas" },
+      { value: "visibilidade-pipeline", label: "Visibilidade do pipeline" },
+    ],
+    validation: (value) => !value ? "Selecione uma opção" : null,
+  },
+];
+
+// Fluxo de perguntas - Ecommerce (placeholder)
+const questionsEcommerce: Question[] = [
+  {
+    id: "nome",
+    question: "Olá! Que bom ter você aqui. Vamos entender como a Limvex pode acelerar o crescimento do seu e-commerce. Para começar, qual é o seu nome?",
+    type: "text",
+    placeholder: "Digite seu nome",
+    validation: (value) => value.length < 3 ? "Nome deve ter pelo menos 3 caracteres" : null,
+  },
+  {
+    id: "telefone",
+    question: "Ótimo, {nome}! Qual é o melhor telefone para contato?",
+    type: "tel",
+    placeholder: "(11) 99999-9999",
+    validation: (value) => {
+      const cleaned = value.replace(/\D/g, "");
+      return cleaned.length < 10 ? "Telefone inválido" : null;
+    },
+  },
+  {
+    id: "email",
+    question: "Perfeito! E qual é o seu melhor e-mail?",
+    type: "email",
+    placeholder: "seu@email.com",
+    validation: (value) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return !emailRegex.test(value) ? "E-mail inválido" : null;
+    },
+  },
+  {
+    id: "empresa",
+    question: "Legal! Qual é o nome da sua empresa?",
+    type: "text",
+    placeholder: "Nome da empresa",
+    validation: (value) => value.length < 2 ? "Nome da empresa deve ter pelo menos 2 caracteres" : null,
+  },
+  {
+    id: "tipoProjeto",
+    question: "Qual plataforma de e-commerce você usa hoje?",
+    type: "select",
+    options: [
+      { value: "shopify", label: "Shopify" },
+      { value: "vtex", label: "VTEX" },
+      { value: "woocommerce", label: "WooCommerce" },
+      { value: "loja-propria", label: "Loja própria" },
+      { value: "nenhuma-ainda", label: "Nenhuma ainda" },
+    ],
+    validation: (value) => !value ? "Selecione uma opção" : null,
+  },
+  {
+    id: "orcamento",
+    question: "Qual é o volume médio de pedidos por mês?",
+    type: "select",
+    options: [
+      { value: "ate-100", label: "Até 100" },
+      { value: "100-500", label: "100 a 500" },
+      { value: "500-2000", label: "500 a 2000" },
+      { value: "mais-2000", label: "Mais de 2000" },
+    ],
+    validation: (value) => !value ? "Selecione uma opção" : null,
+  },
+  {
+    id: "urgencia",
+    question: "Qual é o maior desafio no seu e-commerce hoje?",
+    type: "select",
+    options: [
+      { value: "integracao-sistemas", label: "Integração de sistemas" },
+      { value: "automacao-processos", label: "Automação de processos" },
+      { value: "performance-loja", label: "Performance da loja" },
+      { value: "outro", label: "Outro" },
+    ],
+    validation: (value) => !value ? "Selecione uma opção" : null,
   },
 ];
 
@@ -197,6 +335,14 @@ function UserResponse({ children }: { children: React.ReactNode }) {
 
 export default function Contato() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const origem = (location.state as any)?.origem ?? "home";
+  const fluxos: Record<string, Question[]> = {
+    home: questionsHome,
+    licitacao: questionsLicitacao,
+    ecommerce: questionsEcommerce,
+  };
+  const questions = fluxos[origem] ?? fluxos["home"];
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     nome: "",
@@ -378,7 +524,7 @@ export default function Contato() {
 
           <p className="text-white/70 mb-8 leading-relaxed">
             Obrigado por entrar em contato, <span className="text-white font-medium">{formData.nome}</span>!
-            Nossa equipe analisará seu projeto e entrará em contato em até 24 horas.
+            Em breve um dos nossos especialistas entrará em contato para dar continuidade à conversa.
           </p>
 
           <Button
