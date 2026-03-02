@@ -15,7 +15,7 @@ const produtos = [
   },
   {
     imagem: lvxLicitaImage,
-    titulo: "Limvex Bidding",
+    titulo: "Limvex Licitação",
     subtitulo: "Automação de licitações públicas em escala",
     descricao: "Monitore editais, gere propostas automaticamente e acompanhe processos licitatórios com inteligência artificial.",
     link: "/solucoes/limvex-licitacao",
