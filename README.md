@@ -68,8 +68,8 @@ VITE_ENABLE_PDF_DOWNLOAD=true
 # Obtenha em: https://resend.com/api-keys
 RESEND_API_KEY=re_6WEoM8uW_ExoKjqHMM7zf5vwcqcF2sHsM
 
-# E-mail de destino (opcional, padrão: linvex.software@gmail.com)
-LEAD_EMAIL=linvex.software@gmail.com
+# E-mail de destino (opcional, padrão: limvextec@gmail.com)
+LEAD_EMAIL=limvextec@gmail.com
 ```
 
 **⚠️ IMPORTANTE**:
@@ -82,7 +82,7 @@ LEAD_EMAIL=linvex.software@gmail.com
 Configure as seguintes variáveis no painel da Vercel:
 
 - `RESEND_API_KEY` - API key do Resend para envio de e-mails (obrigatório para produção)
-- `LEAD_EMAIL` - E-mail de destino para receber os leads (padrão: `linvex.software@gmail.com`)
+- `LEAD_EMAIL` - E-mail de destino para receber os leads (padrão: `limvextec@gmail.com`)
 - `RESEND_FROM_EMAIL` - E-mail remetente (padrão: `noreply@limvex.com`). **IMPORTANTE**: Use um e-mail do seu domínio verificado no Resend
 - `VITE_ENABLE_PDF_DOWNLOAD` - Habilitar botão de download do PDF (padrão: `false`)
 - `KV_REST_API_URL` - URL do Vercel KV para rate limiting (opcional, mas recomendado)
@@ -102,7 +102,7 @@ O sistema utiliza **Resend** como provedor de e-mail. Para configurar:
    - Aguarde a verificação (pode levar alguns minutos)
 4. Configure a variável `RESEND_API_KEY` na Vercel
 5. Configure a variável `RESEND_FROM_EMAIL` na Vercel com um e-mail do seu domínio (ex: `noreply@limvex.com` ou `contato@limvex.com`)
-6. O e-mail padrão de destino é `linvex.software@gmail.com`, mas pode ser alterado via `LEAD_EMAIL`
+6. O e-mail padrão de destino é `limvextec@gmail.com`, mas pode ser alterado via `LEAD_EMAIL`
 
 **⚠️ IMPORTANTE**: Sem verificar um domínio no Resend, você só poderá enviar e-mails para o próprio endereço da sua conta. Para enviar para qualquer destinatário, é necessário verificar um domínio.
 
@@ -192,7 +192,7 @@ Os dados são enviados para `/api/lead` que:
 1. Valida os campos obrigatórios
 2. Aplica validação anti-spam básica
 3. Verifica rate limit
-4. Envia e-mail via Resend para `linvex.software@gmail.com`
+4. Envia e-mail via Resend para `limvextec@gmail.com`
 5. Retorna sucesso/erro.
 
 ## 🚀 Deploy
@@ -218,7 +218,7 @@ vercel
    ```bash
    # Criar/editar arquivo .env na raiz do projeto
    echo "RESEND_API_KEY=re_6WEoM8uW_ExoKjqHMM7zf5vwcqcF2sHsM" > .env
-   echo "LEAD_EMAIL=linvex.software@gmail.com" >> .env
+   echo "LEAD_EMAIL=limvextec@gmail.com" >> .env
    ```
 
 2. **Testar envio com sucesso:**
@@ -234,7 +234,7 @@ vercel
 
    # Envie o formulário
    # Deve aparecer estado de sucesso com badge "Concluído"
-   # Verifique o inbox de linvex.software@gmail.com
+   # Verifique o inbox de limvextec@gmail.com
    ```
 
 3. **Testar erro (sem API key):**
@@ -254,7 +254,7 @@ vercel
      ```
      [Lead API] LEAD RECEIVED: {...}
      [Lead API] RESEND_API_KEY: re_6WEoM8uW...
-     [Lead API] EMAIL_TO: linvex.software@gmail.com
+     [Lead API] EMAIL_TO: limvextec@gmail.com
      [Lead API] Tentando enviar email via Resend...
      [Lead API] EMAIL SENT SUCCESSFULLY
      [Lead API] Message ID: ...

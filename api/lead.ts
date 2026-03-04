@@ -113,7 +113,7 @@ async function registerEmailSend(): Promise<void> {
 
 // API key do Resend - usar variável de ambiente 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
-const EMAIL_TO = process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'linvex.software@gmail.com';
+const EMAIL_TO = process.env.LEAD_EMAIL || process.env.EMAIL_TO || 'limvextec@gmail.com';
 // Email remetente - usar variável de ambiente ou fallback para domínio verificado
 const EMAIL_FROM = process.env.RESEND_FROM_EMAIL || 'noreply@limvex.com';
 const IS_DEV = process.env.NODE_ENV === 'development' || !process.env.VERCEL;
