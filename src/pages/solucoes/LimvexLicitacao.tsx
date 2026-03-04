@@ -27,8 +27,8 @@ const features = [
   },
   {
     icon: FileText,
-    title: "Módulo Jurídico",
-    description: "Gere Impugnações e Recursos automaticamente, com download em .docx editável. Mantenha histórico completo de peças jurídicas por licitação.",
+    title: "Módulo Jurídico Inteligente",
+    description: "Acompanhe o ciclo jurídico completo de cada licitação. Registre impugnações, recursos e contra-razões com geração automática em .docx. A plataforma detecta efeito suspensivo, sinaliza janelas críticas de recurso e mantém uma timeline histórica de todos os eventos — do edital à homologação.",
   },
   {
     icon: FolderSearch,
