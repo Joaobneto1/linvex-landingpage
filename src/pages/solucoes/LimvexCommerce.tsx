@@ -64,11 +64,16 @@ export default function LimvexCommerce() {
       {/* Top Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 xl:px-12 mt-12 min-h-[70vh] flex items-center overflow-hidden">
 
+        {/* Mobile Background Image (Icone) */}
+        <div className="absolute inset-0 top-16 z-0 lg:hidden flex justify-center opacity-30 pointer-events-none">
+          <img src={iconeImagem} alt="" className="w-[180%] max-w-none -ml-[30%] blur-sm object-contain object-top" />
+        </div>
+
         {/* Glow Effects */}
         <div className="absolute top-1/4 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#0076CE]/15 rounded-full blur-[100px] md:blur-[150px] z-0 animate-pulse-slow pointer-events-none" />
         <div className="absolute top-1/4 right-[10%] w-[500px] h-[500px] bg-[#0099FF]/10 rounded-full blur-[120px] z-0 pointer-events-none" />
 
-        <div className="container mx-auto max-w-[1440px] relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8">
+        <div className="container mx-auto max-w-[1440px] relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-4 sm:gap-12 lg:gap-8">
 
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-2xl w-full lg:w-1/2 relative z-20">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">
@@ -90,24 +95,29 @@ export default function LimvexCommerce() {
             </Link>
           </div>
 
-          <div className="w-full lg:w-1/2 relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] flex justify-center lg:justify-end z-0 mt-8 lg:mt-0">
-            <img src={iconeImagem} alt="Limvex Commerce" className="absolute top-[60%] sm:top-[65%] -translate-y-1/2 lg:right-[-15%] xl:right-[-15%] w-[130%] sm:w-[110%] lg:w-[130%] xl:w-[900px] max-w-none animate-float-slow pointer-events-none" />
+          <div className="hidden lg:flex w-full lg:w-1/2 justify-center lg:justify-end z-0 mt-0 sm:mt-8 lg:mt-0 lg:min-h-[500px] lg:relative">
+            <img src={iconeImagem} alt="Limvex Commerce" className="w-[110%] sm:w-[90%] lg:absolute lg:top-[65%] lg:-translate-y-1/2 lg:right-[-15%] xl:right-[-15%] lg:w-[130%] xl:w-[900px] lg:max-w-none animate-float-slow pointer-events-none" />
           </div>
 
         </div>
       </section>
 
       {/* Notebook Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 min-h-[70vh] flex items-center overflow-hidden">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 min-h-[50vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden">
+
+        {/* Mobile Background Image (Notebook) */}
+        <div className="absolute inset-0 z-0 lg:hidden flex items-center justify-center opacity-30 pointer-events-none">
+          <img src={notebookImagem} alt="" className="w-[180%] ml-[30%] max-w-none blur-sm" />
+        </div>
 
         {/* Glow Effects */}
         <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#0099FF]/5 rounded-full blur-[120px] z-0 pointer-events-none" />
         <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-[#0076CE]/10 rounded-full blur-[150px] z-0 pointer-events-none" />
 
-        <div className="container mx-auto max-w-[1440px] relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+        <div className="container mx-auto max-w-[1440px] relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-12 lg:gap-8">
 
-          <div className="w-full lg:w-1/2 relative min-h-[350px] sm:min-h-[450px] lg:min-h-[600px] flex justify-center lg:justify-start z-0 mb-8 lg:mb-0">
-            <img src={notebookImagem} alt="Plataforma Dashboard" className="absolute top-1/2 -translate-y-1/2 left-[5%] sm:left-[10%] lg:left-auto lg:-left-[25%] xl:-left-[35%] w-[140%] sm:w-[120%] lg:w-[170%] xl:w-[1200px] max-w-none pointer-events-none" />
+          <div className="hidden lg:flex w-full lg:w-1/2 justify-center lg:justify-start z-0 lg:mb-0 lg:min-h-[600px] lg:relative">
+            <img src={notebookImagem} alt="Plataforma Dashboard" className="lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-auto lg:-left-[25%] xl:-left-[35%] lg:w-[170%] xl:w-[1200px] lg:max-w-none pointer-events-none" />
           </div>
 
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-xl lg:w-1/2 relative z-20">

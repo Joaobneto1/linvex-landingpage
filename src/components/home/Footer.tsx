@@ -16,51 +16,57 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Plataformas */}
-          <div>
-            <h4 className="text-xs font-medium text-white/70 mb-3 sm:mb-4 uppercase tracking-wider">
-              Plataformas
-            </h4>
-            <ul className="space-y-2 sm:space-y-3">
-              <li>
-                <Link to="/solucoes/limvex-commerce" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
-                  Inteligência Operacional
-                </Link>
-              </li>
-              <li>
-                <Link to="/solucoes/limvex-licitacao" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
-                  Automação Enterprise
-                </Link>
-              </li>
-              <li>
-                <Link to="/contato" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
-                  Integração Corporativa
-                </Link>
-              </li>
-            </ul>
+          {/* Plataformas e Recursos (Desktop) / Coluna Única (Mobile) */}
+          <div className="flex flex-col gap-6 sm:gap-8">
+            {/* Plataformas */}
+            <div>
+              <h4 className="text-xs font-medium text-white/70 mb-3 sm:mb-4 uppercase tracking-wider">
+                Plataformas
+              </h4>
+              <ul className="space-y-2 sm:space-y-3">
+                <li>
+                  <Link to="/solucoes/limvex-commerce" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
+                    Inteligência Operacional
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/solucoes/limvex-licitacao" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
+                    Automação Enterprise
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contato" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
+                    Integração Corporativa
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Recursos */}
-          <div>
-            <h4 className="text-xs font-medium text-white/70 mb-3 sm:mb-4 uppercase tracking-wider">
-              Recursos
-            </h4>
-            <ul className="space-y-2 sm:space-y-3">
-              <li>
-                <a href="/#faq" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
-                  Perguntas frequentes
-                </a>
-              </li>
-              <li>
-                <Link to="/contato" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
-                  Solicitar documentação
-                </Link>
-              </li>
-            </ul>
+          <div className="flex flex-col gap-6 sm:gap-8">
+            {/* Recursos */}
+            <div>
+              <h4 className="text-xs font-medium text-white/70 mb-3 sm:mb-4 uppercase tracking-wider">
+                Recursos
+              </h4>
+              <ul className="space-y-2 sm:space-y-3">
+                <li>
+                  <a href="/#faq" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
+                    Perguntas frequentes
+                  </a>
+                </li>
+                <li>
+                  <Link to="/contato" className="text-xs text-white/50 hover:text-[#0076CE] transition-colors">
+                    Solicitar documentação
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Empresa */}
+          {/* Conforma e Empresa */}
           <div>
+            {/* Empresa */}
             <h4 className="text-xs font-medium text-white/70 mb-3 sm:mb-4 uppercase tracking-wider">
               Empresa
             </h4>
@@ -73,8 +79,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Conformidade */}
-          <div className="col-span-2 sm:col-span-1">
+          <div>
+            {/* Conformidade */}
             <h4 className="text-xs font-medium text-white/70 mb-3 sm:mb-4 uppercase tracking-wider">
               Conformidade
             </h4>
