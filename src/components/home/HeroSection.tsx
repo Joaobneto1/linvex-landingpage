@@ -71,7 +71,7 @@ export function HeroSection() {
               className={`mb-6 sm:mb-8 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               <span className="inline-flex items-center gap-2 rounded-full bg-[#0076CE]/10 border border-[#0076CE]/20 px-4 py-1.5 text-xs sm:text-sm text-white/70 font-medium tracking-wide">
-                Infraestrutura de nível enterprise
+                Tecnologia para empresas em crescimento
               </span>
             </div>
 
@@ -80,9 +80,9 @@ export function HeroSection() {
               style={{ animationDelay: '200ms' }}
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.15] sm:leading-[1.1] mb-6 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
-              Infraestrutura de inteligência operacional{' '}
+              Tecnologia que estrutura, automatiza e{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0076CE] to-[#00B8FF]">
-                para empresas em expansão
+                impulsiona o crescimento das empresas.
               </span>
             </h1>
 
@@ -91,7 +91,7 @@ export function HeroSection() {
               style={{ animationDelay: '300ms' }}
               className={`mx-auto max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl text-white/65 leading-relaxed mb-10 sm:mb-12 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
-              Plataformas de missão crítica que unificam dados, automatizam processos complexos e entregam inteligência acionável para decisões estratégicas.
+              Desenvolvemos plataformas, sistemas e soluções digitais que ajudam empresas a operar melhor, automatizar processos e crescer com tecnologia.
             </p>
 
             {/* CTA Buttons */}
@@ -105,7 +105,7 @@ export function HeroSection() {
                 className="group relative bg-gradient-to-r from-[#0076CE] to-[#0099FF] hover:from-[#0099FF] hover:to-[#00B8FF] text-white text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 h-auto font-semibold rounded-xl shadow-[0_0_30px_rgba(0,118,206,0.4)] hover:shadow-[0_0_50px_rgba(0,118,206,0.6)] transition-all duration-300 w-full sm:w-auto"
               >
                 <Link to="/contato">
-                  Solicitar avaliação técnica
+                  Falar com um especialista
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -116,7 +116,7 @@ export function HeroSection() {
                 className="border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto"
               >
                 <a href="#plataformas">
-                  Ver plataformas
+                  Conhecer nossas soluções
                 </a>
               </Button>
             </div>
