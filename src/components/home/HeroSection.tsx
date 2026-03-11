@@ -89,7 +89,7 @@ export function HeroSection() {
             {/* Subheadline */}
             <p
               style={{ animationDelay: '300ms' }}
-              className={`mx-auto max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl text-white/65 leading-relaxed mb-10 sm:mb-12 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
+              className={`mx-auto max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl text-white leading-relaxed mb-10 sm:mb-12 ${isMounted ? 'animate-fadeInUp' : 'opacity-0'}`}
             >
               Desenvolvemos plataformas, sistemas e soluções digitais que ajudam empresas a operar melhor, automatizar processos e crescer com tecnologia.
             </p>
