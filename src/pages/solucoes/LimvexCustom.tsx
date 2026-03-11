@@ -109,12 +109,12 @@ export default function LimvexCustom() {
                         </div>
 
                         <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light">
-                            <strong className="text-white font-medium">Soluções customizadas high-ticket</strong> para desafios únicos. Arquitetura enterprise para empresas que precisam de tecnologia proprietária que realmente move o ponteiro do negócio.
+                            <strong className="text-white font-medium">Software sob medida para empresas que precisam evoluir seus processos.</strong> Desenvolvemos sistemas personalizados para automatizar operações, organizar fluxos de trabalho e resolver desafios específicos de cada empresa.
                         </p>
 
                         <Link to="/contato" className="mt-4">
                             <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
-                                Agendar demonstração
+                                Solicitar uma análise do projeto
                             </Button>
                         </Link>
                     </div>
@@ -146,11 +146,11 @@ export default function LimvexCustom() {
 
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-xl lg:w-1/2 relative z-20">
                         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
-                            Tecnologia proprietária<br className="hidden lg:block" /> para <span className="text-[#0099FF]">desafios únicos</span>
+                            Quando ferramentas prontas<br className="hidden lg:block" /> não <span className="text-[#0099FF]">atendem ao negócio</span>
                         </h2>
 
                         <p className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mt-4">
-                            Desenvolvemos sistemas sob medida para empresas que precisam de soluções que não existem no mercado. Do MVP ao produto enterprise, entregamos software que resolve problemas reais e gera resultados mensuráveis.
+                            Quando ferramentas prontas não atendem às necessidades do negócio, o desenvolvimento sob medida permite criar soluções adaptadas à realidade da empresa, aumentando eficiência operacional e controle sobre os processos internos.
                         </p>
                     </div>
 
@@ -224,7 +224,7 @@ export default function LimvexCustom() {
                             </p>
                             <Link to="/contato">
                                 <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
-                                    Agendar demonstração
+                                    Falar com um especialista
                                 </Button>
                             </Link>
                         </div>
@@ -262,7 +262,7 @@ export default function LimvexCustom() {
                     </p>
                     <Link to="/contato">
                         <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-4 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_40px_rgba(0,153,255,0.4)] border border-white/10">
-                            Agendar demonstração
+                            Solicitar uma análise do projeto
                         </Button>
                     </Link>
                 </div>

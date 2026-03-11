@@ -100,12 +100,12 @@ export default function LimvexLicitacao() {
             </div>
 
             <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light">
-              <strong className="text-white font-medium">Gestão inteligente do ciclo completo de licitações públicas,</strong> desde a captação de editais até a homologação. Escale seus resultados no setor público com organização, tecnologia e assertividade.
+              <strong className="text-white font-medium">Organize e potencialize sua atuação no mercado de licitações.</strong> Uma plataforma desenvolvida para empresas que participam de licitações e precisam acompanhar oportunidades, organizar processos e aumentar eficiência operacional.
             </p>
 
             <Link to="/contato" state={{ origem: "licitacao" }} className="mt-4">
               <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
-                Agendar demonstração
+                Conhecer a plataforma
               </Button>
             </Link>
           </div>
@@ -137,12 +137,12 @@ export default function LimvexLicitacao() {
 
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-xl lg:w-1/2 relative z-20">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
-              CRM + ERP de licitações. <br className="hidden lg:block" />
-              <span className="text-[#0099FF]">Tudo em um só lugar.</span>
+              Atuação mais estruturada <br className="hidden lg:block" />
+              <span className="text-[#0099FF]">no mercado público.</span>
             </h2>
 
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mt-4">
-              A Limvex Licitação é uma plataforma B2B desenvolvida para empresas que participam ativamente de processos licitatórios e precisam de controle real sobre cada etapa - da prospecção ao resultado. Não é mais uma ferramenta de busca de editais. É a central de operações da sua equipe de licitações.
+              A solução de licitações da LIMVEX centraliza informações, organiza processos e facilita o acompanhamento de oportunidades, permitindo uma atuação mais estruturada no mercado de compras públicas.
             </p>
           </div>
 
@@ -246,7 +246,7 @@ export default function LimvexLicitacao() {
               </p>
               <Link to="/contato" state={{ origem: "licitacao" }}>
                 <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
-                  Agendar demonstração
+                  Solicitar apresentação
                 </Button>
               </Link>
             </div>
@@ -285,7 +285,7 @@ export default function LimvexLicitacao() {
           </p>
           <Link to="/contato" state={{ origem: "licitacao" }}>
             <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-4 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_40px_rgba(0,153,255,0.4)] border border-white/10">
-              Agendar demonstração
+              Solicitar apresentação
             </Button>
           </Link>
           <p className="text-sm text-white/70 mt-6 font-light">

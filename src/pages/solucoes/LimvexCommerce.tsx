@@ -85,12 +85,12 @@ export default function LimvexCommerce() {
             </div>
 
             <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light">
-              <strong className="text-white font-medium">Plataforma completa de e-commerce</strong> com gestão de estoque, integrações com marketplaces e checkout otimizado. Escale suas vendas online com tecnologia de ponta.
+              <strong className="text-white font-medium">Estruture e escale seu e-commerce com uma plataforma profissional.</strong> Uma solução completa para empresas que desejam vender online com mais controle, performance e independência de marketplaces.
             </p>
 
             <Link to="/contato" className="mt-4">
               <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
-                Agendar demonstração
+                Conhecer a plataforma
               </Button>
             </Link>
           </div>
@@ -122,12 +122,12 @@ export default function LimvexCommerce() {
 
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 max-w-xl lg:w-1/2 relative z-20">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
-              Tudo que você precisa para <br className="hidden lg:block" />
-              <span className="text-[#0099FF]">vender mais</span>
+              Operação digital sólida, <br className="hidden lg:block" />
+              <span className="text-[#0099FF]">preparada para crescer</span>
             </h2>
 
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mt-4">
-              O Limvex Commerce é uma plataforma pronta para uso, desenvolvida para empresas que querem profissionalizar e escalar suas operações de vendas online. Implementação em dias, não em meses.
+              A plataforma de e-commerce da LIMVEX permite que empresas criem uma operação digital sólida, com gestão completa de produtos, pedidos e clientes, além de infraestrutura preparada para crescimento.
             </p>
           </div>
 
@@ -201,7 +201,7 @@ export default function LimvexCommerce() {
               </p>
               <Link to="/contato">
                 <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-6 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_30px_rgba(0,153,255,0.3)] border border-white/10">
-                  Agendar demonstração
+                  Solicitar demonstração
                 </Button>
               </Link>
             </div>
@@ -238,7 +238,7 @@ export default function LimvexCommerce() {
           </p>
           <Link to="/contato">
             <Button className="bg-[#0099FF] hover:bg-[#0076CE] text-white font-semibold px-8 py-4 h-auto text-base rounded-[100px] transition-all hover:scale-105 shadow-[0_0_40px_rgba(0,153,255,0.4)] border border-white/10">
-              Agendar demonstração
+              Solicitar demonstração
             </Button>
           </Link>
         </div>
