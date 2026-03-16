@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
+import { useNavigate } from "react-router-dom";
 
 const faqs = [
   {
@@ -37,12 +38,7 @@ const faqs = [
 ];
 
 export function FAQSection() {
-  const scrollToForm = () => {
-    const form = document.getElementById("formulario");
-    if (form) {
-      form.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <section id="faq" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#030014] relative overflow-hidden">
@@ -89,7 +85,7 @@ export function FAQSection() {
               </div>
               <div className="mt-3 sm:mt-4">
                 <Button
-                  onClick={scrollToForm}
+                  onClick={() => navigate("/contato")}
                   className="gap-3 sm:gap-4 border-white/20 bg-white/5 hover:bg-white/10 hover:border-[#0076CE]/50 text-white text-sm sm:text-base"
                   variant="outline"
                 >
