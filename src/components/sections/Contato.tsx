@@ -104,7 +104,7 @@ export function Contato() {
   return (
     <section
       id="contato"
-      className="scroll-mt-16 bg-ink py-16 text-offwhite md:py-24"
+      className="scroll-mt-16 bg-graphite py-16 text-offwhite md:py-24"
     >
       <div className="container-limvex">
         <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-14">

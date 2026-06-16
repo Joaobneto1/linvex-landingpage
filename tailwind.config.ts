@@ -23,6 +23,7 @@ export default {
         /* ---- Limvex brand (hex via CSS vars) ---- */
         offwhite: "var(--offwhite)",
         ink: "var(--ink)",
+        graphite: "var(--graphite)",
         orange: "var(--orange)",
         "gray-warm": "var(--gray-warm)",
         line: "var(--line)",

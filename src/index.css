@@ -9,6 +9,7 @@
     /* ---- Limvex brand tokens (raw) ---- */
     --offwhite: #f5f2ee; /* fundo dominante */
     --ink: #0a0a0a; /* hero / rodapé / texto sobre claro */
+    --graphite: #1a1814; /* faixa escura alternativa (ritmo entre seções) */
     --orange: #e8621a; /* acento — só em CTA, detalhes, números */
     --gray-warm: #6e685e; /* texto secundário */
     --line: #ded6c8; /* divisórias finas */
@@ -90,7 +91,7 @@
 
 @layer components {
   .container-limvex {
-    @apply mx-auto w-full max-w-6xl px-6 md:px-10;
+    @apply mx-auto w-full max-w-7xl px-6 md:px-10;
   }
 
   .kicker {
