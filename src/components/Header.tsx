@@ -1,192 +1,160 @@
-import { useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
-interface SolutionItem {
-  name: string;
-  description: string;
-  href: string;
-}
+import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
+import { NAV_LINKS } from "@/lib/content";
+import { scrollToId } from "@/lib/scroll";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { cn } from "@/lib/utils";
 
-const solutions: SolutionItem[] = [
-  {
-    name: "Limvex Commerce",
-    description: "E-commerce e vendas online",
-    href: "/solucoes/limvex-commerce",
-  },
-  {
-    name: "Limvex Licitação",
-    description: "Gestão de licitações públicas",
-    href: "/solucoes/limvex-licitacao",
-  },
-  {
-    name: "Limvex Custom",
-    description: "Desenvolvimento sob medida",
-    href: "/solucoes/limvex-custom",
-  },
-];
+const SECTION_IDS = NAV_LINKS.map((l) => l.id);
 
-interface HeaderProps {
-  transparent?: boolean;
-}
+export function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const active = useScrollSpy(["hero", ...SECTION_IDS]);
 
-export function Header({ transparent = false }: HeaderProps) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
-
-  // Fecha o dropdown ao clicar fora
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Fecha dropdown ao mudar de página
+  // Trava o scroll do body enquanto o menu mobile estiver aberto.
   useEffect(() => {
-    setDropdownOpen(false);
-  }, [location.pathname]);
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
-  const isActive = (path: string) => location.pathname === path;
-  const isSolutionActive = solutions.some((s) => location.pathname.startsWith(s.href));
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
+  const handleNav = (id: string) => {
+    setMenuOpen(false);
+    requestAnimationFrame(() => scrollToId(id));
   };
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  // No topo, o header é transparente sobre o hero preto → tratamento claro.
+  // Ao rolar, ganha fundo off-white sólido → tratamento escuro.
+  const light = !scrolled;
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 pt-4 px-3 sm:px-4">
-      <div
-        className={`mx-auto w-full max-w-fit h-11 sm:h-12 px-2 sm:px-3 flex items-center gap-1.5 sm:gap-2 rounded-full transition-all duration-300 ${transparent
-          ? "bg-transparent"
-          : "bg-[#0a0a14]/80 backdrop-blur-xl border border-white/[0.1]"
-          }`}
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+          scrolled
+            ? "border-b border-line bg-offwhite"
+            : "border-b border-transparent bg-transparent"
+        )}
       >
-        {/* Logo LIMVEX */}
-        <Link
-          to="/"
-          onClick={(e) => {
-            if (location.pathname === "/") {
+        <div className="container-limvex flex h-16 items-center justify-between">
+          <a
+            href="#hero"
+            onClick={(e) => {
               e.preventDefault();
-            }
-          }}
-          className="flex items-center h-8 sm:h-9 px-2 sm:px-3 text-xl sm:text-2xl font-bold tracking-tight text-white hover:text-[#0076CE] transition-colors"
-          style={{ fontFamily: "'Oswald', sans-serif" }}
-        >
-          LIMVEX
-        </Link>
-
-        {/* Separador - escondido em telas muito pequenas */}
-        <div className="hidden xs:block w-px h-5 bg-white/10" />
-
-        {/* Desktop Navigation */}
-        <div className="hidden sm:flex items-center gap-1.5 sm:gap-2">
-          {/* Dropdown Soluções */}
-          <div
-            className="relative"
-            ref={dropdownRef}
+              handleNav("hero");
+            }}
+            className="flex items-center"
+            aria-label="Limvex — início"
           >
+            <Logo variant={light ? "light" : "dark"} />
+          </a>
+
+          {/* Navegação desktop */}
+          <nav
+            className="hidden items-center gap-8 md:flex"
+            aria-label="Principal"
+          >
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav(link.id);
+                }}
+                className={cn(
+                  "relative text-sm font-medium transition-colors",
+                  light
+                    ? active === link.id
+                      ? "text-offwhite"
+                      : "text-offwhite/65 hover:text-offwhite"
+                    : active === link.id
+                      ? "text-ink"
+                      : "text-gray-warm hover:text-ink"
+                )}
+              >
+                {link.label}
+                <span
+                  className={cn(
+                    "absolute -bottom-1.5 left-0 h-px bg-orange transition-all duration-300",
+                    active === link.id ? "w-full" : "w-0"
+                  )}
+                />
+              </a>
+            ))}
+            <Button size="sm" onClick={() => handleNav("contato")}>
+              Solicitar análise
+            </Button>
+          </nav>
+
+          {/* Botão hambúrguer mobile */}
+          <button
+            type="button"
+            className={cn(
+              "flex h-10 w-10 items-center justify-center rounded-md md:hidden",
+              light ? "text-offwhite" : "text-ink"
+            )}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+      </header>
+
+      {/* Overlay mobile — sólido #0A0A0A, cobre a tela inteira, acima de tudo.
+          Montado só quando aberto: nada do conteúdo atrás pode vazar. */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-[100] flex flex-col bg-ink md:hidden">
+          <div className="container-limvex flex h-16 shrink-0 items-center justify-between">
+            <Logo variant="light" />
             <button
-              onClick={toggleDropdown}
-              className={`flex items-center gap-1 sm:gap-1.5 h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-full transition-colors ${isSolutionActive
-                ? "text-[#00d9ff] bg-white/5"
-                : "text-white/85 hover:text-white hover:bg-white/5"
-                }`}
+              type="button"
+              className="flex h-10 w-10 items-center justify-center rounded-md text-offwhite"
+              aria-label="Fechar menu"
+              onClick={() => setMenuOpen(false)}
             >
-              <span>Soluções</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""
-                  }`}
-              />
+              <X className="h-6 w-6" />
             </button>
-
-            {/* Dropdown Menu */}
-            <div
-              className={`absolute top-full left-0 mt-3 w-[280px] transition-all duration-200 ${dropdownOpen
-                ? "opacity-100 visible translate-y-0"
-                : "opacity-0 invisible -translate-y-2 pointer-events-none"
-                }`}
-            >
-              <div className="bg-[#0f0f19]/95 backdrop-blur-xl border border-white/10 rounded-xl p-1.5 shadow-2xl shadow-black/40">
-                {solutions.map((solution) => (
-                  <Link
-                    key={solution.href}
-                    to={solution.href}
-                    onClick={() => setDropdownOpen(false)}
-                    className={`flex flex-col px-4 py-3 rounded-lg transition-colors ${isActive(solution.href)
-                      ? "bg-[#00d9ff]/10 text-white"
-                      : "text-white/80 hover:bg-white/[0.05] hover:text-white"
-                      }`}
-                  >
-                    <span className="text-sm font-semibold">{solution.name}</span>
-                    <span className="text-xs text-white/50 mt-0.5">{solution.description}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
 
-          {/* CTA Button */}
-          <Link
-            to="/contato"
-            className="inline-flex items-center h-8 sm:h-9 px-3 sm:px-5 text-xs sm:text-sm font-semibold text-white bg-[#0076CE] hover:bg-[#0099FF] rounded-full transition-all whitespace-nowrap"
+          <nav
+            className="container-limvex mt-6 flex flex-col gap-1"
+            aria-label="Menu mobile"
           >
-            Conhecer agora
-          </Link>
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav(link.id);
+                }}
+                className="border-b border-white/10 py-4 text-2xl font-semibold tracking-tight text-offwhite"
+              >
+                {link.label}
+              </a>
+            ))}
+            <Button className="mt-6" size="lg" onClick={() => handleNav("contato")}>
+              Solicitar análise
+            </Button>
+          </nav>
         </div>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          className="sm:hidden flex items-center justify-center w-8 h-8 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
-          onClick={toggleMobileMenu}
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`sm:hidden absolute top-[120%] left-4 right-4 bg-[#0f0f19]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4 pointer-events-none'}`}
-      >
-        <div className="flex flex-col p-2">
-          <div className="px-3 py-2 text-xs font-bold text-white/40 uppercase tracking-wider">
-            Soluções
-          </div>
-          {solutions.map((solution) => (
-            <Link
-              key={solution.href}
-              to={solution.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`flex flex-col px-4 py-3 rounded-xl transition-colors ${isActive(solution.href)
-                ? "bg-[#00d9ff]/10 text-white"
-                : "text-white/80 hover:bg-white/[0.05] hover:text-white"
-                }`}
-            >
-              <span className="text-sm font-semibold">{solution.name}</span>
-              <span className="text-xs text-white/50 mt-0.5">{solution.description}</span>
-            </Link>
-          ))}
-          <div className="mt-2 p-2 border-t border-white/10">
-            <Link
-              to="/contato"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center w-full h-11 text-sm font-semibold text-white bg-[#0076CE] hover:bg-[#0099FF] rounded-xl transition-colors"
-            >
-              Conhecer agora
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }

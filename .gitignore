@@ -23,16 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# AI Agent configurations and skills
-.agent/
-.agents/
-.claude/
-.codes/
-.cursor/
-.codex/
-.gemini/
-
-# Environment variables
+# Env
 .env
 .env.local
 .env.*.local

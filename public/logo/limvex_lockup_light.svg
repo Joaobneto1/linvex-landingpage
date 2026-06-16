@@ -1,0 +1,5 @@
+<svg width="148" height="32" viewBox="0 0 148 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Limvex">
+  <path d="M10 6 V26 H28" stroke="#F5F2EE" stroke-width="3.4" stroke-linecap="square"/>
+  <path d="M28 9 A10 10 0 1 0 28 26" stroke="#E8621A" stroke-width="3.4" fill="none"/>
+  <text x="48" y="23" font-family="Geist Variable, system-ui, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#F5F2EE">LIMVEX</text>
+</svg>
